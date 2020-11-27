@@ -5,7 +5,7 @@ import de.uni_mannheim.informatik.dws.winter.model.defaultmodel.Attribute;
 import de.uni_mannheim.informatik.dws.winter.model.io.XMLMatchableReader;
 import org.w3c.dom.Node;
 
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeFormatterBuilder;
 import java.util.List;
@@ -74,14 +74,14 @@ public class PlayerXMLReader extends XMLMatchableReader<Player, Attribute> {
             if (birth_date != null && !birth_date.isEmpty()) {
                 DateTimeFormatter formatter = new DateTimeFormatterBuilder()
                         .appendPattern("yyyy-MM-dd").toFormatter(Locale.ENGLISH);
-                LocalDateTime dt = LocalDateTime.parse(birth_date, formatter);
+                LocalDate dt = LocalDate.parse(birth_date, formatter);
                 player.setBirth_date(dt);
             }
             String contract_exp = getValueFromChildElement(node, "contract_exp");
             if (contract_exp != null && !contract_exp.isEmpty()) {
                 DateTimeFormatter formatter = new DateTimeFormatterBuilder()
                         .appendPattern("yyyy-MM-dd").toFormatter(Locale.ENGLISH);
-                LocalDateTime dt = LocalDateTime.parse(contract_exp, formatter);
+                LocalDate dt = LocalDate.parse(contract_exp, formatter);
                 player.setContract_exp(dt);
             }
 

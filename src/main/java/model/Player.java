@@ -3,7 +3,7 @@ import de.uni_mannheim.informatik.dws.winter.model.AbstractRecord;
 import de.uni_mannheim.informatik.dws.winter.model.defaultmodel.Attribute;
 
 import java.io.Serializable;
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 import java.util.List;
 
 public class Player extends AbstractRecord<Attribute> implements Serializable {
@@ -16,7 +16,7 @@ public class Player extends AbstractRecord<Attribute> implements Serializable {
     protected String provenance;
     private String name;
     private String nationality;
-    private LocalDateTime birth_date;
+    private LocalDate birth_date;
     private String birth_place;
     private List<String> positions;
     private List<String> competitions;
@@ -26,7 +26,7 @@ public class Player extends AbstractRecord<Attribute> implements Serializable {
     private int wage;
     private int market_value_19;
     private int est_market_value_18;
-    private LocalDateTime contract_exp;
+    private LocalDate contract_exp;
     private int release_clause;
     private int overall;
     private int potential;
@@ -114,11 +114,11 @@ public class Player extends AbstractRecord<Attribute> implements Serializable {
         this.strong_foot = strong_foot;
     }
 
-    public LocalDateTime getBirth_date() {
+    public LocalDate getBirth_date() {
         return birth_date;
     }
 
-    public void setBirth_date(LocalDateTime birth_date) {
+    public void setBirth_date(LocalDate birth_date) {
         this.birth_date = birth_date;
     }
 
@@ -146,11 +146,11 @@ public class Player extends AbstractRecord<Attribute> implements Serializable {
         this.market_value_19 = market_value_19;
     }
 
-    public LocalDateTime getContract_exp() {
+    public LocalDate getContract_exp() {
         return contract_exp;
     }
 
-    public void setContract_exp(LocalDateTime contract_exp) {
+    public void setContract_exp(LocalDate contract_exp) {
         this.contract_exp = contract_exp;
     }
 
