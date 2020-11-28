@@ -1,4 +1,5 @@
 import blocker.PlayerBlockingKeyByNationalityGenerator;
+import comparator.PlayerBirthDateComparatorEqual;
 import comparator.PlayerClubComparatorJaccard;
 import comparator.PlayerNameComparatorJaccard;
 import comparator.PlayerNationalityComparatorJaccard;
@@ -32,10 +33,12 @@ public class IdentityResolution {
         new PlayerXMLReader().loadFromXML(new File("data/input/real_market_players.xml"),"/players/player", dataRealPlayers);
         new PlayerXMLReader().loadFromXML(new File("data/input/fifa_players.xml"),"/players/player", dataFifaPlayers);
 
-        matchingRule.addComparator(new PlayerNameComparatorJaccard(), 0.5);
-        matchingRule.addComparator(new PlayerClubComparatorJaccard(), 0.15);
-        matchingRule.addComparator(new PlayerNationalityComparatorJaccard(), 0.35);
-
+        //added the comparators
+        matchingRule.addComparator(new PlayerNameComparatorJaccard(), 0.40);
+        matchingRule.addComparator(new PlayerClubComparatorJaccard(), 0.10);
+        matchingRule.addComparator(new PlayerNationalityComparatorJaccard(), 0.25);
+        matchingRule.addComparator(new PlayerBirthDateComparatorEqual(), 0.25);
+        
         // Initialize Matching Engine
         MatchingEngine<Player, Attribute> engine = new MatchingEngine<>();
 
