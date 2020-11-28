@@ -32,6 +32,7 @@ public class Player extends AbstractRecord<Attribute> implements Serializable {
     private int potential;
     private String last_injury;
 
+
     public static final Attribute NAME = new Attribute("Name");
     public static final Attribute NATIONALITY = new Attribute("Nationality");
     public static final Attribute CLUB = new Attribute("Club");
@@ -51,7 +52,8 @@ public class Player extends AbstractRecord<Attribute> implements Serializable {
     public static final Attribute LASTINJURY = new Attribute("LastInjury");
 
     public Player(String identifier, String provenance) {
-        super(identifier, provenance);
+        id = identifier;
+        this.provenance = provenance;
     }
 
     @Override
@@ -72,14 +74,20 @@ public class Player extends AbstractRecord<Attribute> implements Serializable {
 
     @Override
     public String getIdentifier() {
-        // TODO Auto-generated method stub
         return id;
     }
 
     @Override
     public String getProvenance() {
-        // TODO Auto-generated method stub
         return provenance;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String identifier) {
+        this.id = identifier;
     }
 
     public String getName() {
