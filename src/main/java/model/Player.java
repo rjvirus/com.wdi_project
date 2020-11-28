@@ -8,9 +8,6 @@ import java.util.List;
 
 public class Player extends AbstractRecord<Attribute> implements Serializable {
 
-    /**
-     *
-     */
     private static final long serialVersionUID = 1L;
     protected String id;
     protected String provenance;
