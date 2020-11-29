@@ -32,7 +32,7 @@ public class IdentityResolution {
         new PlayerXMLReader().loadFromXML(new File("data/input/prediction_players.xml"),"/players/player", dataPredictionPlayers);
         new PlayerXMLReader().loadFromXML(new File("data/input/fifa_players.xml"),"/players/player", dataFifaPlayers);
 
-        //added comparators for PredReal
+        //added comparators for RealPred
         matchingRuleRealPred.addComparator(new PlayerNameComparatorJaccardTokenizer(), 0.40);
         matchingRuleRealPred.addComparator(new PlayerClubComparatorJaccard(), 0.10);
         matchingRuleRealPred.addComparator(new PlayerNationalityComparatorJaccard(), 0.25);
@@ -52,7 +52,7 @@ public class IdentityResolution {
         matchingRuleFifaPred.addComparator(new PlayerPositionComparatorJaccard(), 0.1);
 
         // Initialize Matching Engines
-        MatchingEngine<Player, Attribute> enginePredReal = new MatchingEngine<>();
+        MatchingEngine<Player, Attribute> engineRealPred = new MatchingEngine<>();
         MatchingEngine<Player, Attribute> engineFifaReal = new MatchingEngine<>();
         MatchingEngine<Player, Attribute> engineFifaPred = new MatchingEngine<>();
 
@@ -60,7 +60,7 @@ public class IdentityResolution {
         StandardRecordBlocker<Player, Attribute> blocker = new StandardRecordBlocker<Player, Attribute>(new PlayerBlockingKeyByNationalityGenerator());
 
         // Execute the matchings
-        Processable<Correspondence<Player, Attribute>> correspondencesRealPred = enginePredReal.runIdentityResolution(
+        Processable<Correspondence<Player, Attribute>> correspondencesRealPred = engineRealPred.runIdentityResolution(
                 dataRealPlayers, dataPredictionPlayers, null, matchingRuleRealPred, blocker);
         Processable<Correspondence<Player, Attribute>> correspondencesFifaReal = engineFifaReal.runIdentityResolution(
                 dataFifaPlayers, dataRealPlayers, null, matchingRuleFifaReal, blocker);
