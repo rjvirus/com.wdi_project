@@ -70,9 +70,7 @@ public class Player extends AbstractRecord<Attribute> implements Serializable {
     }
 
     @Override
-    public String getIdentifier() {
-        return id;
-    }
+    public String getIdentifier() { return id; }
 
     @Override
     public String getProvenance() {

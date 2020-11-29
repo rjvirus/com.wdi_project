@@ -22,8 +22,9 @@ public class IdentityResolution {
 
     public static void main(String args[]) throws Exception {
 
-        //create a matching rule
-        LinearCombinationMatchingRule<Player, Attribute> matchingRule = new LinearCombinationMatchingRule<>(0.7);
+        //create 3 matching rules
+        LinearCombinationMatchingRule<Player, Attribute> matchingRulePredReal = new LinearCombinationMatchingRule<>(0.7);
+        LinearCombinationMatchingRule<Player, Attribute> matchingRuleFifaReal = new LinearCombinationMatchingRule<>(0.7);
 
         //loading the data
         HashedDataSet<Player, Attribute> dataPredictionPlayers = new HashedDataSet<>();
@@ -33,12 +34,17 @@ public class IdentityResolution {
         new PlayerXMLReader().loadFromXML(new File("data/input/real_market_players.xml"),"/players/player", dataRealPlayers);
         new PlayerXMLReader().loadFromXML(new File("data/input/fifa_players.xml"),"/players/player", dataFifaPlayers);
 
-        //added the comparators
-        matchingRule.addComparator(new PlayerNameComparatorJaccard(), 0.40);
-        matchingRule.addComparator(new PlayerClubComparatorJaccard(), 0.10);
-        matchingRule.addComparator(new PlayerNationalityComparatorJaccard(), 0.25);
-        matchingRule.addComparator(new PlayerBirthDateComparatorEqual(), 0.25);
-        
+        //added comparators for PredReal
+        matchingRulePredReal.addComparator(new PlayerNameComparatorJaccard(), 0.40);
+        matchingRulePredReal.addComparator(new PlayerClubComparatorJaccard(), 0.10);
+        matchingRulePredReal.addComparator(new PlayerNationalityComparatorJaccard(), 0.25);
+        matchingRulePredReal.addComparator(new PlayerBirthDateComparatorEqual(), 0.25);
+
+        //added comparators for FifaReal
+        matchingRuleFifaReal.addComparator(new PlayerNameComparatorJaccard(), 0.5);
+        matchingRuleFifaReal.addComparator(new PlayerClubComparatorJaccard(), 0.5);
+        matchingRuleFifaReal.addComparator(new PlayerBirthDateComparatorEqual(), 0.5);
+
         // Initialize Matching Engine
         MatchingEngine<Player, Attribute> engine = new MatchingEngine<>();
 
@@ -47,7 +53,7 @@ public class IdentityResolution {
 
         // Execute the matching
         Processable<Correspondence<Player, Attribute>> correspondences = engine.runIdentityResolution(
-                dataPredictionPlayers, dataRealPlayers, null, matchingRule, blocker);
+                dataPredictionPlayers, dataRealPlayers, null, matchingRulePredReal, blocker);
 
         // write the correspondences to the output file
         new CSVCorrespondenceFormatter().writeCSV(new File("data/output/prediction_2_real_correspondences.csv"), correspondences);
