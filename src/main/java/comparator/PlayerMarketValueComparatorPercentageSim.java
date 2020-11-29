@@ -1,40 +1,46 @@
 package comparator;
 
-import de.uni_mannheim.informatik.dws.winter.similarity.SimilarityMeasure;
+import de.uni_mannheim.informatik.dws.winter.matching.rules.Comparator;
+import de.uni_mannheim.informatik.dws.winter.matching.rules.ComparatorLogger;
+import de.uni_mannheim.informatik.dws.winter.model.Correspondence;
+import de.uni_mannheim.informatik.dws.winter.model.Matchable;
+import de.uni_mannheim.informatik.dws.winter.model.defaultmodel.Attribute;
+import de.uni_mannheim.informatik.dws.winter.similarity.numeric.PercentageSimilarity;
+import model.Player;
 
-/**
- * Calculates a numeric similarity based on the percental difference between the two numbers
- * @author Oliver
- *
- */
-public class PlayerMarketValueComparatorPercentageSim extends SimilarityMeasure<Double> {
+
+public class PlayerMarketValueComparatorPercentageSim implements Comparator<Player, Attribute> {
 
     private static final long serialVersionUID = 1L;
-    private double max_percentage = 0.0;
+    PercentageSimilarity sim = new PercentageSimilarity(5.0);
 
-    /**
-     * Creates a new instance of the similarity measure
-     * @param max_percental_difference the max percental difference between two values. Higher differences lead to a similarity value of 0.0.
-     */
-    public PercentageSimilarity(double max_percental_difference) {
-        this.max_percentage = max_percental_difference;
+    private ComparatorLogger comparisonLog;
+
+    @Override
+    public double compare(Player record1, Player record2, Correspondence<Attribute, Matchable> schemaCorrespondence) {
+        double d1 = record1.getMarket_value_19();
+        double d2 = record2.getMarket_value_19();
+
+        double similarity = sim.calculate(d1, d2);
+
+        if(this.comparisonLog != null){
+            this.comparisonLog.setComparatorName(getClass().getName());
+            this.comparisonLog.setRecord1Value(String.valueOf(d1));
+            this.comparisonLog.setRecord2Value(String.valueOf(d2));
+            this.comparisonLog.setSimilarity(Double.toString(similarity));
+        }
+
+        return similarity;
     }
 
     @Override
-    public double calculate(Double first, Double second) {
-        if(first==null || second==null) {
-            return 0.0;
-        } else {
-            double pc = Math.abs(first-second)/Math.max(first, second);
-
-            if(pc < max_percentage) {
-                return 1 - pc/max_percentage;
-            } else {
-                return 0.0;
-            }
-        }
+    public ComparatorLogger getComparisonLog() {
+        return this.comparisonLog;
     }
 
-
+    @Override
+    public void setComparisonLog(ComparatorLogger comparatorLog) {
+        this.comparisonLog = comparatorLog;
+    }
 
 }

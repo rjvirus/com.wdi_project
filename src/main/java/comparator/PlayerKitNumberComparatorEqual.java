@@ -5,33 +5,31 @@ import de.uni_mannheim.informatik.dws.winter.matching.rules.ComparatorLogger;
 import de.uni_mannheim.informatik.dws.winter.model.Correspondence;
 import de.uni_mannheim.informatik.dws.winter.model.Matchable;
 import de.uni_mannheim.informatik.dws.winter.model.defaultmodel.Attribute;
-import de.uni_mannheim.informatik.dws.winter.similarity.string.JaccardOnNGramsSimilarity;
-import de.uni_mannheim.informatik.dws.winter.similarity.string.TokenizingJaccardSimilarity;
+import de.uni_mannheim.informatik.dws.winter.similarity.EqualsSimilarity;
 import model.Player;
 
-public class PlayerNameComparatorJaccard implements Comparator<Player, Attribute> {
+public class PlayerKitNumberComparatorEqual implements Comparator<Player, Attribute> {
 
     private static final long serialVersionUID = 1L;
-    JaccardOnNGramsSimilarity sim = new JaccardOnNGramsSimilarity(3);
+    private EqualsSimilarity<Integer> sim = new EqualsSimilarity<>();
 
     private ComparatorLogger comparisonLog;
 
     @Override
     public double compare(Player record1, Player record2, Correspondence<Attribute, Matchable> schemaCorrespondence) {
-        String s1 = record1.getName();
-        String s2 = record2.getName();
+        int kitNo1 = record1.getKit_number();
+        int kitNo2 = record2.getKit_number();
 
-        double similarity = sim.calculate(s1, s2);
+        double similarity = sim.calculate(kitNo1, kitNo2);
 
         if(this.comparisonLog != null){
             this.comparisonLog.setComparatorName(getClass().getName());
 
-            this.comparisonLog.setRecord1Value(s1);
-            this.comparisonLog.setRecord2Value(s2);
+            this.comparisonLog.setRecord1Value(String.valueOf(kitNo1));
+            this.comparisonLog.setRecord2Value(String.valueOf((kitNo2)));
 
             this.comparisonLog.setSimilarity(Double.toString(similarity));
         }
-
         return similarity;
     }
 
@@ -44,5 +42,4 @@ public class PlayerNameComparatorJaccard implements Comparator<Player, Attribute
     public void setComparisonLog(ComparatorLogger comparatorLog) {
         this.comparisonLog = comparatorLog;
     }
-
 }
