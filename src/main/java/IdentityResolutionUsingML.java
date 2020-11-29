@@ -3,6 +3,7 @@ import comparator.*;
 import de.uni_mannheim.informatik.dws.winter.matching.MatchingEngine;
 import de.uni_mannheim.informatik.dws.winter.matching.MatchingEvaluator;
 import de.uni_mannheim.informatik.dws.winter.matching.algorithms.RuleLearner;
+import de.uni_mannheim.informatik.dws.winter.matching.blockers.SortedNeighbourhoodBlocker;
 import de.uni_mannheim.informatik.dws.winter.matching.blockers.StandardRecordBlocker;
 import de.uni_mannheim.informatik.dws.winter.matching.rules.WekaMatchingRule;
 import de.uni_mannheim.informatik.dws.winter.model.Correspondence;
@@ -30,10 +31,10 @@ public class IdentityResolutionUsingML {
         //loading the data
         HashedDataSet<Player, Attribute> dataPredictionPlayers = new HashedDataSet<>();
         HashedDataSet<Player, Attribute> dataRealPlayers = new HashedDataSet<>();
-        HashedDataSet<Player, Attribute> dataFifaPlayers = new HashedDataSet<>();
+        //HashedDataSet<Player, Attribute> dataFifaPlayers = new HashedDataSet<>();
         new PlayerXMLReader().loadFromXML(new File("data/input/real_market_players.xml"),"/players/player", dataRealPlayers);
         new PlayerXMLReader().loadFromXML(new File("data/input/prediction_players.xml"),"/players/player", dataPredictionPlayers);
-        new PlayerXMLReader().loadFromXML(new File("data/input/fifa_players.xml"),"/players/player", dataFifaPlayers);
+        //new PlayerXMLReader().loadFromXML(new File("data/input/fifa_players.xml"),"/players/player", dataFifaPlayers);
 
         // load the training set
         MatchingGoldStandard gsTraining = new MatchingGoldStandard();
@@ -61,7 +62,7 @@ public class IdentityResolutionUsingML {
 
         // create a blocker (blocking strategy)
         StandardRecordBlocker<Player, Attribute> blocker = new StandardRecordBlocker<Player, Attribute>(new PlayerBlockingKeyByNationalityGenerator());
-//		SortedNeighbourhoodBlocker<Movie, Attribute, Attribute> blocker = new SortedNeighbourhoodBlocker<>(new MovieBlockingKeyByDecadeGenerator(), 1);
+        //SortedNeighbourhoodBlocker<Player, Attribute, Attribute> blocker = new SortedNeighbourhoodBlocker<>(new PlayerBlockingKeyByNationalityGenerator(), 1);
         blocker.collectBlockSizeData("data/output/debugResultsBlocking.csv", 100);
 
         // Initialize Matching Engine
@@ -81,6 +82,8 @@ public class IdentityResolutionUsingML {
         MatchingGoldStandard gsTest = new MatchingGoldStandard();
         gsTest.loadFromCSVFile(new File(
                 "data/goldstandard/real_market_2_prediction_test.csv"));
+
+        System.out.println(matchingRuleForReal2Pred.getModelDescription());
 
         // evaluate your result
         System.out.println("*\n*\tEvaluating result\n*");
