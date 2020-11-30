@@ -25,7 +25,7 @@ public class IdentityResolution {
         //create 3 matching rules
         LinearCombinationMatchingRule<Player, Attribute> matchingRuleRealPred = new LinearCombinationMatchingRule<>(0.7);
         LinearCombinationMatchingRule<Player, Attribute> matchingRuleFifaReal = new LinearCombinationMatchingRule<>(0.5);
-        LinearCombinationMatchingRule<Player, Attribute> matchingRuleFifaPred = new LinearCombinationMatchingRule<>(0.5);
+        LinearCombinationMatchingRule<Player, Attribute> matchingRulePredFifa = new LinearCombinationMatchingRule<>(0.5);
 
         //loading the data
         HashedDataSet<Player, Attribute> dataRealPlayers = new HashedDataSet<>();
@@ -53,17 +53,17 @@ public class IdentityResolution {
         // matchingRuleFifaReal.addComparator(new PlayerMarketValueComparatorPercentageSim(), 0.1);
         matchingRuleFifaReal.addComparator(new PlayerKitNumberComparatorEqual(), 0.1);
 
-        //added comparators for FifaPred
-        matchingRuleFifaPred.addComparator(new PlayerNameComparatorJaccard(), 0.35);
-        matchingRuleFifaPred.addComparator(new PlayerClubComparatorJaccard(), 0.25);
-        matchingRuleFifaPred.addComparator(new PlayerNationalityComparatorJaccard(), 0.15);
-        matchingRuleFifaPred.addComparator(new PlayerContractExpComparatorEqual(), 0.15);
-        matchingRuleFifaPred.addComparator(new PlayerPositionComparatorJaccard(), 0.1);
+        //added comparators for PredFifa
+        matchingRulePredFifa.addComparator(new PlayerNameComparatorJaccard(), 0.35);
+        matchingRulePredFifa.addComparator(new PlayerClubComparatorJaccard(), 0.25);
+        matchingRulePredFifa.addComparator(new PlayerNationalityComparatorJaccard(), 0.15);
+        matchingRulePredFifa.addComparator(new PlayerContractExpComparatorEqual(), 0.15);
+        matchingRulePredFifa.addComparator(new PlayerPositionComparatorJaccard(), 0.1);
 
         // Initialize Matching Engines
         MatchingEngine<Player, Attribute> engineRealPred = new MatchingEngine<>();
         MatchingEngine<Player, Attribute> engineFifaReal = new MatchingEngine<>();
-        MatchingEngine<Player, Attribute> engineFifaPred = new MatchingEngine<>();
+        MatchingEngine<Player, Attribute> enginePredFifa = new MatchingEngine<>();
 
         // create a blocker (blocking strategy)
         StandardRecordBlocker<Player, Attribute> blocker = new StandardRecordBlocker<Player, Attribute>(new PlayerBlockingKeyByNationalityGenerator());
@@ -73,14 +73,14 @@ public class IdentityResolution {
                 dataRealPlayers, dataPredictionPlayers, null, matchingRuleRealPred, blocker);
         Processable<Correspondence<Player, Attribute>> correspondencesFifaReal = engineFifaReal.runIdentityResolution(
                 dataFifaPlayers, dataRealPlayers, null, matchingRuleFifaReal, blocker);
-        Processable<Correspondence<Player, Attribute>> correspondencesFifaPred = engineFifaPred.runIdentityResolution(
-                dataFifaPlayers, dataPredictionPlayers, null, matchingRuleFifaPred, blocker);
+        Processable<Correspondence<Player, Attribute>> correspondencesPredFifa = enginePredFifa.runIdentityResolution(
+                dataPredictionPlayers, dataFifaPlayers , null, matchingRulePredFifa, blocker);
 
 
         // write the correspondences to the output file
         new CSVCorrespondenceFormatter().writeCSV(new File("data/output/real_2_prediction_correspondences.csv"), correspondencesRealPred);
         new CSVCorrespondenceFormatter().writeCSV(new File("data/output/fifa_2_real_correspondences.csv"), correspondencesFifaReal);
-        new CSVCorrespondenceFormatter().writeCSV(new File("data/output/fifa_2_prediction_correspondences.csv"), correspondencesFifaPred);
+        new CSVCorrespondenceFormatter().writeCSV(new File("data/output/prediction_2_fifa_correspondences.csv"), correspondencesPredFifa);
 
 
         System.out.println("*\n*\tEvaluating result\n*");
