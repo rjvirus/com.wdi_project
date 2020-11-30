@@ -18,34 +18,34 @@ public class PlayerPositionComparatorJaccard implements Comparator<Player, Attri
 
     @Override
     public double compare(Player record1, Player record2, Correspondence<Attribute, Matchable> schemaCorrespondence) {
-        List<String> s1L = record1.getPositions();
-        List<String> s2 = record2.getPositions();
-        if (s1L != null && s2 != null) {
-            String s1 = s1L.get(0);
-            for (int posNumb = 0; posNumb < s2.size(); posNumb++) {
+        List<String> s1 = record1.getPositions();
+        List<String> s2L = record2.getPositions();
+        if (s2L != null && s1 != null) {
+            String s2 = s2L.get(0);
+            for (int posNumb = 0; posNumb < s1.size(); posNumb++) {
                 String chars = "";
-                for (int i = 0; i < s2.get(posNumb).length(); i++) {
-                    if (Character.isUpperCase(s2.get(posNumb).charAt(i))) {
-                        chars = chars + s2.get(posNumb).charAt(i);
+                for (int i = 0; i < s1.get(posNumb).length(); i++) {
+                    if (Character.isUpperCase(s1.get(posNumb).charAt(i))) {
+                        chars = chars + s1.get(posNumb).charAt(i);
                     }
                 }
-                s2.set(posNumb, chars);
+                s1.set(posNumb, chars);
             }
             double maxVal = 0;
-            String s2S = "";
-            for (int i = 0; i < s2.size(); i++) {
-                double similarity = sim.calculate(s1, s2.get(i));
+            String s1S = "";
+            for (int i = 0; i < s1.size(); i++) {
+                double similarity = sim.calculate(s2, s1.get(i));
                 if (similarity > maxVal) {
                     maxVal = similarity;
-                    s2S = s2.get(i);
+                    s1S = s1.get(i);
                 }
             }
 
             if (this.comparisonLog != null) {
                 this.comparisonLog.setComparatorName(getClass().getName());
 
-                this.comparisonLog.setRecord1Value(s1);
-                this.comparisonLog.setRecord2Value(s2S);
+                this.comparisonLog.setRecord1Value(s1S);
+                this.comparisonLog.setRecord2Value(s2);
 
                 this.comparisonLog.setSimilarity(Double.toString(maxVal));
             }
