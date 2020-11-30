@@ -1,9 +1,12 @@
 import blocker.PlayerBlockingKeyByNationalityGenerator;
 import comparator.*;
 import de.uni_mannheim.informatik.dws.winter.matching.MatchingEngine;
+import de.uni_mannheim.informatik.dws.winter.matching.MatchingEvaluator;
 import de.uni_mannheim.informatik.dws.winter.matching.blockers.StandardRecordBlocker;
 import de.uni_mannheim.informatik.dws.winter.model.Correspondence;
 import de.uni_mannheim.informatik.dws.winter.model.HashedDataSet;
+import de.uni_mannheim.informatik.dws.winter.model.MatchingGoldStandard;
+import de.uni_mannheim.informatik.dws.winter.model.Performance;
 import de.uni_mannheim.informatik.dws.winter.model.defaultmodel.Attribute;
 import de.uni_mannheim.informatik.dws.winter.matching.rules.LinearCombinationMatchingRule;
 import de.uni_mannheim.informatik.dws.winter.model.io.CSVCorrespondenceFormatter;
@@ -32,9 +35,15 @@ public class IdentityResolution {
         new PlayerXMLReader().loadFromXML(new File("data/input/prediction_players.xml"),"/players/player", dataPredictionPlayers);
         new PlayerXMLReader().loadFromXML(new File("data/input/fifa_players.xml"),"/players/player", dataFifaPlayers);
 
+        // load the gold standard (test set)
+        System.out.println("*\n*\tLoading gold standard\n*");
+        MatchingGoldStandard gsTest = new MatchingGoldStandard();
+        gsTest.loadFromCSVFile(new File(
+                "data/goldstandard/real_market_2_prediction_test.csv"));
+
         //added comparators for RealPred
-        matchingRuleRealPred.addComparator(new PlayerNameComparatorJaccardTokenizer(), 0.40);
-        matchingRuleRealPred.addComparator(new PlayerClubComparatorJaccard(), 0.10);
+        matchingRuleRealPred.addComparator(new PlayerNameComparatorJaccard(), 0.50);
+        //matchingRuleRealPred.addComparator(new PlayerClubComparatorJaccard(), 0.10);
         matchingRuleRealPred.addComparator(new PlayerNationalityComparatorJaccard(), 0.25);
         matchingRuleRealPred.addComparator(new PlayerBirthDateComparatorEqual(), 0.25);
 
@@ -72,5 +81,21 @@ public class IdentityResolution {
         new CSVCorrespondenceFormatter().writeCSV(new File("data/output/real_2_prediction_correspondences.csv"), correspondencesRealPred);
         new CSVCorrespondenceFormatter().writeCSV(new File("data/output/fifa_2_real_correspondences.csv"), correspondencesFifaReal);
         new CSVCorrespondenceFormatter().writeCSV(new File("data/output/fifa_2_prediction_correspondences.csv"), correspondencesFifaPred);
+
+
+        System.out.println("*\n*\tEvaluating result\n*");
+        // evaluate your result
+        MatchingEvaluator<Player, Attribute> evaluator = new MatchingEvaluator<Player, Attribute>();
+        Performance perfTest = evaluator.evaluateMatching(correspondencesRealPred,
+                gsTest);
+
+        // print the evaluation result
+        System.out.println("Players - Real Market <-> Players - Predicted Price");
+        System.out.println(String.format(
+                "Precision: %.4f",perfTest.getPrecision()));
+        System.out.println(String.format(
+                "Recall: %.4f",	perfTest.getRecall()));
+        System.out.println(String.format(
+                "F1: %.4f",perfTest.getF1()));
     }
 }
