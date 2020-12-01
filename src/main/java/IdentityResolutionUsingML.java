@@ -36,47 +36,62 @@ public class IdentityResolutionUsingML {
         new PlayerXMLReader().loadFromXML(new File("data/input/prediction_players.xml"),"/players/player", dataPredictionPlayers);
         new PlayerXMLReader().loadFromXML(new File("data/input/fifa_players.xml"),"/players/player", dataFifaPlayers);
 
-        // load the training set
-        MatchingGoldStandard gsTraining = new MatchingGoldStandard();
-        MatchingGoldStandard gsTrainingpredFifa = new MatchingGoldStandard();
-        gsTraining.loadFromCSVFile(new File("data/goldstandard/real_market_2_prediction_train.csv"));
-        gsTrainingpredFifa.loadFromCSVFile(new File("data/goldstandard/prediction_2_fifa_train.csv"));
+        // load the training sets
+        MatchingGoldStandard gsTrainingRealPred = new MatchingGoldStandard();
+        MatchingGoldStandard gsTrainingPredFifa = new MatchingGoldStandard();
+        MatchingGoldStandard gsTrainingRealFifa = new MatchingGoldStandard();
 
-        // create a matching rule
+        gsTrainingRealPred.loadFromCSVFile(new File("data/goldstandard/real_market_2_prediction_train.csv"));
+        gsTrainingPredFifa.loadFromCSVFile(new File("data/goldstandard/prediction_2_fifa_train.csv"));
+        gsTrainingRealFifa.loadFromCSVFile(new File("data/goldstandard/real_market_2_fifa_train.csv"));
+
+        // create matching rules
         String options[] = new String[] { "-S" };
         String modelType = "SimpleLogistic"; // use a logistic regression
-        WekaMatchingRule<Player, Attribute> matchingRuleForReal2Pred = new WekaMatchingRule<>(0.7, modelType, options);
-        matchingRuleForReal2Pred.activateDebugReport("data/output/debugResultsMatchingRule.csv", 1000, gsTraining);
+        WekaMatchingRule<Player, Attribute> matchingRuleRealPred = new WekaMatchingRule<>(0.7, modelType, options);
+        matchingRuleRealPred.activateDebugReport("data/output/debugResultsMatchingRule.csv", 1000, gsTrainingRealPred);
 
-        // create a matching rule
-        WekaMatchingRule<Player, Attribute> matchingRuleForPred2Fifa = new WekaMatchingRule<>(0.7, modelType, options);
-        matchingRuleForReal2Pred.activateDebugReport("data/output/debugResultsMatchingRulePredFifa.csv", 1000, gsTrainingpredFifa);
+        WekaMatchingRule<Player, Attribute> matchingRulePredFifa = new WekaMatchingRule<>(0.7, modelType, options);
+        matchingRulePredFifa.activateDebugReport("data/output/debugResultsMatchingRulePredFifa.csv", 1000, gsTrainingPredFifa);
 
+        WekaMatchingRule<Player, Attribute> matchingRuleRealFifa = new WekaMatchingRule<>(0.7, modelType, options);
+        matchingRuleRealFifa.activateDebugReport("data/output/debugResultsMatchingRule.csv", 1000, gsTrainingRealFifa);
 
-        // add comparators
-        matchingRuleForReal2Pred.addComparator(new PlayerNameComparatorJaccard());
-        matchingRuleForReal2Pred.addComparator(new PlayerNameComparatorJaccardTokenizer());
-        matchingRuleForReal2Pred.addComparator(new PlayerClubComparatorJaccard());
-        matchingRuleForReal2Pred.addComparator(new PlayerNationalityComparatorJaccard());
-        matchingRuleForReal2Pred.addComparator(new PlayerBirthDateComparatorEqual());
 
         // add comparators
-        matchingRuleForPred2Fifa.addComparator(new PlayerNameComparatorJaccard());
-        matchingRuleForPred2Fifa.addComparator(new PlayerClubComparatorJaccard());
-        matchingRuleForPred2Fifa.addComparator(new PlayerNationalityComparatorJaccard());
-        matchingRuleForPred2Fifa.addComparator(new PlayerContractExpComparatorEqual());
-        matchingRuleForPred2Fifa.addComparator(new PlayerPositionComparatorJaccard());
+        matchingRuleRealPred.addComparator(new PlayerNameComparatorJaccard());
+        matchingRuleRealPred.addComparator(new PlayerNameComparatorJaccardTokenizer());
+        matchingRuleRealPred.addComparator(new PlayerClubComparatorJaccard());
+        matchingRuleRealPred.addComparator(new PlayerNationalityComparatorJaccard());
+        matchingRuleRealPred.addComparator(new PlayerBirthDateComparatorEqual());
 
+        // add comparators
+        matchingRulePredFifa.addComparator(new PlayerNameComparatorJaccard());
+        matchingRulePredFifa.addComparator(new PlayerClubComparatorJaccard());
+        matchingRulePredFifa.addComparator(new PlayerNationalityComparatorJaccard());
+        matchingRulePredFifa.addComparator(new PlayerContractExpComparatorEqual());
+        matchingRulePredFifa.addComparator(new PlayerPositionComparatorJaccard());
+
+        // add comparators
+        matchingRuleRealFifa.addComparator(new PlayerNameComparatorJaccard());
+        matchingRuleRealFifa.addComparator(new PlayerClubComparatorJaccard());
+        matchingRuleRealFifa.addComparator(new PlayerNationalityComparatorJaccard());
+        matchingRuleRealFifa.addComparator(new PlayerContractExpComparatorEqual());
+        matchingRuleRealFifa.addComparator(new PlayerPositionComparatorJaccard());
 
         // train the matching rule's model
         System.out.println("*\n*\tLearning matching rule\n*");
-        RuleLearner<Player, Attribute> learner = new RuleLearner<>();
+        RuleLearner<Player, Attribute> learnerRealPred = new RuleLearner<>();
         RuleLearner<Player, Attribute> learnerPredFifa = new RuleLearner<>();
-        learner.learnMatchingRule(dataRealPlayers, dataPredictionPlayers, null, matchingRuleForReal2Pred, gsTraining);
-        learnerPredFifa.learnMatchingRule(dataPredictionPlayers, dataFifaPlayers, null, matchingRuleForPred2Fifa, gsTrainingpredFifa
-        );
-        System.out.println(String.format("Matching rule is:\n%s", matchingRuleForReal2Pred.getModelDescription()));
-        System.out.println(String.format("Matching rule is:\n%s", matchingRuleForPred2Fifa.getModelDescription()));
+        RuleLearner<Player, Attribute> learnerRealFifa = new RuleLearner<>();
+
+        learnerRealPred.learnMatchingRule(dataRealPlayers, dataPredictionPlayers, null, matchingRuleRealPred, gsTrainingRealPred);
+        learnerPredFifa.learnMatchingRule(dataPredictionPlayers, dataFifaPlayers, null, matchingRulePredFifa, gsTrainingPredFifa);
+        learnerRealFifa.learnMatchingRule(dataRealPlayers, dataFifaPlayers, null, matchingRuleRealFifa, gsTrainingRealFifa);
+        System.out.println(String.format("Matching rule is:\n%s", matchingRuleRealPred.getModelDescription()));
+        System.out.println(String.format("Matching rule is:\n%s", matchingRulePredFifa.getModelDescription()));
+        System.out.println(String.format("Matching rule is:\n%s", matchingRuleRealFifa.getModelDescription()));
+
         // create a blocker (blocking strategy)
         StandardRecordBlocker<Player, Attribute> blocker = new StandardRecordBlocker<Player, Attribute>(new PlayerBlockingKeyByNationalityGenerator());
         //SortedNeighbourhoodBlocker<Player, Attribute, Attribute> blocker = new SortedNeighbourhoodBlocker<>(new PlayerBlockingKeyByNationalityGenerator(), 1);
@@ -87,45 +102,56 @@ public class IdentityResolutionUsingML {
 
         // Execute the matching
         System.out.println("*\n*\tRunning identity resolution\n*");
-        Processable<Correspondence<Player, Attribute>> correspondences = engine.runIdentityResolution(
-                dataRealPlayers, dataPredictionPlayers, null, matchingRuleForReal2Pred,
+        Processable<Correspondence<Player, Attribute>> correspondencesRealPred = engine.runIdentityResolution(
+                dataRealPlayers, dataPredictionPlayers, null, matchingRuleRealPred,
                 blocker);
         Processable<Correspondence<Player, Attribute>> correspondencesPredFifa = engine.runIdentityResolution(
-                dataPredictionPlayers, dataFifaPlayers, null, matchingRuleForPred2Fifa,
+                dataPredictionPlayers, dataFifaPlayers, null, matchingRulePredFifa,
+                blocker);
+        Processable<Correspondence<Player, Attribute>> correspondencesRealFifa = engine.runIdentityResolution(
+                dataRealPlayers, dataFifaPlayers, null, matchingRuleRealFifa,
                 blocker);
 
         // write the correspondences to the output file
-        new CSVCorrespondenceFormatter().writeCSV(new File("data/output/real_2_prediction_correspondences.csv"), correspondences);
+        new CSVCorrespondenceFormatter().writeCSV(new File("data/output/real_2_prediction_correspondences.csv"), correspondencesRealPred);
         new CSVCorrespondenceFormatter().writeCSV(new File("data/output/prediction_2_fifa_correspondences.csv"), correspondencesPredFifa);
+        new CSVCorrespondenceFormatter().writeCSV(new File("data/output/real_2_prediction_correspondences.csv"), correspondencesRealFifa);
+
 
         // load the gold standard (test set)
         System.out.println("*\n*\tLoading gold standard\n*");
-        MatchingGoldStandard gsTest = new MatchingGoldStandard();
+        MatchingGoldStandard gsTestRealPred = new MatchingGoldStandard();
         MatchingGoldStandard gsTestPredFifa = new MatchingGoldStandard();
-        gsTest.loadFromCSVFile(new File(
-                "data/goldstandard/real_market_2_prediction_test.csv"));
-        gsTestPredFifa.loadFromCSVFile(new File(
-                "data/goldstandard/prediction_2_fifa_test.csv"));
-        System.out.println(matchingRuleForReal2Pred.getModelDescription());
-        System.out.println(matchingRuleForPred2Fifa.getModelDescription());
+        MatchingGoldStandard gsTestRealFifa = new MatchingGoldStandard();
+
+        gsTestRealPred.loadFromCSVFile(new File("data/goldstandard/real_market_2_prediction_test.csv"));
+        gsTestRealFifa.loadFromCSVFile(new File("data/goldstandard/real_market_2_fifa_test.csv"));
+        gsTestPredFifa.loadFromCSVFile(new File("data/goldstandard/prediction_2_fifa_test.csv"));
+        System.out.println(matchingRuleRealPred.getModelDescription());
+        System.out.println(matchingRulePredFifa.getModelDescription());
+        System.out.println(matchingRuleRealFifa.getModelDescription());
+
 
         // evaluate your result
         System.out.println("*\n*\tEvaluating result\n*");
-        MatchingEvaluator<Player, Attribute> evaluator = new MatchingEvaluator<Player, Attribute>();
+        MatchingEvaluator<Player, Attribute> evaluatorRealPred = new MatchingEvaluator<Player, Attribute>();
         MatchingEvaluator<Player, Attribute> evaluatorPredFifa = new MatchingEvaluator<Player, Attribute>();
-        Performance perfTest = evaluator.evaluateMatching(correspondences,
-                gsTest);
+        MatchingEvaluator<Player, Attribute> evaluatorRealFifa = new MatchingEvaluator<Player, Attribute>();
+        Performance perfTestRealPred = evaluatorRealPred.evaluateMatching(correspondencesRealPred,
+                gsTestRealPred);
         Performance perfTestPredFifa = evaluatorPredFifa.evaluateMatching(correspondencesPredFifa,
                 gsTestPredFifa);
+        Performance perfTestRealFifa = evaluatorRealFifa.evaluateMatching(correspondencesRealFifa,
+                gsTestRealFifa);
 
         // print the evaluation result
         System.out.println("Academy Real <-> Pred");
         System.out.println(String.format(
-                "Precision: %.4f",perfTest.getPrecision()));
+                "Precision: %.4f",perfTestRealPred.getPrecision()));
         System.out.println(String.format(
-                "Recall: %.4f",	perfTest.getRecall()));
+                "Recall: %.4f",	perfTestRealPred.getRecall()));
         System.out.println(String.format(
-                "F1: %.4f",perfTest.getF1()));
+                "F1: %.4f",perfTestRealPred.getF1()));
 
         System.out.println("Academy Prediction <-> Fifa");
         System.out.println(String.format(
@@ -134,5 +160,13 @@ public class IdentityResolutionUsingML {
                 "Recall: %.4f",	perfTestPredFifa.getRecall()));
         System.out.println(String.format(
                 "F1: %.4f",perfTestPredFifa.getF1()));
+
+        System.out.println("Academy Real <-> Fifa");
+        System.out.println(String.format(
+                "Precision: %.4f",perfTestRealFifa.getPrecision()));
+        System.out.println(String.format(
+                "Recall: %.4f",	perfTestRealFifa.getRecall()));
+        System.out.println(String.format(
+                "F1: %.4f",perfTestRealFifa.getF1()));
     }
 }
