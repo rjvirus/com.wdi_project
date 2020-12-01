@@ -24,7 +24,7 @@ public class IdentityResolution {
 
         //create 3 matching rules
         LinearCombinationMatchingRule<Player, Attribute> matchingRuleRealPred = new LinearCombinationMatchingRule<>(0.7);
-        LinearCombinationMatchingRule<Player, Attribute> matchingRuleFifaReal = new LinearCombinationMatchingRule<>(0.5);
+        LinearCombinationMatchingRule<Player, Attribute> matchingRuleRealFifa = new LinearCombinationMatchingRule<>(0.5);
         LinearCombinationMatchingRule<Player, Attribute> matchingRulePredFifa = new LinearCombinationMatchingRule<>(0.5);
 
         //loading the data
@@ -35,11 +35,14 @@ public class IdentityResolution {
         new PlayerXMLReader().loadFromXML(new File("data/input/prediction_players.xml"),"/players/player", dataPredictionPlayers);
         new PlayerXMLReader().loadFromXML(new File("data/input/fifa_players.xml"),"/players/player", dataFifaPlayers);
 
-        // load the gold standard (test set)
+        // load the gold standards (test set)
         System.out.println("*\n*\tLoading gold standard\n*");
-        MatchingGoldStandard gsTest = new MatchingGoldStandard();
-        gsTest.loadFromCSVFile(new File(
-                "data/goldstandard/real_market_2_prediction_test.csv"));
+        MatchingGoldStandard gsTestRealPred = new MatchingGoldStandard();
+        gsTestRealPred.loadFromCSVFile(new File("data/goldstandard/real_market_2_prediction_test.csv"));
+
+        System.out.println("*\n*\tLoading gold standard\n*");
+        MatchingGoldStandard gsTestRealFifa = new MatchingGoldStandard();
+        gsTestRealFifa.loadFromCSVFile(new File("data/goldstandard/real_market_2_fifa_test.csv"));
 
         //added comparators for RealPred
         matchingRuleRealPred.addComparator(new PlayerNameComparatorJaccard(), 0.50);
@@ -47,11 +50,11 @@ public class IdentityResolution {
         matchingRuleRealPred.addComparator(new PlayerNationalityComparatorJaccard(), 0.25);
         matchingRuleRealPred.addComparator(new PlayerBirthDateComparatorEqual(), 0.25);
 
-        //added comparators for FifaReal
-        matchingRuleFifaReal.addComparator(new PlayerNameComparatorJaccard(), 0.6);
-        matchingRuleFifaReal.addComparator(new PlayerClubComparatorJaccard(), 0.3);
-        // matchingRuleFifaReal.addComparator(new PlayerMarketValueComparatorPercentageSim(), 0.1);
-        matchingRuleFifaReal.addComparator(new PlayerKitNumberComparatorEqual(), 0.1);
+        //added comparators for RealFifa
+        matchingRuleRealFifa.addComparator(new PlayerNameComparatorJaccard(), 0.6);
+        matchingRuleRealFifa.addComparator(new PlayerClubComparatorJaccard(), 0.3);
+        // matchingRuleRealFifa.addComparator(new PlayerMarketValueComparatorPercentageSim(), 0.1);
+        matchingRuleRealFifa.addComparator(new PlayerKitNumberComparatorEqual(), 0.1);
 
         //added comparators for PredFifa
         matchingRulePredFifa.addComparator(new PlayerNameComparatorJaccard(), 0.35);
@@ -62,7 +65,7 @@ public class IdentityResolution {
 
         // Initialize Matching Engines
         MatchingEngine<Player, Attribute> engineRealPred = new MatchingEngine<>();
-        MatchingEngine<Player, Attribute> engineFifaReal = new MatchingEngine<>();
+        MatchingEngine<Player, Attribute> engineRealFifa = new MatchingEngine<>();
         MatchingEngine<Player, Attribute> enginePredFifa = new MatchingEngine<>();
 
         // create a blocker (blocking strategy)
@@ -71,31 +74,43 @@ public class IdentityResolution {
         // Execute the matchings
         Processable<Correspondence<Player, Attribute>> correspondencesRealPred = engineRealPred.runIdentityResolution(
                 dataRealPlayers, dataPredictionPlayers, null, matchingRuleRealPred, blocker);
-        Processable<Correspondence<Player, Attribute>> correspondencesFifaReal = engineFifaReal.runIdentityResolution(
-                dataFifaPlayers, dataRealPlayers, null, matchingRuleFifaReal, blocker);
+        Processable<Correspondence<Player, Attribute>> correspondencesRealFifa = engineRealFifa.runIdentityResolution(
+                dataRealPlayers, dataFifaPlayers, null, matchingRuleRealFifa, blocker);
         Processable<Correspondence<Player, Attribute>> correspondencesPredFifa = enginePredFifa.runIdentityResolution(
                 dataPredictionPlayers, dataFifaPlayers , null, matchingRulePredFifa, blocker);
 
 
         // write the correspondences to the output file
         new CSVCorrespondenceFormatter().writeCSV(new File("data/output/real_2_prediction_correspondences.csv"), correspondencesRealPred);
-        new CSVCorrespondenceFormatter().writeCSV(new File("data/output/fifa_2_real_correspondences.csv"), correspondencesFifaReal);
+        new CSVCorrespondenceFormatter().writeCSV(new File("data/output/fifa_2_real_correspondences.csv"), correspondencesRealFifa);
         new CSVCorrespondenceFormatter().writeCSV(new File("data/output/prediction_2_fifa_correspondences.csv"), correspondencesPredFifa);
 
 
         System.out.println("*\n*\tEvaluating result\n*");
-        // evaluate your result
-        MatchingEvaluator<Player, Attribute> evaluator = new MatchingEvaluator<Player, Attribute>();
-        Performance perfTest = evaluator.evaluateMatching(correspondencesRealPred,
-                gsTest);
+        // evaluate your results
+        MatchingEvaluator<Player, Attribute> evaluatorRealPred = new MatchingEvaluator<Player, Attribute>();
+        Performance perfTestRealPred = evaluatorRealPred.evaluateMatching(correspondencesRealPred,
+                gsTestRealPred);
+
+        MatchingEvaluator<Player, Attribute> evaluatorRealFifa = new MatchingEvaluator<Player, Attribute>();
+        Performance perfTestRealFifa = evaluatorRealFifa.evaluateMatching(correspondencesRealFifa,
+                gsTestRealFifa);
 
         // print the evaluation result
         System.out.println("Players - Real Market <-> Players - Predicted Price");
         System.out.println(String.format(
-                "Precision: %.4f",perfTest.getPrecision()));
+                "Precision: %.4f",perfTestRealPred.getPrecision()));
         System.out.println(String.format(
-                "Recall: %.4f",	perfTest.getRecall()));
+                "Recall: %.4f",	perfTestRealPred.getRecall()));
         System.out.println(String.format(
-                "F1: %.4f",perfTest.getF1()));
+                "F1: %.4f",perfTestRealPred.getF1()));
+
+        System.out.println("Players - Real Market <-> Players - Fifa");
+        System.out.println(String.format(
+                "Precision: %.4f",perfTestRealFifa.getPrecision()));
+        System.out.println(String.format(
+                "Recall: %.4f",	perfTestRealFifa.getRecall()));
+        System.out.println(String.format(
+                "F1: %.4f",perfTestRealFifa.getF1()));
     }
 }

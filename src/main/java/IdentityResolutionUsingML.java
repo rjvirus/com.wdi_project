@@ -36,21 +36,24 @@ public class IdentityResolutionUsingML {
         new PlayerXMLReader().loadFromXML(new File("data/input/prediction_players.xml"),"/players/player", dataPredictionPlayers);
         new PlayerXMLReader().loadFromXML(new File("data/input/fifa_players.xml"),"/players/player", dataFifaPlayers);
 
-        // load the training set
-        MatchingGoldStandard gsTraining = new MatchingGoldStandard();
-        MatchingGoldStandard gsTrainingpredFifa = new MatchingGoldStandard();
-        gsTraining.loadFromCSVFile(new File("data/goldstandard/real_market_2_prediction_train.csv"));
-        gsTrainingpredFifa.loadFromCSVFile(new File("data/goldstandard/prediction_2_fifa_train.csv"));
+        // load the training sets
+        MatchingGoldStandard gsTrainingRealPred = new MatchingGoldStandard();
+        MatchingGoldStandard gsTrainingPredFifa = new MatchingGoldStandard();
+        MatchingGoldStandard gsTrainingFifaReal = new MatchingGoldStandard();
+
+        gsTrainingRealPred.loadFromCSVFile(new File("data/goldstandard/real_market_2_prediction_train.csv"));
+        gsTrainingPredFifa.loadFromCSVFile(new File("data/goldstandard/prediction_2_fifa_train.csv"));
+        gsTrainingFifaReal.loadFromCSVFile(new File("data/goldstandard/prediction_2_fifa_train.csv"));
 
         // create a matching rule
         String options[] = new String[] { "-S" };
         String modelType = "SimpleLogistic"; // use a logistic regression
         WekaMatchingRule<Player, Attribute> matchingRuleForReal2Pred = new WekaMatchingRule<>(0.7, modelType, options);
-        matchingRuleForReal2Pred.activateDebugReport("data/output/debugResultsMatchingRule.csv", 1000, gsTraining);
+        matchingRuleForReal2Pred.activateDebugReport("data/output/debugResultsMatchingRule.csv", 1000, gsTrainingRealPred);
 
         // create a matching rule
         WekaMatchingRule<Player, Attribute> matchingRuleForPred2Fifa = new WekaMatchingRule<>(0.7, modelType, options);
-        matchingRuleForReal2Pred.activateDebugReport("data/output/debugResultsMatchingRulePredFifa.csv", 1000, gsTrainingpredFifa);
+        matchingRuleForReal2Pred.activateDebugReport("data/output/debugResultsMatchingRulePredFifa.csv", 1000, gsTrainingPredFifa);
 
 
         // add comparators
@@ -72,8 +75,8 @@ public class IdentityResolutionUsingML {
         System.out.println("*\n*\tLearning matching rule\n*");
         RuleLearner<Player, Attribute> learner = new RuleLearner<>();
         RuleLearner<Player, Attribute> learnerPredFifa = new RuleLearner<>();
-        learner.learnMatchingRule(dataRealPlayers, dataPredictionPlayers, null, matchingRuleForReal2Pred, gsTraining);
-        learnerPredFifa.learnMatchingRule(dataPredictionPlayers, dataFifaPlayers, null, matchingRuleForPred2Fifa, gsTrainingpredFifa
+        learner.learnMatchingRule(dataRealPlayers, dataPredictionPlayers, null, matchingRuleForReal2Pred, gsTrainingRealPred);
+        learnerPredFifa.learnMatchingRule(dataPredictionPlayers, dataFifaPlayers, null, matchingRuleForPred2Fifa, gsTrainingPredFifa
         );
         System.out.println(String.format("Matching rule is:\n%s", matchingRuleForReal2Pred.getModelDescription()));
         System.out.println(String.format("Matching rule is:\n%s", matchingRuleForPred2Fifa.getModelDescription()));
