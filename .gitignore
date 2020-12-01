@@ -1,2 +1,10 @@
 # Project exclude paths
 /target/
+data/output/debugResultsBlocking.csv
+data/output/debugResultsMatchingRule.csv
+data/output/debugResultsMatchingRule.csv_short
+data/output/debugResultsMatchingRulePredFifa.csv
+data/output/debugResultsMatchingRulePredFifa.csv_short
+data/output/fifa_2_prediction_correspondences.csv
+data/output/fifa_2_real_correspondences.csv
+data/output/prediction_2_fifa_correspondences.csv
