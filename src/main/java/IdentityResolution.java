@@ -25,7 +25,7 @@ public class IdentityResolution {
         //create 3 matching rules
         LinearCombinationMatchingRule<Player, Attribute> matchingRuleRealPred = new LinearCombinationMatchingRule<>(0.7);
         LinearCombinationMatchingRule<Player, Attribute> matchingRuleRealFifa = new LinearCombinationMatchingRule<>(0.5);
-        LinearCombinationMatchingRule<Player, Attribute> matchingRulePredFifa = new LinearCombinationMatchingRule<>(0.5);
+        LinearCombinationMatchingRule<Player, Attribute> matchingRulePredFifa = new LinearCombinationMatchingRule<>(0.35);
 
         //loading the data
         HashedDataSet<Player, Attribute> dataRealPlayers = new HashedDataSet<>();
@@ -43,6 +43,10 @@ public class IdentityResolution {
         System.out.println("*\n*\tLoading gold standard\n*");
         MatchingGoldStandard gsTestRealFifa = new MatchingGoldStandard();
         gsTestRealFifa.loadFromCSVFile(new File("data/goldstandard/real_market_2_fifa_test.csv"));
+
+        System.out.println("*\n*\tLoading gold standard\n*");
+        MatchingGoldStandard gsTestPredFifa = new MatchingGoldStandard();
+        gsTestPredFifa.loadFromCSVFile(new File("data/goldstandard/prediction_2_fifa_test.csv"));
 
         //added comparators for RealPred
         matchingRuleRealPred.addComparator(new PlayerNameComparatorJaccard(), 0.50);
@@ -96,6 +100,10 @@ public class IdentityResolution {
         Performance perfTestRealFifa = evaluatorRealFifa.evaluateMatching(correspondencesRealFifa,
                 gsTestRealFifa);
 
+        MatchingEvaluator<Player, Attribute> evaluatorPredFifa = new MatchingEvaluator<Player, Attribute>();
+        Performance perfTestPredFifa = evaluatorPredFifa.evaluateMatching(correspondencesPredFifa,
+                gsTestPredFifa);
+
         // print the evaluation result
         System.out.println("Players - Real Market <-> Players - Predicted Price");
         System.out.println(String.format(
@@ -112,5 +120,13 @@ public class IdentityResolution {
                 "Recall: %.4f",	perfTestRealFifa.getRecall()));
         System.out.println(String.format(
                 "F1: %.4f",perfTestRealFifa.getF1()));
+
+        System.out.println("Players - Predicted Prict <-> Players - Fifa");
+        System.out.println(String.format(
+                "Precision: %.4f",perfTestPredFifa.getPrecision()));
+        System.out.println(String.format(
+                "Recall: %.4f",	perfTestPredFifa.getRecall()));
+        System.out.println(String.format(
+                "F1: %.4f",perfTestPredFifa.getF1()));
     }
 }
