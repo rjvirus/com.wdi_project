@@ -24,8 +24,8 @@ public class IdentityResolution {
 
         //create 3 matching rules
         LinearCombinationMatchingRule<Player, Attribute> matchingRuleRealPred = new LinearCombinationMatchingRule<>(0.7);
-        LinearCombinationMatchingRule<Player, Attribute> matchingRuleRealFifa = new LinearCombinationMatchingRule<>(0.5);
-        LinearCombinationMatchingRule<Player, Attribute> matchingRulePredFifa = new LinearCombinationMatchingRule<>(0.35);
+        LinearCombinationMatchingRule<Player, Attribute> matchingRuleRealFifa = new LinearCombinationMatchingRule<>(0.53);
+        LinearCombinationMatchingRule<Player, Attribute> matchingRulePredFifa = new LinearCombinationMatchingRule<>(0.55);
 
         //loading the data
         HashedDataSet<Player, Attribute> dataRealPlayers = new HashedDataSet<>();
@@ -55,17 +55,17 @@ public class IdentityResolution {
         matchingRuleRealPred.addComparator(new PlayerBirthDateComparatorEqual(), 0.25);
 
         //added comparators for RealFifa
-        matchingRuleRealFifa.addComparator(new PlayerNameComparatorJaccard(), 0.6);
-        matchingRuleRealFifa.addComparator(new PlayerClubComparatorJaccard(), 0.3);
-        // matchingRuleRealFifa.addComparator(new PlayerMarketValueComparatorPercentageSim(), 0.1);
-        matchingRuleRealFifa.addComparator(new PlayerKitNumberComparatorEqual(), 0.1);
+        matchingRuleRealFifa.addComparator(new PlayerNameShortComparatorJaccard(), 0.6);
+        matchingRuleRealFifa.addComparator(new PlayerClubComparatorNGramJaccard(), 0.12);
+        matchingRuleRealFifa.addComparator(new PlayerNationalityComparatorJaccard(), 0.23);
+        matchingRuleRealFifa.addComparator(new PlayerKitNumberComparatorEqual(), 0.05);
 
         //added comparators for PredFifa
-        matchingRulePredFifa.addComparator(new PlayerNameComparatorJaccard(), 0.35);
-        matchingRulePredFifa.addComparator(new PlayerClubComparatorJaccard(), 0.25);
+        matchingRulePredFifa.addComparator(new PlayerNameShortComparatorJaccard(), 0.6);
+        matchingRulePredFifa.addComparator(new PlayerClubComparatorNGramJaccard(), 0.20);
         matchingRulePredFifa.addComparator(new PlayerNationalityComparatorJaccard(), 0.15);
-        matchingRulePredFifa.addComparator(new PlayerContractExpComparatorEqual(), 0.15);
-        matchingRulePredFifa.addComparator(new PlayerPositionComparatorJaccard(), 0.1);
+        //matchingRulePredFifa.addComparator(new PlayerContractExpComparatorEqual(), 0.05);
+        matchingRulePredFifa.addComparator(new PlayerPositionComparatorJaccard(), 0.05);
 
         // Initialize Matching Engines
         MatchingEngine<Player, Attribute> engineRealPred = new MatchingEngine<>();

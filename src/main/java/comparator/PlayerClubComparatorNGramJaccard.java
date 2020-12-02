@@ -5,12 +5,13 @@ import de.uni_mannheim.informatik.dws.winter.matching.rules.ComparatorLogger;
 import de.uni_mannheim.informatik.dws.winter.model.Correspondence;
 import de.uni_mannheim.informatik.dws.winter.model.Matchable;
 import de.uni_mannheim.informatik.dws.winter.model.defaultmodel.Attribute;
+import de.uni_mannheim.informatik.dws.winter.similarity.string.JaccardOnNGramsSimilarity;
 import de.uni_mannheim.informatik.dws.winter.similarity.string.TokenizingJaccardSimilarity;
 import model.Player;
 
-public class PlayerClubComparatorJaccard implements Comparator<Player, Attribute> {
+public class PlayerClubComparatorNGramJaccard implements Comparator<Player, Attribute> {
     private static final long serialVersionUID = 1L;
-    TokenizingJaccardSimilarity sim = new TokenizingJaccardSimilarity();
+    JaccardOnNGramsSimilarity sim = new JaccardOnNGramsSimilarity(3);
 
     private ComparatorLogger comparisonLog;
 
