@@ -1,16 +1,19 @@
 package model;
 import de.uni_mannheim.informatik.dws.winter.model.AbstractRecord;
 import de.uni_mannheim.informatik.dws.winter.model.defaultmodel.Attribute;
+import org.apache.commons.lang3.StringUtils;
 
 import java.io.Serializable;
 import java.time.LocalDate;
+import java.util.Collection;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class Player extends AbstractRecord<Attribute> implements Serializable {
 
     private static final long serialVersionUID = 1L;
     protected String id;
-    protected String provenance;
     private String name;
     private String nationality;
     private LocalDate birth_date;
@@ -50,7 +53,6 @@ public class Player extends AbstractRecord<Attribute> implements Serializable {
 
     public Player(String identifier, String provenance) {
         id = identifier;
-        this.provenance = provenance;
     }
 
     @Override
@@ -71,11 +73,6 @@ public class Player extends AbstractRecord<Attribute> implements Serializable {
 
     @Override
     public String getIdentifier() { return id; }
-
-    @Override
-    public String getProvenance() {
-        return provenance;
-    }
 
     public String getId() {
         return id;
@@ -220,6 +217,35 @@ public class Player extends AbstractRecord<Attribute> implements Serializable {
 
     public void setEst_market_value_18(int est_market_value_18) {
         this.est_market_value_18 = est_market_value_18;
+    }
+
+    private Map<Attribute, Collection<String>> provenance = new HashMap<>();
+    private Collection<String> recordProvenance;
+
+    public void setRecordProvenance(Collection<String> provenance) {
+        recordProvenance = provenance;
+    }
+
+    public Collection<String> getRecordProvenance() {
+        return recordProvenance;
+    }
+
+    public void setAttributeProvenance(Attribute attribute, Collection<String> provenance) {
+        this.provenance.put(attribute, provenance);
+    }
+
+    public Collection<String> getAttributeProvenance(String attribute) {
+        return provenance.get(attribute);
+    }
+
+    public String getMergedAttributeProvenance(Attribute attribute) {
+        Collection<String> prov = provenance.get(attribute);
+
+        if (prov != null) {
+            return StringUtils.join(prov, "+");
+        } else {
+            return "";
+        }
     }
 }
 
