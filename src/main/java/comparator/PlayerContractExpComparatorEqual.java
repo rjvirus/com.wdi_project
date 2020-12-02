@@ -25,7 +25,9 @@ public class PlayerContractExpComparatorEqual implements Comparator<Player, Attr
         if(record1ContractExp != null && record2ContractExp != null) {
             String s1 = record1ContractExp.format(DateTimeFormatter.ofPattern("yyyy"));
             String s2 = record2ContractExp.format(DateTimeFormatter.ofPattern("yyyy"));;
-
+        if (s1.equals("1582") || s2.equals("1582")){
+                return 0;
+        }
             double similarity = sim.calculate(s1, s2);
 
             if(this.comparisonLog != null){
