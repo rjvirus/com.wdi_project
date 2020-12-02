@@ -18,7 +18,7 @@ import org.slf4j.Logger;
 import java.io.File;
 
 public class IdentityResolution {
-    private static final Logger logger = WinterLogManager.activateLogger("default");
+    private static final Logger logger = WinterLogManager.activateLogger("trace");
 
     public static void main(String args[]) throws Exception {
 
@@ -36,15 +36,15 @@ public class IdentityResolution {
         new PlayerXMLReader().loadFromXML(new File("data/input/fifa_players.xml"),"/players/player", dataFifaPlayers);
 
         // load the gold standards (test set)
-        System.out.println("*\n*\tLoading gold standard\n*");
+        System.out.println("*\n*\tLoading gold standard for Real Market Players to Prediction \n*");
         MatchingGoldStandard gsTestRealPred = new MatchingGoldStandard();
         gsTestRealPred.loadFromCSVFile(new File("data/goldstandard/real_market_2_prediction_test.csv"));
 
-        System.out.println("*\n*\tLoading gold standard\n*");
+        System.out.println("*\n*\tLoading gold standard for Real Market Players to FIFA \n*");
         MatchingGoldStandard gsTestRealFifa = new MatchingGoldStandard();
         gsTestRealFifa.loadFromCSVFile(new File("data/goldstandard/real_market_2_fifa_test.csv"));
 
-        System.out.println("*\n*\tLoading gold standard\n*");
+        System.out.println("*\n*\tLoading gold standard for Prediction to FIFA\n*");
         MatchingGoldStandard gsTestPredFifa = new MatchingGoldStandard();
         gsTestPredFifa.loadFromCSVFile(new File("data/goldstandard/prediction_2_fifa_test.csv"));
 
@@ -90,16 +90,18 @@ public class IdentityResolution {
         new CSVCorrespondenceFormatter().writeCSV(new File("data/output/correspondences/prediction_2_fifa_correspondences.csv"), correspondencesPredFifa);
 
 
-        System.out.println("*\n*\tEvaluating result\n*");
+        System.out.println("*\n*\tEvaluating result for Real to Prediction\n*");
         // evaluate your results
         MatchingEvaluator<Player, Attribute> evaluatorRealPred = new MatchingEvaluator<Player, Attribute>();
         Performance perfTestRealPred = evaluatorRealPred.evaluateMatching(correspondencesRealPred,
                 gsTestRealPred);
 
+        System.out.println("*\n*\tEvaluating result for Real to FIFA\n*");
         MatchingEvaluator<Player, Attribute> evaluatorRealFifa = new MatchingEvaluator<Player, Attribute>();
         Performance perfTestRealFifa = evaluatorRealFifa.evaluateMatching(correspondencesRealFifa,
                 gsTestRealFifa);
 
+        System.out.println("*\n*\tEvaluating result for Prediction to FIFA\n*");
         MatchingEvaluator<Player, Attribute> evaluatorPredFifa = new MatchingEvaluator<Player, Attribute>();
         Performance perfTestPredFifa = evaluatorPredFifa.evaluateMatching(correspondencesPredFifa,
                 gsTestPredFifa);
