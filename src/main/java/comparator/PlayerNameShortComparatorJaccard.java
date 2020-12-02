@@ -21,7 +21,6 @@ public class PlayerNameShortComparatorJaccard implements Comparator<Player, Attr
         String s2 = record2.getName();
 
         String[] s1Parts = s1.split(" ");
-        System.out.println(s1Parts[0].charAt(0));
         String modR1 = s1Parts[0].charAt(0) + "." + " " + s1Parts[s1Parts.length-1];
 
         double similarity = sim.calculate(modR1, s2);
