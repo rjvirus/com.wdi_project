@@ -30,7 +30,7 @@ public class PlayerXMLReader extends XMLMatchableReader<Player, Attribute> imple
         Player player = new Player(id, provenanceInfo);
 
         // fill the attributes
-        player.setName(getValueFromChildElement(node, "name"));
+        player.setName(StringUtils.stripAccents(getValueFromChildElement(node, "name")));
         player.setNationality(getValueFromChildElement(node, "nationality"));
         player.setClub(getValueFromChildElement(node, "club"));
 
