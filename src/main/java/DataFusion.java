@@ -13,7 +13,7 @@ import fusers.NameFuserLongestString;
 import model.Player;
 import model.PlayerXMLFormatter;
 import model.PlayerXMLReader;
-import org.apache.logging.log4j.Logger;
+import org.slf4j.Logger;
 
 import java.io.File;
 import java.time.LocalDateTime;
@@ -24,7 +24,7 @@ import java.util.Locale;
 
 public class DataFusion {
 
-    private static final Logger logger = (Logger) WinterLogManager.activateLogger("traceFile");
+    private static final Logger logger = WinterLogManager.activateLogger("trace");
 
     public static void main( String[] args ) throws Exception
     {
@@ -73,7 +73,7 @@ public class DataFusion {
         // load the gold standard
         System.out.println("*\n*\tEvaluating results\n*");
         DataSet<Player, Attribute> gs = new FusibleHashedDataSet<>();
-        //new PlayerXMLReader().loadFromXML(new File("data/goldstandard/gold.xml"), "/players/player", gs);
+        //new PlayerXMLReader().loadFromXML(new File("data/goldstandard/gold.xml"), "/players/player", gs); pratik
 
         for(Player m : gs.get()) {
             System.out.println(String.format("gs: %s", m.getIdentifier()));
@@ -91,12 +91,16 @@ public class DataFusion {
         strategy.addAttributeFuser(Player.CLUB,new ActorsFuserUnion(),new ActorsEvaluationRule());
         strategy.addAttributeFuser(Player.COMPETITIONS,new ActorsFuserUnion(),new ActorsEvaluationRule());
         strategy.addAttributeFuser(Player.CONTRACTEXP,new ActorsFuserUnion(),new ActorsEvaluationRule());
+
+        mert
         strategy.addAttributeFuser(Player.ESTMARKETVALUE18,new ActorsFuserUnion(),new ActorsEvaluationRule());
         strategy.addAttributeFuser(Player.KITNUMBER,new ActorsFuserUnion(),new ActorsEvaluationRule());
         strategy.addAttributeFuser(Player.LASTINJURY,new ActorsFuserUnion(),new ActorsEvaluationRule());
         strategy.addAttributeFuser(Player.MARKETVALUE19,new ActorsFuserUnion(),new ActorsEvaluationRule());
         strategy.addAttributeFuser(Player.NATIONALITY,new ActorsFuserUnion(),new ActorsEvaluationRule());
         strategy.addAttributeFuser(Player.OVERALL,new ActorsFuserUnion(),new ActorsEvaluationRule());
+
+        kai
         strategy.addAttributeFuser(Player.POSITIONS,new ActorsFuserUnion(),new ActorsEvaluationRule());
         strategy.addAttributeFuser(Player.POTENTIAL,new ActorsFuserUnion(),new ActorsEvaluationRule());
         strategy.addAttributeFuser(Player.RELEASECLAUSE,new ActorsFuserUnion(),new ActorsEvaluationRule());
