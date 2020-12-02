@@ -13,9 +13,9 @@ import model.Player;
 
 import java.time.LocalDate;
 
-public class DateFuserFavourSource extends AttributeValueFuser<LocalDate, Player, Attribute> {
+public class BirthDateFuserFavourSource extends AttributeValueFuser<LocalDate, Player, Attribute> {
 
-	public DateFuserFavourSource() {
+	public BirthDateFuserFavourSource() {
 		super(new FavourSources<LocalDate, Player, Attribute>());
 	}
 
