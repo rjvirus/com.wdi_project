@@ -88,9 +88,9 @@ public class IdentityResolutionUsingML {
         learnerRealPred.learnMatchingRule(dataRealPlayers, dataPredictionPlayers, null, matchingRuleRealPred, gsTrainingRealPred);
         learnerPredFifa.learnMatchingRule(dataPredictionPlayers, dataFifaPlayers, null, matchingRulePredFifa, gsTrainingPredFifa);
         learnerRealFifa.learnMatchingRule(dataRealPlayers, dataFifaPlayers, null, matchingRuleRealFifa, gsTrainingRealFifa);
-        System.out.println(String.format("Matching rule is:\n%s", matchingRuleRealPred.getModelDescription()));
-        System.out.println(String.format("Matching rule is:\n%s", matchingRulePredFifa.getModelDescription()));
-        System.out.println(String.format("Matching rule is:\n%s", matchingRuleRealFifa.getModelDescription()));
+        System.out.println(String.format("Matching rule for Real <-> Pred  is:\n%s", matchingRuleRealPred.getModelDescription()));
+        System.out.println(String.format("Matching rule for Pred <-> Fifa is:\n%s", matchingRulePredFifa.getModelDescription()));
+        System.out.println(String.format("Matching rule for Real <-> Fifa is:\n%s", matchingRuleRealFifa.getModelDescription()));
 
         // create a blocker (blocking strategy)
         StandardRecordBlocker<Player, Attribute> blocker = new StandardRecordBlocker<Player, Attribute>(new PlayerBlockingKeyByNationalityGenerator());
@@ -113,9 +113,9 @@ public class IdentityResolutionUsingML {
                 blocker);
 
         // write the correspondences to the output file
-        new CSVCorrespondenceFormatter().writeCSV(new File("data/output/real_2_prediction_correspondences.csv"), correspondencesRealPred);
-        new CSVCorrespondenceFormatter().writeCSV(new File("data/output/prediction_2_fifa_correspondences.csv"), correspondencesPredFifa);
-        new CSVCorrespondenceFormatter().writeCSV(new File("data/output/real_2_prediction_correspondences.csv"), correspondencesRealFifa);
+        new CSVCorrespondenceFormatter().writeCSV(new File("data/output/correspondences/real_2_prediction_correspondences.csv"), correspondencesRealPred);
+        new CSVCorrespondenceFormatter().writeCSV(new File("data/output/correspondences/prediction_2_fifa_correspondences.csv"), correspondencesPredFifa);
+        new CSVCorrespondenceFormatter().writeCSV(new File("data/output/correspondences/real_2_prediction_correspondences.csv"), correspondencesRealFifa);
 
 
         // load the gold standard (test set)
@@ -145,7 +145,7 @@ public class IdentityResolutionUsingML {
                 gsTestRealFifa);
 
         // print the evaluation result
-        System.out.println("Academy Real <-> Pred");
+        System.out.println("Real <-> Pred");
         System.out.println(String.format(
                 "Precision: %.4f",perfTestRealPred.getPrecision()));
         System.out.println(String.format(
@@ -153,7 +153,7 @@ public class IdentityResolutionUsingML {
         System.out.println(String.format(
                 "F1: %.4f",perfTestRealPred.getF1()));
 
-        System.out.println("Academy Prediction <-> Fifa");
+        System.out.println("Prediction <-> Fifa");
         System.out.println(String.format(
                 "Precision: %.4f",perfTestPredFifa.getPrecision()));
         System.out.println(String.format(
@@ -161,7 +161,7 @@ public class IdentityResolutionUsingML {
         System.out.println(String.format(
                 "F1: %.4f",perfTestPredFifa.getF1()));
 
-        System.out.println("Academy Real <-> Fifa");
+        System.out.println("Real <-> Fifa");
         System.out.println(String.format(
                 "Precision: %.4f",perfTestRealFifa.getPrecision()));
         System.out.println(String.format(
