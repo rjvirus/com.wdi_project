@@ -85,9 +85,9 @@ public class IdentityResolution {
 
 
         // write the correspondences to the output file
-        new CSVCorrespondenceFormatter().writeCSV(new File("data/output/real_2_prediction_correspondences.csv"), correspondencesRealPred);
-        new CSVCorrespondenceFormatter().writeCSV(new File("data/output/fifa_2_real_correspondences.csv"), correspondencesRealFifa);
-        new CSVCorrespondenceFormatter().writeCSV(new File("data/output/prediction_2_fifa_correspondences.csv"), correspondencesPredFifa);
+        new CSVCorrespondenceFormatter().writeCSV(new File("data/output/correspondences/real_2_prediction_correspondences.csv"), correspondencesRealPred);
+        new CSVCorrespondenceFormatter().writeCSV(new File("data/output/correspondences/real_2_fifa_correspondences.csv"), correspondencesRealFifa);
+        new CSVCorrespondenceFormatter().writeCSV(new File("data/output/correspondences/prediction_2_fifa_correspondences.csv"), correspondencesPredFifa);
 
 
         System.out.println("*\n*\tEvaluating result\n*");
