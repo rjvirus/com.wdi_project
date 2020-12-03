@@ -52,6 +52,7 @@ public class Player extends AbstractRecord<Attribute> implements Serializable {
     public static final Attribute LASTINJURY = new Attribute("LastInjury");
 
     public Player(String identifier, String provenance) {
+        super(identifier, provenance);
         id = identifier;
     }
 
@@ -63,11 +64,39 @@ public class Player extends AbstractRecord<Attribute> implements Serializable {
     @Override
     public boolean hasValue(Attribute attribute) {
         if(attribute==NAME)
-            return name!=null;
+            return name != null && !name.isEmpty();
         else if(attribute==NATIONALITY)
-            return nationality!=null;
+            return nationality!=null && !nationality.isEmpty();
         else if(attribute==CLUB)
-            return club!=null;
+            return club!=null && !club.isEmpty();
+        else if(attribute==BIRTHDATE)
+            return birth_date!=null;
+        else if(attribute==BIRTHPLACE)
+            return birth_place!=null && !birth_place.isEmpty();
+        else if(attribute==POSITIONS)
+            return positions != null && positions.size() > 0;
+        else if(attribute==COMPETITIONS)
+            return competitions != null && competitions.size() > 0;
+        else if(attribute==STRONGFOOT)
+            return strong_foot!=null && !strong_foot.isEmpty();
+        else if(attribute==KITNUMBER)
+            return kit_number!=0;
+        else if(attribute==WAGE)
+            return wage!=0;
+        else if(attribute==MARKETVALUE19)
+            return market_value_19!=0;
+        else if(attribute==ESTMARKETVALUE18)
+            return est_market_value_18!=0;
+        else if(attribute==CONTRACTEXP)
+            return contract_exp!=null;
+        else if(attribute==RELEASECLAUSE)
+            return release_clause!=0;
+        else if(attribute==OVERALL)
+            return overall!=0;
+        else if(attribute==POTENTIAL)
+            return potential!=0;
+        else if(attribute==LASTINJURY)
+            return last_injury!=null && !last_injury.isEmpty();
         return false;
     }
 
