@@ -61,7 +61,7 @@ public class IdentityResolution {
 
         //added comparators for PredFifa
         matchingRulePredFifa.addComparator(new PlayerNameShortComparatorJaccard(), 0.6);
-        matchingRulePredFifa.addComparator(new PlayerClubComparatorJaccard(), 0.1);
+        matchingRulePredFifa.addComparator(new PlayerClubComparatorNGramJaccard(), 0.1);
         matchingRulePredFifa.addComparator(new PlayerNationalityComparatorJaccard(), 0.25);
         matchingRulePredFifa.addComparator(new PlayerPositionComparatorJaccard(), 0.05);
 
