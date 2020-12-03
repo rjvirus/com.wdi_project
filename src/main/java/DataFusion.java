@@ -42,7 +42,6 @@ public class DataFusion {
         new PlayerXMLReader().loadFromXML(new File("data/input/fifa_players.xml"), "/players/player", dsFifa);
         dsFifa.printDataSetDensityReport();
 
-        // Maintain Provenance
         // Scores (e.g. from rating)
         dsReal.setScore(2.0);
         dsPrediction.setScore(1.0);
@@ -67,68 +66,7 @@ public class DataFusion {
         correspondences.loadCorrespondences(new File("data/output/correspondences/real_2_fifa_correspondences.csv"),dsReal, dsFifa);
         correspondences.loadCorrespondences(new File("data/output/correspondences/prediction_2_fifa_correspondences.csv"),dsPrediction, dsFifa);
 
-        // write group size distribution
         correspondences.printGroupSizeDistribution();
-
-        // load the gold standard
-        System.out.println("*\n*\tEvaluating results\n*");
-        DataSet<Player, Attribute> gs = new FusibleHashedDataSet<>();
-        //new PlayerXMLReader().loadFromXML(new File("data/goldstandard/gold.xml"), "/players/player", gs); pratik
-
-        for(Player m : gs.get()) {
-            System.out.println(String.format("gs: %s", m.getIdentifier()));
-        }
-
-        // define the fusion strategy
-        DataFusionStrategy<Player, Attribute> strategy = new DataFusionStrategy<>(new PlayerXMLReader());
-        // write debug results to file
-        strategy.activateDebugReport("data/output/debugResultsDatafusion.csv", -1, gs);
-
-        // add attribute fusers //TODO: fix and add evaluators and fusers
-        strategy.addAttributeFuser(Player.NAME, new NameFuserLongestString(),new NameEvaluationRule());
-        /*strategy.addAttributeFuser(Player.BIRTHDATE,new DirectorFuserLongestString(), new DirectorEvaluationRule());
-        strategy.addAttributeFuser(Player.BIRTHPLACE, new DateFuserFavourSource(),new DateEvaluationRule());
-        strategy.addAttributeFuser(Player.CLUB,new ActorsFuserUnion(),new ActorsEvaluationRule());
-        strategy.addAttributeFuser(Player.COMPETITIONS,new ActorsFuserUnion(),new ActorsEvaluationRule());
-        strategy.addAttributeFuser(Player.CONTRACTEXP,new ActorsFuserUnion(),new ActorsEvaluationRule());
-
-        mert
-        strategy.addAttributeFuser(Player.ESTMARKETVALUE18,new ActorsFuserUnion(),new ActorsEvaluationRule());
-        strategy.addAttributeFuser(Player.KITNUMBER,new ActorsFuserUnion(),new ActorsEvaluationRule());
-        strategy.addAttributeFuser(Player.LASTINJURY,new ActorsFuserUnion(),new ActorsEvaluationRule());
-        strategy.addAttributeFuser(Player.MARKETVALUE19,new ActorsFuserUnion(),new ActorsEvaluationRule());
-        strategy.addAttributeFuser(Player.NATIONALITY,new ActorsFuserUnion(),new ActorsEvaluationRule());
-        strategy.addAttributeFuser(Player.OVERALL,new ActorsFuserUnion(),new ActorsEvaluationRule());
-
-        kai
-        strategy.addAttributeFuser(Player.POSITIONS,new ActorsFuserUnion(),new ActorsEvaluationRule());
-        strategy.addAttributeFuser(Player.POTENTIAL,new ActorsFuserUnion(),new ActorsEvaluationRule());
-        strategy.addAttributeFuser(Player.RELEASECLAUSE,new ActorsFuserUnion(),new ActorsEvaluationRule());
-        strategy.addAttributeFuser(Player.STRONGFOOT,new ActorsFuserUnion(),new ActorsEvaluationRule());
-        strategy.addAttributeFuser(Player.WAGE,new ActorsFuserUnion(),new ActorsEvaluationRule());*/
-
-
-        // create the fusion engine
-        DataFusionEngine<Player, Attribute> engine = new DataFusionEngine<>(strategy);
-
-        // print consistency report
-        engine.printClusterConsistencyReport(correspondences, null);
-
-        // print record groups sorted by consistency
-        engine.writeRecordGroupsByConsistency(new File("data/output/recordGroupConsistencies.csv"), correspondences, null);
-
-        // run the fusion
-        System.out.println("*\n*\tRunning data fusion\n*");
-        FusibleDataSet<Player, Attribute> fusedDataSet = engine.run(correspondences, null);
-
-        // write the result
-        new PlayerXMLFormatter().writeXML(new File("data/output/fused.xml"), fusedDataSet);
-
-        // evaluate
-        DataFusionEvaluator<Player, Attribute> evaluator = new DataFusionEvaluator<>(strategy, new RecordGroupFactory<Player, Attribute>());
-
-        double accuracy = evaluator.evaluate(fusedDataSet, gs, null);
-
-        System.out.println(String.format("Accuracy: %.2f", accuracy));
+        correspondences.getRecordGroups();
     }
 }
