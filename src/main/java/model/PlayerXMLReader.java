@@ -21,6 +21,24 @@ public class PlayerXMLReader extends XMLMatchableReader<Player, Attribute> imple
 
     protected void initialiseDataset(DataSet<Player, Attribute> dataset) {
         super.initialiseDataset(dataset);
+        // the schema is defined in the Movie class and not interpreted from the file, so we have to set the attributes manually
+
+        dataset.addAttribute(Player.NAME);
+        dataset.addAttribute(Player.BIRTHDATE);
+        dataset.addAttribute(Player.BIRTHPLACE);
+        dataset.addAttribute(Player.CLUB);
+        dataset.addAttribute(Player.COMPETITIONS);
+        dataset.addAttribute(Player.CONTRACTEXP);
+        dataset.addAttribute(Player.ESTMARKETVALUE18);
+        dataset.addAttribute(Player.KITNUMBER);
+        dataset.addAttribute(Player.LASTINJURY);
+        dataset.addAttribute(Player.MARKETVALUE19);
+        dataset.addAttribute(Player.NATIONALITY);
+        dataset.addAttribute(Player.POSITIONS);
+        dataset.addAttribute(Player.RELEASECLAUSE);
+        dataset.addAttribute(Player.POTENTIAL);
+        dataset.addAttribute(Player.STRONGFOOT);
+        dataset.addAttribute(Player.WAGE);
     }
 
     @Override
@@ -34,75 +52,69 @@ public class PlayerXMLReader extends XMLMatchableReader<Player, Attribute> imple
         player.setNationality(getValueFromChildElement(node, "nationality"));
         player.setClub(getValueFromChildElement(node, "club"));
 
-        // convert the date string into a DateTime object
-        try {
-            String strong_foot = getValueFromChildElement(node, "strong_foot");
-            if (strong_foot != null && !strong_foot.isEmpty()) {
-                player.setStrong_foot(strong_foot);
-            }
-            String birth_place = getValueFromChildElement(node, "birth_place");
-            if (birth_place != null && !birth_place.isEmpty()) {
-                player.setBirth_place(birth_place);
-            }
-            String kit_number = getValueFromChildElement(node, "kit_number");
-            if (kit_number != null && !kit_number.isEmpty()) {
-                player.setKit_number(Integer.parseInt(kit_number));
-            }
-            String wage = getValueFromChildElement(node, "wage");
-            if (wage != null && !wage.isEmpty()) {
-                player.setWage(Integer.parseInt(wage));
-            }
-            String market_value_19 = getValueFromChildElement(node, "market_value_19");
-            if (market_value_19 != null && !market_value_19.isEmpty()) {
-                player.setMarket_value_19(Integer.parseInt(market_value_19));
-            }
-            String est_market_value_18 = getValueFromChildElement(node, "est_market_value_18");
-            if (est_market_value_18 != null && !est_market_value_18.isEmpty()) {
-                player.setEst_market_value_18(Integer.parseInt(est_market_value_18));
-            }
-            String release_clause = getValueFromChildElement(node, "release_clause");
-            if (release_clause != null && !release_clause.isEmpty()) {
-                player.setRelease_clause(Integer.parseInt(release_clause));
-            }
-            String overall = getValueFromChildElement(node, "overall");
-            if (overall != null && !overall.isEmpty()) {
-                player.setOverall(Integer.parseInt(overall));
-            }
-            String potential = getValueFromChildElement(node, "potential");
-            if (potential != null && !potential.isEmpty()) {
-                player.setPotential(Integer.parseInt(potential));
-            }
-            String last_injury = getValueFromChildElement(node, "last_injury");
-            if (last_injury != null && !last_injury.isEmpty()) {
-                player.setStrong_foot(last_injury);
-            }
-            String birth_date = getValueFromChildElement(node, "birth_date");
-            if (birth_date != null && !birth_date.isEmpty()) {
-                DateTimeFormatter formatter = new DateTimeFormatterBuilder()
-                        .appendPattern("yyyy-MM-dd").toFormatter(Locale.ENGLISH);
-                LocalDate dt = LocalDate.parse(birth_date, formatter);
-                player.setBirth_date(dt);
-            }
-            String contract_exp = getValueFromChildElement(node, "contract_exp");
-            if (contract_exp != null && !contract_exp.isEmpty()) {
-                DateTimeFormatter formatter = new DateTimeFormatterBuilder()
-                        .appendPattern("yyyy-MM-dd").toFormatter(Locale.ENGLISH);
-                LocalDate dt = LocalDate.parse(contract_exp, formatter);
-                player.setContract_exp(dt);
-            }
+        String strong_foot = getValueFromChildElement(node, "strong_foot");
+        if (strong_foot != null && !strong_foot.isEmpty()) {
+            player.setStrong_foot(strong_foot);
+        }
+        String birth_place = getValueFromChildElement(node, "birth_place");
+        if (birth_place != null && !birth_place.isEmpty()) {
+            player.setBirth_place(birth_place);
+        }
+        String kit_number = getValueFromChildElement(node, "kit_number");
+        if (kit_number != null && !kit_number.isEmpty()) {
+            player.setKit_number(Integer.parseInt(kit_number));
+        }
+        String wage = getValueFromChildElement(node, "wage");
+        if (wage != null && !wage.isEmpty()) {
+            player.setWage(Integer.parseInt(wage));
+        }
+        String market_value_19 = getValueFromChildElement(node, "market_value_19");
+        if (market_value_19 != null && !market_value_19.isEmpty()) {
+            player.setMarket_value_19(Integer.parseInt(market_value_19));
+        }
+        String est_market_value_18 = getValueFromChildElement(node, "est_market_value_18");
+        if (est_market_value_18 != null && !est_market_value_18.isEmpty()) {
+            player.setEst_market_value_18(Integer.parseInt(est_market_value_18));
+        }
+        String release_clause = getValueFromChildElement(node, "release_clause");
+        if (release_clause != null && !release_clause.isEmpty()) {
+            player.setRelease_clause(Integer.parseInt(release_clause));
+        }
+        String overall = getValueFromChildElement(node, "overall");
+        if (overall != null && !overall.isEmpty()) {
+            player.setOverall(Integer.parseInt(overall));
+        }
+        String potential = getValueFromChildElement(node, "potential");
+        if (potential != null && !potential.isEmpty()) {
+            player.setPotential(Integer.parseInt(potential));
+        }
+        String last_injury = getValueFromChildElement(node, "last_injury");
+        if (last_injury != null && !last_injury.isEmpty()) {
+            player.setStrong_foot(last_injury);
+        }
+        String birth_date = getValueFromChildElement(node, "birth_date");
+        if (birth_date != null && !birth_date.isEmpty()) {
+            DateTimeFormatter formatter = new DateTimeFormatterBuilder()
+                    .appendPattern("yyyy-MM-dd").toFormatter(Locale.ENGLISH);
+            LocalDate dt = LocalDate.parse(birth_date, formatter);
+            player.setBirth_date(dt);
+        }
+        String contract_exp = getValueFromChildElement(node, "contract_exp");
+        if (contract_exp != null && !contract_exp.isEmpty()) {
+            DateTimeFormatter formatter = new DateTimeFormatterBuilder()
+                    .appendPattern("yyyy-MM-dd").toFormatter(Locale.ENGLISH);
+            LocalDate dt = LocalDate.parse(contract_exp, formatter);
+            player.setContract_exp(dt);
+        }
 
-            List<String> competitions = getListFromChildElement(node, "competitions");
-            if(competitions != null && competitions.isEmpty()) {
-                player.setCompetitions(competitions);
-            }
+        List<String> competitions = getListFromChildElement(node, "competitions");
+        if(competitions != null && competitions.isEmpty()) {
+            player.setCompetitions(competitions);
+        }
 
-            List<String> positions = getListFromChildElement(node, "positions");
-            if(positions != null && positions.isEmpty()) {
-                player.setPositions(positions);
-            }
-
-        } catch (Exception e) {
-            e.printStackTrace();
+        List<String> positions = getListFromChildElement(node, "positions");
+        if(positions != null && positions.isEmpty()) {
+            player.setPositions(positions);
         }
 
         return player;
