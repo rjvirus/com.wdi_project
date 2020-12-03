@@ -61,20 +61,20 @@ public class IdentityResolutionUsingML {
         // add comparators
         matchingRuleRealPred.addComparator(new PlayerNameComparatorJaccard());
         matchingRuleRealPred.addComparator(new PlayerNameComparatorJaccardTokenizer());
-        matchingRuleRealPred.addComparator(new PlayerClubComparatorJaccard());
+        matchingRuleRealPred.addComparator(new PlayerClubComparatorNGramJaccard());
         matchingRuleRealPred.addComparator(new PlayerNationalityComparatorJaccard());
         matchingRuleRealPred.addComparator(new PlayerBirthDateComparatorEqual());
 
         // add comparators
         matchingRulePredFifa.addComparator(new PlayerNameComparatorJaccard());
-        matchingRulePredFifa.addComparator(new PlayerClubComparatorJaccard());
+        matchingRulePredFifa.addComparator(new PlayerClubComparatorNGramJaccard());
         matchingRulePredFifa.addComparator(new PlayerNationalityComparatorJaccard());
         matchingRulePredFifa.addComparator(new PlayerContractExpComparatorEqual());
         matchingRulePredFifa.addComparator(new PlayerPositionComparatorJaccard());
 
         // add comparators
         matchingRuleRealFifa.addComparator(new PlayerNameComparatorJaccard());
-        matchingRuleRealFifa.addComparator(new PlayerClubComparatorJaccard());
+        matchingRuleRealFifa.addComparator(new PlayerClubComparatorNGramJaccard());
         matchingRuleRealFifa.addComparator(new PlayerNationalityComparatorJaccard());
         matchingRuleRealFifa.addComparator(new PlayerContractExpComparatorEqual());
         matchingRuleRealFifa.addComparator(new PlayerPositionComparatorJaccard());

@@ -23,9 +23,9 @@ public class IdentityResolution {
     public static void main(String args[]) throws Exception {
 
         //create 3 matching rules
-        LinearCombinationMatchingRule<Player, Attribute> matchingRuleRealPred = new LinearCombinationMatchingRule<>(0.8);
-        LinearCombinationMatchingRule<Player, Attribute> matchingRuleRealFifa = new LinearCombinationMatchingRule<>(0.7);
-        LinearCombinationMatchingRule<Player, Attribute> matchingRulePredFifa = new LinearCombinationMatchingRule<>(0.8);
+        LinearCombinationMatchingRule<Player, Attribute> matchingRuleRealPred = new LinearCombinationMatchingRule<>(0.7);
+        LinearCombinationMatchingRule<Player, Attribute> matchingRuleRealFifa = new LinearCombinationMatchingRule<>(0.53);
+        LinearCombinationMatchingRule<Player, Attribute> matchingRulePredFifa = new LinearCombinationMatchingRule<>(0.55);
 
         //loading the data
         HashedDataSet<Player, Attribute> dataRealPlayers = new HashedDataSet<>();
@@ -55,9 +55,8 @@ public class IdentityResolution {
 
         //added comparators for RealFifa
         matchingRuleRealFifa.addComparator(new PlayerNameShortComparatorJaccard(), 0.6);
-        matchingRuleRealFifa.addComparator(new PlayerClubComparatorJaccard(), 0.12);
+        matchingRuleRealFifa.addComparator(new PlayerClubComparatorNGramJaccard(), 0.12);
         matchingRuleRealFifa.addComparator(new PlayerNationalityComparatorJaccard(), 0.23);
-        // matchingRuleRealFifa.addComparator(new PlayerMarketValueComparatorPercentageSim(), 0.1);
         matchingRuleRealFifa.addComparator(new PlayerKitNumberComparatorEqual(), 0.05);
 
         //added comparators for PredFifa
