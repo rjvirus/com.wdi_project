@@ -7,7 +7,10 @@ import de.uni_mannheim.informatik.dws.winter.model.Matchable;
 import de.uni_mannheim.informatik.dws.winter.model.defaultmodel.Attribute;
 import de.uni_mannheim.informatik.dws.winter.similarity.string.JaccardOnNGramsSimilarity;
 import de.uni_mannheim.informatik.dws.winter.similarity.string.TokenizingJaccardSimilarity;
+import edu.stanford.nlp.util.StringUtils;
 import model.Player;
+
+import static org.apache.commons.lang3.StringUtils.stripAccents;
 
 public class PlayerClubComparatorNGramJaccard implements Comparator<Player, Attribute> {
     private static final long serialVersionUID = 1L;
@@ -17,8 +20,8 @@ public class PlayerClubComparatorNGramJaccard implements Comparator<Player, Attr
 
     @Override
     public double compare(Player record1, Player record2, Correspondence<Attribute, Matchable> schemaCorrespondence) {
-        String s1 = record1.getClub();
-        String s2 = record2.getClub();
+        String s1 = stripAccents(record1.getClub());
+        String s2 = stripAccents(record2.getClub());
 
         double similarity = sim.calculate(s1, s2);
 
