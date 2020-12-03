@@ -20,15 +20,27 @@ public class PlayerNameShortComparatorJaccard implements Comparator<Player, Attr
         String s1 = record1.getName();
         String s2 = record2.getName();
 
-        String[] s1Parts = s1.split(" ");
-        String modR1 = s1Parts[0].charAt(0) + "." + " " + s1Parts[s1Parts.length-1];
+        String[] s1Parts = s1.split("(?=\\p{Upper})");
+        String[] s2Parts = s2.split("(?=\\p{Upper})");
 
-        double similarity = sim.calculate(modR1, s2);
+        for (int i = 0; i < s1Parts.length; i++) {
+            if(i == 0) {
+                if(s2Parts[0].length() > 3) {
+                    s1 = s1Parts[0];
+                } else {
+                    s1 = s1Parts[0].charAt(0) + ".";
+                }
+            } else {
+                s1 += " " + s1Parts[i].trim();
+            }
+        }
+
+        double similarity = sim.calculate(s1, s2);
 
         if(this.comparisonLog != null){
             this.comparisonLog.setComparatorName(getClass().getName());
 
-            this.comparisonLog.setRecord1Value(modR1);
+            this.comparisonLog.setRecord1Value(s1);
             this.comparisonLog.setRecord2Value(s2);
 
             this.comparisonLog.setSimilarity(Double.toString(similarity));
