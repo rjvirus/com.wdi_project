@@ -48,25 +48,27 @@ public class IdentityResolutionUsingML {
         // create matching rules
         String options[] = new String[] { "-S" };
         String modelType = "SimpleLogistic"; // use a logistic regression
-        WekaMatchingRule<Player, Attribute> matchingRuleRealPred = new WekaMatchingRule<>(0.7, modelType, options);
+        WekaMatchingRule<Player, Attribute> matchingRuleRealPred = new WekaMatchingRule<>(0.8, modelType, options);
         matchingRuleRealPred.activateDebugReport("data/output/debugResultsMatchingRule.csv", 1000, gsTrainingRealPred);
 
-        WekaMatchingRule<Player, Attribute> matchingRulePredFifa = new WekaMatchingRule<>(0.7, modelType, options);
+        WekaMatchingRule<Player, Attribute> matchingRulePredFifa = new WekaMatchingRule<>(0.75, modelType, options);
         matchingRulePredFifa.activateDebugReport("data/output/debugResultsMatchingRulePredFifa.csv", 1000, gsTrainingPredFifa);
 
-        WekaMatchingRule<Player, Attribute> matchingRuleRealFifa = new WekaMatchingRule<>(0.7, modelType, options);
+        WekaMatchingRule<Player, Attribute> matchingRuleRealFifa = new WekaMatchingRule<>(0.75, modelType, options);
         matchingRuleRealFifa.activateDebugReport("data/output/debugResultsMatchingRule.csv", 1000, gsTrainingRealFifa);
 
 
         // add comparators
         matchingRuleRealPred.addComparator(new PlayerNameComparatorJaccard());
         matchingRuleRealPred.addComparator(new PlayerNameComparatorJaccardTokenizer());
+        matchingRuleRealPred.addComparator(new PlayerNameComparatorLevenshtein());
         matchingRuleRealPred.addComparator(new PlayerClubComparatorNGramJaccard());
         matchingRuleRealPred.addComparator(new PlayerNationalityComparatorJaccard());
         matchingRuleRealPred.addComparator(new PlayerBirthDateComparatorEqual());
 
         // add comparators
         matchingRulePredFifa.addComparator(new PlayerNameComparatorJaccard());
+        matchingRulePredFifa.addComparator(new PlayerNameShortComparatorJaccard());
         matchingRulePredFifa.addComparator(new PlayerClubComparatorNGramJaccard());
         matchingRulePredFifa.addComparator(new PlayerNationalityComparatorJaccard());
         matchingRulePredFifa.addComparator(new PlayerContractExpComparatorEqual());
@@ -74,6 +76,7 @@ public class IdentityResolutionUsingML {
 
         // add comparators
         matchingRuleRealFifa.addComparator(new PlayerNameComparatorJaccard());
+        matchingRuleRealFifa.addComparator(new PlayerNameShortComparatorJaccard());
         matchingRuleRealFifa.addComparator(new PlayerClubComparatorNGramJaccard());
         matchingRuleRealFifa.addComparator(new PlayerNationalityComparatorJaccard());
         matchingRuleRealFifa.addComparator(new PlayerContractExpComparatorEqual());
@@ -115,7 +118,7 @@ public class IdentityResolutionUsingML {
         // write the correspondences to the output file
         new CSVCorrespondenceFormatter().writeCSV(new File("data/output/correspondences/real_2_prediction_correspondences.csv"), correspondencesRealPred);
         new CSVCorrespondenceFormatter().writeCSV(new File("data/output/correspondences/prediction_2_fifa_correspondences.csv"), correspondencesPredFifa);
-        new CSVCorrespondenceFormatter().writeCSV(new File("data/output/correspondences/real_2_prediction_correspondences.csv"), correspondencesRealFifa);
+        new CSVCorrespondenceFormatter().writeCSV(new File("data/output/correspondences/real_2_fifa_correspondences.csv"), correspondencesRealFifa);
 
 
         // load the gold standard (test set)
