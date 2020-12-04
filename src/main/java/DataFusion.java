@@ -2,17 +2,11 @@ import de.uni_mannheim.informatik.dws.winter.datafusion.CorrespondenceSet;
 import de.uni_mannheim.informatik.dws.winter.datafusion.DataFusionEngine;
 import de.uni_mannheim.informatik.dws.winter.datafusion.DataFusionEvaluator;
 import de.uni_mannheim.informatik.dws.winter.datafusion.DataFusionStrategy;
-import de.uni_mannheim.informatik.dws.winter.matching.MatchingEngine;
 import de.uni_mannheim.informatik.dws.winter.model.*;
 import de.uni_mannheim.informatik.dws.winter.model.defaultmodel.Attribute;
-import de.uni_mannheim.informatik.dws.winter.processing.Processable;
 import de.uni_mannheim.informatik.dws.winter.utils.WinterLogManager;
-import evaluation.BirthDateEvaluationRule;
-import evaluation.NameEvaluationRule;
-import evaluation.PositionsEvaluationRule;
-import fusers.BirthDateFuserFavourSource;
-import fusers.NameFuserLongestString;
-import fusers.PositionsFuserUnion;
+import evaluation.*;
+import fusers.*;
 import model.Player;
 import model.PlayerXMLFormatter;
 import model.PlayerXMLReader;
@@ -46,9 +40,9 @@ public class DataFusion {
         dsFifa.printDataSetDensityReport();
 
         // Scores (e.g. from rating)
-        dsReal.setScore(2.0);
+        dsReal.setScore(3.0);
         dsPrediction.setScore(1.0);
-        dsFifa.setScore(3.0);
+        dsFifa.setScore(2.0);
 
         // Date (e.g. last update)
         DateTimeFormatter formatter = new DateTimeFormatterBuilder()
@@ -70,12 +64,11 @@ public class DataFusion {
         correspondences.loadCorrespondences(new File("data/output/correspondences/prediction_2_fifa_correspondences.csv"),dsPrediction, dsFifa);
 
         correspondences.printGroupSizeDistribution();
-        correspondences.getRecordGroups();
 
         // load the gold standard
         System.out.println("*\n*\tEvaluating results\n*");
         DataSet<Player, Attribute> gs = new FusibleHashedDataSet<>();
-        new PlayerXMLReader().loadFromXML(new File("data/goldstandard/gold_standard_fusion_final.xml"), "/players/player", gs); // to be changed
+        new PlayerXMLReader().loadFromXML(new File("data/goldstandard/fused.xml"), "/players/player", gs); // to be changed
 
         for(Player p : gs.get()) {
             System.out.println(String.format("gs: %s", p.getIdentifier()));
@@ -89,7 +82,9 @@ public class DataFusion {
         // add attribute fusers
         strategy.addAttributeFuser(Player.NAME, new NameFuserLongestString(),new NameEvaluationRule());
         strategy.addAttributeFuser(Player.BIRTHDATE, new BirthDateFuserFavourSource(), new BirthDateEvaluationRule());
-        strategy.addAttributeFuser(Player.POSITIONS,new PositionsFuserUnion(), new PositionsEvaluationRule());
+        strategy.addAttributeFuser(Player.BIRTHPLACE, new BirthPlaceFuserFavourSource(),new BirthPlaceEvaluationRule());
+        strategy.addAttributeFuser(Player.CLUB, new ClubFuserMostRecent(),new ClubEvaluationRule());
+        strategy.addAttributeFuser(Player.CONTRACTEXP, new ContractExpFuserFavourSource(),new ContractExpEvaluationRule());
 
         // create the fusion engine
         DataFusionEngine<Player, Attribute> engine = new DataFusionEngine<>(strategy);
@@ -116,18 +111,12 @@ public class DataFusion {
     }
 }
 
-// add attribute fusers //TODO: fix and add evaluators and fusers
-        //strategy.addAttributeFuser(Player.NAME, new NameFuserLongestString(),new NameEvaluationRule());
-        /*strategy.addAttributeFuser(Player.BIRTHDATE,new DirectorFuserLongestString(), new DirectorEvaluationRule());
-        strategy.addAttributeFuser(Player.BIRTHPLACE, new DateFuserFavourSource(),new DateEvaluationRule());
-        strategy.addAttributeFuser(Player.CLUB,new ActorsFuserUnion(),new ActorsEvaluationRule());
+/* add attribute fusers //TODO: fix and add evaluators and fusers
         strategy.addAttributeFuser(Player.COMPETITIONS,new ActorsFuserUnion(),new ActorsEvaluationRule());
-        strategy.addAttributeFuser(Player.CONTRACTEXP,new ActorsFuserUnion(),new ActorsEvaluationRule());
 
         mert
         strategy.addAttributeFuser(Player.ESTMARKETVALUE18,new ActorsFuserUnion(),new ActorsEvaluationRule());
         strategy.addAttributeFuser(Player.KITNUMBER,new ActorsFuserUnion(),new ActorsEvaluationRule());
-        strategy.addAttributeFuser(Player.LASTINJURY,new ActorsFuserUnion(),new ActorsEvaluationRule());
         strategy.addAttributeFuser(Player.MARKETVALUE19,new ActorsFuserUnion(),new ActorsEvaluationRule());
         strategy.addAttributeFuser(Player.NATIONALITY,new ActorsFuserUnion(),new ActorsEvaluationRule());
         strategy.addAttributeFuser(Player.OVERALL,new ActorsFuserUnion(),new ActorsEvaluationRule());
