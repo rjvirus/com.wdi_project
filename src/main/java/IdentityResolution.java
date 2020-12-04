@@ -53,21 +53,21 @@ public class IdentityResolution {
         gsTestPredFifa.loadFromCSVFile(new File("data/goldstandard/prediction_2_fifa_train.csv"));
 
         //added comparators for RealPred
-        matchingRuleRealPred.addComparator(new PlayerNameComparatorJaccard(), 0.55);
+        matchingRuleRealPred.addComparator(new PlayerNameComparatorJaccard(), 0.4);
         matchingRuleRealPred.addComparator(new PlayerNationalityComparatorJaccard(), 0.10);
-        matchingRuleRealPred.addComparator(new PlayerBirthDateComparatorEqual(), 0.35);
+        matchingRuleRealPred.addComparator(new PlayerBirthDateComparatorEqual(), 0.50);
 
         //added comparators for RealFifa
-        matchingRuleRealFifa.addComparator(new PlayerNameShortComparatorJaccard(), 0.55);
-        matchingRuleRealFifa.addComparator(new PlayerClubComparatorNGramJaccard(), 0.15);
-        matchingRuleRealFifa.addComparator(new PlayerNationalityComparatorJaccard(), 0.25);
+        matchingRuleRealFifa.addComparator(new PlayerNameShortComparatorJaccard(), 0.40);
+        matchingRuleRealFifa.addComparator(new PlayerClubComparatorNGramJaccard(), 0.20);
+        matchingRuleRealFifa.addComparator(new PlayerNationalityComparatorJaccard(), 0.35);
         matchingRuleRealFifa.addComparator(new PlayerKitNumberComparatorEqual(), 0.05);
 
         //added comparators for PredFifa
-        matchingRulePredFifa.addComparator(new PlayerNameShortComparatorJaccard(), 0.6);
-        matchingRulePredFifa.addComparator(new PlayerNationalityComparatorJaccard(), 0.25);
-        matchingRulePredFifa.addComparator(new PlayerClubComparatorNGramJaccard(), 0.10);
-        matchingRulePredFifa.addComparator(new PlayerPositionComparatorJaccard(), 0.05);
+        matchingRulePredFifa.addComparator(new PlayerNameShortComparatorJaccard(), 0.40);
+        matchingRulePredFifa.addComparator(new PlayerNationalityComparatorJaccard(), 0.30);
+        matchingRulePredFifa.addComparator(new PlayerClubComparatorNGramJaccard(), 0.30);
+        //matchingRulePredFifa.addComparator(new PlayerPositionComparatorJaccard(), 0.05);
 
         // Initialize Matching Engines
         MatchingEngine<Player, Attribute> engineRealPred = new MatchingEngine<>();
