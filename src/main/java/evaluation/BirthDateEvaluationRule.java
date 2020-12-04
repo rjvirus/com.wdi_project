@@ -12,7 +12,7 @@ public class BirthDateEvaluationRule extends EvaluationRule<Player, Attribute> {
     public boolean isEqual(Player record1, Player record2, Attribute schemaElement) {
         if(record1.getBirth_date()==null && record2.getBirth_date()==null)
             return true;
-        else if(record1.getBirth_date()==null ^ record2.getBirth_date()==null)
+        else if(record1.getBirth_date()==null || record2.getBirth_date()==null)
             return false;
         else
             return record1.getBirth_date() == record2.getBirth_date();
