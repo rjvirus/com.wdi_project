@@ -112,3 +112,26 @@ public class DataFusion {
         System.out.println(String.format("Accuracy: %.2f", accuracy));
     }
 }
+
+// add attribute fusers //TODO: fix and add evaluators and fusers
+        //strategy.addAttributeFuser(Player.NAME, new NameFuserLongestString(),new NameEvaluationRule());
+        /*strategy.addAttributeFuser(Player.BIRTHDATE,new DirectorFuserLongestString(), new DirectorEvaluationRule());
+        strategy.addAttributeFuser(Player.BIRTHPLACE, new DateFuserFavourSource(),new DateEvaluationRule());
+        strategy.addAttributeFuser(Player.CLUB,new ActorsFuserUnion(),new ActorsEvaluationRule());
+        strategy.addAttributeFuser(Player.COMPETITIONS,new ActorsFuserUnion(),new ActorsEvaluationRule());
+        strategy.addAttributeFuser(Player.CONTRACTEXP,new ActorsFuserUnion(),new ActorsEvaluationRule());
+
+        mert
+        strategy.addAttributeFuser(Player.ESTMARKETVALUE18,new ActorsFuserUnion(),new ActorsEvaluationRule());
+        strategy.addAttributeFuser(Player.KITNUMBER,new ActorsFuserUnion(),new ActorsEvaluationRule());
+        strategy.addAttributeFuser(Player.LASTINJURY,new ActorsFuserUnion(),new ActorsEvaluationRule());
+        strategy.addAttributeFuser(Player.MARKETVALUE19,new ActorsFuserUnion(),new ActorsEvaluationRule());
+        strategy.addAttributeFuser(Player.NATIONALITY,new ActorsFuserUnion(),new ActorsEvaluationRule());
+        strategy.addAttributeFuser(Player.OVERALL,new ActorsFuserUnion(),new ActorsEvaluationRule());
+
+        kai
+        strategy.addAttributeFuser(Player.POSITIONS,new ActorsFuserUnion(),new ActorsEvaluationRule());
+        strategy.addAttributeFuser(Player.POTENTIAL,new ActorsFuserUnion(),new ActorsEvaluationRule());
+        strategy.addAttributeFuser(Player.RELEASECLAUSE,new ActorsFuserUnion(),new ActorsEvaluationRule());
+        strategy.addAttributeFuser(Player.STRONGFOOT,new ActorsFuserUnion(),new ActorsEvaluationRule());
+        strategy.addAttributeFuser(Player.WAGE,new ActorsFuserUnion(),new ActorsEvaluationRule());*/

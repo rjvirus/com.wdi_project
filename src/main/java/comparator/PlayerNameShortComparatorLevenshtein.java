@@ -5,21 +5,35 @@ import de.uni_mannheim.informatik.dws.winter.matching.rules.ComparatorLogger;
 import de.uni_mannheim.informatik.dws.winter.model.Correspondence;
 import de.uni_mannheim.informatik.dws.winter.model.Matchable;
 import de.uni_mannheim.informatik.dws.winter.model.defaultmodel.Attribute;
-import de.uni_mannheim.informatik.dws.winter.similarity.string.JaccardOnNGramsSimilarity;
-import de.uni_mannheim.informatik.dws.winter.similarity.string.TokenizingJaccardSimilarity;
+import de.uni_mannheim.informatik.dws.winter.similarity.string.LevenshteinSimilarity;
 import model.Player;
 
-public class PlayerNationalityComparatorJaccard implements Comparator<Player, Attribute> {
+public class PlayerNameShortComparatorLevenshtein implements Comparator<Player, Attribute> {
 
     private static final long serialVersionUID = 1L;
-    JaccardOnNGramsSimilarity sim = new JaccardOnNGramsSimilarity(3);
+    private LevenshteinSimilarity sim = new LevenshteinSimilarity();
 
     private ComparatorLogger comparisonLog;
 
     @Override
     public double compare(Player record1, Player record2, Correspondence<Attribute, Matchable> schemaCorrespondence) {
-        String s1 = record1.getNationality();
-        String s2 = record2.getNationality();
+        String s1 = record1.getName();
+        String s2 = record2.getName();
+
+        String[] s1Parts = s1.split("(?=\\p{Upper})");
+        String[] s2Parts = s2.split("(?=\\p{Upper})");
+
+        for (int i = 0; i < s1Parts.length; i++) {
+            if(i == 0) {
+                if(s2Parts[0].length() > 3) {
+                    s1 = s1Parts[0];
+                } else {
+                    s1 = s1Parts[0].charAt(0) + ".";
+                }
+            } else {
+                s1 += " " + s1Parts[i].trim();
+            }
+        }
 
         double similarity = sim.calculate(s1, s2);
 
@@ -44,4 +58,5 @@ public class PlayerNationalityComparatorJaccard implements Comparator<Player, At
     public void setComparisonLog(ComparatorLogger comparatorLog) {
         this.comparisonLog = comparatorLog;
     }
+
 }
