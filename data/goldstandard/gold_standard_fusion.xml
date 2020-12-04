@@ -1,0 +1,616 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<players>
+	<player>
+		<id>real_1344</id>
+		<name>Lionel Messi</name>
+		<birth_date>1987-06-24</birth_date>
+		<birth_place>Rosario</birth_place>
+		<nationality>Argentina</nationality>
+		<positions>
+			<position>Forward</position>
+			<position>Right Winger</position>
+			<position>RF</position>
+		</positions>
+		<competitions>
+			<competition>LaLiga</competition>
+			<competition>UEFAChampionsLeague</competition>
+			<competition>CopadelRey</competition>
+			<competition>Supercopa</competition>
+			<competition>FIFAClubWorldCup</competition>
+			<competition>UEFASuperCup</competition>
+		</competitions>
+		<strong_foot>Left</strong_foot>
+		<club>FC Barcelona</club>
+		<kit_number>10</kit_number>
+		<games_played>8</games_played>
+		<wage>565000</wage>
+		<market_value_19>150000000</market_value_19>
+		<est_market_value_18>160000000</est_market_value_18>
+		<release_clause>226500000</release_clause>
+		<contract_exp>2021-06-30</contract_exp>
+		<overall>94</overall>
+		<potential>94</potential>
+		<last_injury>NA</last_injury>
+	</player>
+	<player>
+		<id>real_1941</id>
+		<name>Cristiano Ronaldo</name>
+		<birth_date>1985-02-05</birth_date>
+		<birth_place>Funchal</birth_place>
+		<nationality>Portugal</nationality>
+		<positions>
+			<position>Forward</position>
+			<position>Left Winger</position>
+			<position>ST</position>
+		</positions>
+		<competitions>
+			<competition>LaLiga</competition>
+			<competition>PremierLeague</competition>
+			<competition>UEFAChampionsLeague</competition>
+			<competition>CopadelRey</competition>
+			<competition>FACup</competition>
+			<competition>LigaNOS</competition>
+			<competition>SerieA</competition>
+			<competition>EFLCup</competition>
+			<competition>FIFAClubWorldCup</competition>
+			<competition>Supercopa</competition>
+			<competition>UEFAChampionsLeagueQualifying</competition>
+			<competition>UEFA0Cup</competition>
+			<competition>UEFASuperCup</competition>
+			<competition>CoppaItalia</competition>
+			<competition>CommunityShield</competition>
+			<competition>SupercoppaItaliana</competition>
+		</competitions>
+		<strong_foot>Right</strong_foot>
+		<club>Juventus</club>
+		<kit_number>7</kit_number>
+		<games_played>5</games_played>
+		<market_value_19>90000000</market_value_19>
+		<est_market_value_18>100000000</est_market_value_18>
+		<release_clause>127100000</release_clause>
+		<contract_exp>2022-06-30</contract_exp>
+		<overall>94</overall>
+		<potential>94</potential>
+		<last_injury>NA</last_injury>
+	</player>
+	<player>
+		<id>real_1958</id>
+		<name>Miralem Pjanic</name>
+		<birth_date>1990-04-02</birth_date>
+		<birth_place>Tuzla</birth_place>
+		<nationality>Bosnia Herzegovina</nationality>
+		<positions>
+			<position>Midfielder</position>
+			<position>Central Midfield</position>
+			<position>CDM</position>
+		</positions>
+		<competitions>
+			<competition>SerieA</competition>
+			<competition>Ligue1</competition>
+			<competition>UEFAChampionsLeague</competition>
+			<competition>CoppaItalia</competition>
+			<competition>CoupedeFrance</competition>
+			<competition>CoupedelaLigue</competition>
+			<competition>UEFAChampionsLeagueQualifying</competition>
+			<competition>EuropaLeague</competition>
+			<competition>SupercoppaItaliana</competition>
+			<competition>TrophéedesChampions</competition>
+		</competitions>
+		<strong_foot>Right</strong_foot>
+		<club>Juventus</club>
+		<kit_number>5</kit_number>
+		<games_played>3</games_played>
+		<wage>180000</wage>
+		<market_value_19>70000000</market_value_19>
+		<est_market_value_18>70000000</est_market_value_18>
+		<release_clause>72600000</release_clause>
+		<contract_exp>2023-06-30</contract_exp>
+		<overall>86</overall>
+		<potential>86</potential>
+		<last_injury>NA</last_injury>
+	</player>
+	<player>
+		<id>real_314</id>
+		<name>Pierre-Emerick Aubameyang</name>
+		<birth_date>1989-06-18</birth_date>
+		<birth_place>Laval</birth_place>
+		<nationality>Gabon</nationality>
+		<positions>
+			<position>Forward</position>
+			<position>Centre-Forward</position>
+			<position>LM</position>
+		</positions>
+		<competitions>
+			<competition>Bundesliga</competition>
+			<competition>Ligue1</competition>
+			<competition>PremierLeague</competition>
+			<competition>Ligue2</competition>
+			<competition>UEFAChampionsLeague</competition>
+			<competition>EuropaLeague</competition>
+			<competition>DFB0Pokal</competition>
+			<competition>CoupedelaLigue</competition>
+			<competition>CoupedeFrance</competition>
+			<competition>CampionatoPrimaveraGironeB</competition>
+			<competition>EuropaLeagueQualifying</competition>
+			<competition>DFL0Supercup</competition>
+			<competition>EFLCup</competition>
+			<competition>CampionatoPrimaveraFaseFinale</competition>
+			<competition>FACup</competition>
+			<competition>CoppaItalia</competition>
+		</competitions>
+		<strong_foot>Right</strong_foot>
+		<club>Arsenal</club>
+		<kit_number>14</kit_number>
+		<games_played>8</games_played>
+		<wage>265000</wage>
+		<market_value_19>70000000</market_value_19>
+		<est_market_value_18>75000000</est_market_value_18>		
+		<release_clause>112100000</release_clause>
+	    <contract_exp>2021-06-30</contract_exp>
+		<overall>88</overall>
+		<potential>88</potential>	
+		<last_injury>NA</last_injury>
+	</player>
+	<player>
+		<id>real_317</id>
+		<name>Sead Kolasinac</name>
+		<birth_date>1993-06-20</birth_date>
+		<birth_place>Karlsruhe</birth_place>
+		<nationality>Bosnia Herzegovina</nationality>
+		<positions>
+			<position>Defender</position>
+			<position>Left-Back</position>
+			<position>LB</position>
+		</positions>
+		<competitions>
+			<competition>Bundesliga</competition>
+			<competition>PremierLeague</competition>
+			<competition>A0JuniorenBundesligaWest</competition>
+			<competition>B0JuniorenBundesligaSüd/Südwest</competition>
+			<competition>EuropaLeague</competition>
+			<competition>A0JuniorenBundesligaSüd/Südwest</competition>
+			<competition>UEFAChampionsLeague</competition>
+			<competition>DFB0Pokal</competition>
+			<competition>RegionalligaWest</competition>
+			<competition>EFLCup</competition>
+			<competition>A0JuniorenBundesligaEndrunde</competition>
+			<competition>FACup</competition>
+			<competition>RegionalligaWest(bis11/12)</competition>
+			<competition>DFB0Junioren0Vereinspokal</competition>
+			<competition>CommunityShield</competition>
+		</competitions>
+		<strong_foot>Left</strong_foot>
+		<club>Arsenal</club>
+		<kit_number>31</kit_number>
+		<games_played>0</games_played>
+		<wage>89000</wage>
+		<market_value_19>20000000</market_value_19>
+		<est_market_value_18>20000000</est_market_value_18>
+		<release_clause>25700000</release_clause>
+		<contract_exp>2022-06-30</contract_exp>
+		<overall>79</overall>
+		<potential>82</potential>
+		<last_injury>NA</last_injury>
+	</player>
+	<player>
+		<id>real_1345</id>
+		<name>Luis Suarez</name>
+		<birth_date>1987-01-24</birth_date>
+		<birth_place>Salto</birth_place>
+		<nationality>Uruguay</nationality>
+		<positions>
+			<position>Forward</position>
+			<position>Centre-Forward</position>
+			<position>RS</position>
+		</positions>
+		<competitions>
+			<competition>LaLiga</competition>
+			<competition>Eredivisie</competition>
+			<competition>PremierLeague</competition>
+			<competition>UEFAChampionsLeague</competition>
+			<competition>CopadelRey</competition>
+			<competition>EuropaLeague</competition>
+			<competition>UEFA0Cup</competition>
+			<competition>TOTOKNVBbeker</competition>
+			<competition>FACup</competition>
+			<competition>Play0OffsEuropaLeague</competition>
+			<competition>UEFAChampionsLeagueQualifying</competition>
+			<competition>Supercopa</competition>
+			<competition>EFLCup</competition>
+			<competition>EuropaLeagueQualifying</competition>
+			<competition>FIFAClubWorldCup</competition>
+			<competition>UEFASuperCup</competition>
+			<competition>JohanCruijffSchaal</competition>
+		</competitions>
+		<strong_foot>Right</strong_foot>
+		<club>FC Barcelona</club>
+		<kit_number>9</kit_number>
+		<games_played>6</games_played>
+		<wage>455000</wage>
+		<market_value_19>50000000</market_value_19>
+		<est_market_value_18>60000000</est_market_value_18>		
+		<release_clause>164000000</release_clause>
+		<contract_exp>2021-06-30</contract_exp>
+		<overall>91</overall>
+		<potential>91</potential>		
+		<last_injury>NA</last_injury>
+	</player>
+	<player>
+		<id>real_998</id>
+		<name>Willian</name>
+		<birth_date>1988-08-09</birth_date>
+		<birth_place>Ribeirão Pires</birth_place>
+		<nationality>Brazil</nationality>
+		<positions>
+			<position>Forward</position>
+			<position>Right Winger</position>
+			<position>RW</position>
+		</positions>
+		<competitions>
+			<competition>PremierLeague</competition>
+			<competition>PremierLiga</competition>
+			<competition>UEFAChampionsLeague</competition>
+			<competition>UkrainianCup</competition>
+			<competition>FACup</competition>
+			<competition>EFLCup</competition>
+			<competition>EuropaLeague</competition>
+			<competition>CampeonatoBrasileiroSérieA</competition>
+			<competition>PremierLiga</competition>
+			<competition>UEFA0Cup</competition>
+			<competition>UEFAChampionsLeagueQualifying</competition>
+			<competition>UkrainianSuperCup</competition>
+			<competition>CommunityShield</competition>
+			<competition>RussianCup</competition>
+			<competition>EuropaLeagueQualifying</competition>
+			<competition>UEFASuperCup</competition>
+		</competitions>
+		<strong_foot>Right</strong_foot>
+		<club>Chelsea</club>
+		<kit_number>10</kit_number>
+		<games_played>2</games_played>
+		<wage>175000</wage>
+		<market_value_19>35000000</market_value_19>
+		<est_market_value_18>50000000</est_market_value_18>
+		<release_clause>56400000</release_clause>
+		<contract_exp>2020-06-30</contract_exp>
+		<overall>84</overall>
+		<potential>84</potential>		
+		<last_injury>NA</last_injury>
+	</player>
+	<player>
+		<id>real_992</id>
+		<name>Olivier Giroud</name>
+		<birth_date>1986-09-30</birth_date>
+		<birth_place>Chambéry</birth_place>
+		<nationality>France</nationality>
+		<positions>
+			<position>Forward</position>
+			<position>Centre-Forward</position>
+			<position>ST</position>
+		</positions>
+		<competitions>
+			<competition>PremierLeague</competition>
+			<competition>Ligue2</competition>
+			<competition>Ligue1</competition>
+			<competition>UEFAChampionsLeague</competition>
+			<competition>FACup</competition>
+			<competition>EFLCup</competition>
+			<competition>EuropaLeague</competition>
+			<competition>CoupedelaLigue</competition>
+			<competition>CoupedeFrance</competition>
+			<competition>UEFAChampionsLeagueQualifying</competition>
+			<competition>CommunityShield</competition>
+			<competition>EuropaLeagueQualifying</competition>
+		</competitions>
+		<strong_foot>left</strong_foot>
+		<club>Chelsea</club>
+		<kit_number>18</kit_number>
+		<games_played>0</games_played>
+		<wage>140000</wage>
+		<market_value_19>12000000</market_value_19>
+		<est_market_value_18>15000000</est_market_value_18>
+		<release_clause>37000000</release_clause>
+		<contract_exp>2020-06-30</contract_exp>
+		<overall>82</overall>
+		<potential>82</potential>
+		<last_injury>NA</last_injury>
+	</player>
+	<player>
+		<id>real_2282</id>
+		<name>Sergio Aguero</name>
+		<birth_date>1988-06-02</birth_date>
+		<birth_place>Buenos Aires</birth_place>
+		<nationality>Argentina</nationality>
+		<positions>
+			<position>Forward</position>
+			<position>Centre-Forward</position>
+			<position>ST</position>
+		</positions>
+		<competitions>
+			<competition>PremierLeague</competition>
+			<competition>LaLiga</competition>
+			<competition>UEFAChampionsLeague</competition>
+			<competition>FACup</competition>
+			<competition>TorneoInicial</competition>
+			<competition>EFLCup</competition>
+			<competition>EuropaLeague</competition>
+			<competition>CopadelRey</competition>
+			<competition>UEFA0Cup</competition>
+			<competition>UEFAChampionsLeagueQualifying</competition>
+			<competition>CommunityShield</competition>
+			<competition>UEFASuperCup</competition>
+			<competition>UEFA0CupQualifikation</competition>
+			<competition>UEFAIntertotoCup</competition>
+		</competitions>
+		<strong_foot>Right</strong_foot>
+		<club>Manchester City</club>
+		<kit_number>10</kit_number>
+		<games_played>9</games_played>
+		<wage>300000</wage>
+		<market_value_19>65000000</market_value_19>
+		<est_market_value_18>75000000</est_market_value_18>
+		<release_clause>119300000</release_clause>
+		<contract_exp>2021-06-30</contract_exp>
+		<overall>89</overall>
+		<potential>89</potential>
+		<last_injury>NA</last_injury>
+	</player>
+	<player>
+		<id>real_1042</id>
+		<name>Martin Kelly</name>
+		<birth_date>1990-04-27</birth_date>
+		<birth_place>Whiston</birth_place>
+		<nationality>England</nationality>
+		<positions>
+			<position>Defender</position>
+			<position>Right-Back</position>
+			<position>CB</position>
+		</positions>
+		<competitions>
+			<competition>PremierLeague</competition>
+			<competition>EFLCup</competition>
+			<competition>FACup</competition>
+			<competition>EuropaLeague</competition>
+			<competition>LeagueOne</competition>
+			<competition>EuropaLeagueQualifying</competition>
+			<competition>PremierLeague2</competition>
+			<competition>UEFAChampionsLeague</competition>
+			<competition>PremierReserveLeagueNorth</competition>
+		</competitions>
+		<strong_foot>Right</strong_foot>
+		<club>Crystal Palace</club>
+		<kit_number>34</kit_number>
+		<games_played>0</games_played>
+		<wage>44000</wage>
+		<market_value_19>3000000</market_value_19>
+		<est_market_value_18>3000000</est_market_value_18>		
+		<release_clause>11900000</release_clause>
+		<contract_exp>2021-06-30</contract_exp>
+		<overall>75</overall>
+		<potential>76</potential>
+		<last_injury>NA</last_injury>
+	</player>
+	<player>
+		<id>real_4351</id>
+		<name>Ruben Neves</name>
+		<birth_date>1997-03-13</birth_date>
+		<birth_place>Santa Maria da Feira</birth_place>
+		<nationality>Portugal</nationality>
+		<positions>
+			<position>Midfielder</position>
+			<position>Defensive Midfield</position>
+			<position>LCM</position>
+		</positions>
+		<competitions>
+			<competition>LigaNOS</competition>
+			<competition>Championship</competition>
+			<competition>PremierLeague</competition>
+			<competition>UEFAChampionsLeague</competition>
+			<competition>AllianzCup</competition>
+			<competition>TaçadePortugalPlacard</competition>
+			<competition>UEFAChampionsLeagueQualifying</competition>
+			<competition>EuropaLeague</competition>
+			<competition>FACup</competition>
+			<competition>LedmanLigaPro</competition>
+		</competitions>
+		<strong_foot>Right</strong_foot>
+		<club>Wolverhampton Wanderers</club>
+		<kit_number>8</kit_number>
+		<games_played>2</games_played>
+		<wage>59000</wage>
+		<market_value_19>50000000</market_value_19>
+		<est_market_value_18>40000000</est_market_value_18>
+		<release_clause>43100000</release_clause>
+		<contract_exp>2023-06-30</contract_exp>
+		<overall>80</overall>
+		<potential>87</potential>
+		<last_injury>NA</last_injury>
+	</player>
+	<player>
+		<id>real_4098</id>
+		<name>Santi Cazorla</name>
+		<birth_date>1984-12-13</birth_date>
+		<birth_place>Lugo de Llanera</birth_place>
+		<nationality>Spain</nationality>
+		<positions>
+			<position>Midfielder</position>
+			<position>Central Midfield</position>
+			<position>LCM</position>
+		</positions>
+		<competitions>
+			<competition>LaLiga</competition>
+			<competition>PremierLeague</competition>
+			<competition>UEFAChampionsLeague</competition>
+			<competition>EuropaLeague</competition>
+			<competition>CopadelRey</competition>
+			<competition>UEFA0Cup</competition>
+			<competition>FACup</competition>
+			<competition>UEFAChampionsLeagueQualifying</competition>
+			<competition>UEFAIntertotoCup</competition>
+			<competition>EuropaLeagueQualifying</competition>
+			<competition>EFLCup</competition>
+			<competition>CommunityShield</competition>
+			<competition>PremierLeague2Playoffs</competition>
+		</competitions>
+		<strong_foot>Right</strong_foot>
+		<club>Villarreal CF</club>
+		<kit_number>8</kit_number>
+		<games_played>5</games_played>
+		<wage>39000</wage>
+		<market_value_19>4000000</market_value_19>
+		<est_market_value_18>2000000</est_market_value_18>
+		<release_clause>17900000</release_clause>
+		<contract_exp>2020-06-30</contract_exp>
+		<overall>80</overall>
+		<potential>80</potential>
+		<last_injury>NA</last_injury>
+	</player>
+	<player>
+		<id>real_2642</id>
+		<name>Pablo Sarabia</name>
+		<birth_date>1992-05-11</birth_date>
+		<birth_place>Madrid</birth_place>
+		<nationality>Spain</nationality>
+		<positions>
+			<position>Forward</position>
+			<position>Right Winger</position>
+			<position>AttackingMidfield</position>
+			<position>RCM</position>
+		</positions>
+		<competitions>
+			<competition>LaLiga</competition>
+			<competition>CopadelRey</competition>
+			<competition>UEFAChampionsLeague</competition>
+			<competition>EuropaLeagueQualifying</competition>
+			<competition>EuropaLeague</competition>
+			<competition>Supercopa</competition>
+			<competition>UEFAChampionsLeagueQualifying</competition>
+			<competition>SegundaDivisiónB0GrupoII</competition>
+			<competition>UEFASuperCup</competition>
+		</competitions>
+		<strong_foot>left</strong_foot>
+		<club>Paris SG</club>
+		<kit_number>19</kit_number>
+		<games_played>1</games_played>
+		<wage>26000</wage>
+		<market_value_19>40000000</market_value_19>
+		<est_market_value_18>40000000</est_market_value_18>
+		<release_clause>56600000</release_clause>
+		<contract_exp>2024-06-30</contract_exp>
+		<overall>82</overall>
+		<potential>83</potential>
+		<last_injury>NA</last_injury>
+	</player>
+	<player>
+		<id>real_2266</id>
+		<name>Ederson</name>
+		<birth_date>1993-08-17</birth_date>
+		<birth_place>Osasco (SP)</birth_place>
+		<nationality>Brazil</nationality>
+		<positions>
+			<position>Goalkeeper</position>
+			<position>Goalkeeper</position>
+			<position>GK</position>
+		</positions>
+		<competitions>
+			<competition>LigaNOS</competition>
+			<competition>PremierLeague</competition>
+			<competition>UEFAChampionsLeague</competition>
+			<competition>AllianzCup</competition>
+			<competition>TaçadePortugalPlacard</competition>
+			<competition>LedmanLigaPro</competition>
+			<competition>EuropaLeague</competition>
+			<competition>FACup</competition>
+			<competition>EuropaLeagueQualifying</competition>
+			<competition>CommunityShield</competition>
+			<competition>SupertaçaCândidodeOliveira</competition>
+			<competition>EFLCup</competition>
+		</competitions>
+		<strong_foot>Left</strong_foot>
+		<club>Manchester City</club>
+		<kit_number>31</kit_number>
+		<games_played>10</games_played>
+		<wage>125000</wage>
+		<market_value_19>70000000</market_value_19>
+		<est_market_value_18>60000000</est_market_value_18>
+		<release_clause>79900000</release_clause>
+		<contract_exp>2025-06-30</contract_exp>
+		<overall>86</overall>
+		<potential>90</potential>
+		<last_injury>Muscular problems: Return unknown</last_injury>
+	</player>
+	<player>
+		<id>real_3891</id>
+		<name>Alexander Stolz</name>
+		<birth_date>1983-10-13</birth_date>
+		<birth_place>Pforzheim</birth_place>
+		<nationality>Germany</nationality>
+		<positions>
+			<position>Goalkeeper</position>
+			<position>Goalkeeper</position>
+			<position>GK</position>
+		</positions>
+		<competitions>
+			<competition>RegionalligaSüd(bis07/08)</competition>
+			<competition>RegionalligaSüdwest</competition>
+			<competition>3.Liga</competition>
+			<competition>UEFAIntertotoCup</competition>
+			<competition>Bundesliga</competition>
+			<competition>UEFAChampionsLeague</competition>
+			<competition>2.Bundesliga</competition>
+			<competition>EuropaLeague</competition>
+			<competition>DFB0Pokal</competition>
+			<competition>UEFA0Cup</competition>
+		</competitions>
+		<strong_foot>Right</strong_foot>
+		<club>TSG Hoffenheim</club>
+		<kit_number>33</kit_number>
+		<games_played>3</games_played>
+		<wage>6000</wage>
+		<market_value_19>100000</market_value_19>
+		<est_market_value_18>0</est_market_value_18>
+		<release_clause>374000</release_clause>
+		<contract_exp>2020-06-30</contract_exp>
+		<overall>65</overall>
+		<potential>65</potential>
+		<last_injury>NA</last_injury>
+	</player>
+</players>
+
+
+
+
+
+		
+	
+
+		
+
+
+
+		
+		
+
+
+
+		
+		
+		
+
+		
+		
+		
+		
+
+
+
+
+
+
+
+
+
+
+
+	

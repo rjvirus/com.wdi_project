@@ -2,13 +2,14 @@ import de.uni_mannheim.informatik.dws.winter.datafusion.CorrespondenceSet;
 import de.uni_mannheim.informatik.dws.winter.datafusion.DataFusionEngine;
 import de.uni_mannheim.informatik.dws.winter.datafusion.DataFusionEvaluator;
 import de.uni_mannheim.informatik.dws.winter.datafusion.DataFusionStrategy;
-import de.uni_mannheim.informatik.dws.winter.model.DataSet;
-import de.uni_mannheim.informatik.dws.winter.model.FusibleDataSet;
-import de.uni_mannheim.informatik.dws.winter.model.FusibleHashedDataSet;
-import de.uni_mannheim.informatik.dws.winter.model.RecordGroupFactory;
+import de.uni_mannheim.informatik.dws.winter.matching.MatchingEngine;
+import de.uni_mannheim.informatik.dws.winter.model.*;
 import de.uni_mannheim.informatik.dws.winter.model.defaultmodel.Attribute;
+import de.uni_mannheim.informatik.dws.winter.processing.Processable;
 import de.uni_mannheim.informatik.dws.winter.utils.WinterLogManager;
+import evaluation.BirthDateEvaluationRule;
 import evaluation.NameEvaluationRule;
+import fusers.BirthDateFuserFavourSource;
 import fusers.NameFuserLongestString;
 import model.Player;
 import model.PlayerXMLFormatter;
@@ -68,5 +69,46 @@ public class DataFusion {
 
         correspondences.printGroupSizeDistribution();
         correspondences.getRecordGroups();
+
+        // load the gold standard
+        System.out.println("*\n*\tEvaluating results\n*");
+        DataSet<Player, Attribute> gs = new FusibleHashedDataSet<>();
+        new PlayerXMLReader().loadFromXML(new File("data/goldstandard/gold_standard_fusion.xml"), "/players/player", gs); // to be changed
+
+        for(Player p : gs.get()) {
+            System.out.println(String.format("gs: %s", p.getIdentifier()));
+        }
+
+        // define the fusion strategy
+        DataFusionStrategy<Player, Attribute> strategy = new DataFusionStrategy<>(new PlayerXMLReader());
+        // write debug results to file
+        strategy.activateDebugReport("data/output/debugResultsDatafusion.csv", -1, gs);
+
+        // add attribute fusers
+        strategy.addAttributeFuser(Player.NAME, new NameFuserLongestString(),new NameEvaluationRule());
+        strategy.addAttributeFuser(Player.BIRTHDATE, new BirthDateFuserFavourSource(), new BirthDateEvaluationRule());
+
+        // create the fusion engine
+        DataFusionEngine<Player, Attribute> engine = new DataFusionEngine<>(strategy);
+
+        // print consistency report
+        engine.printClusterConsistencyReport(correspondences, null);
+
+        // print record groups sorted by consistency
+        engine.writeRecordGroupsByConsistency(new File("data/output/recordGroupConsistencies.csv"), correspondences, null);
+
+        // run the fusion
+        System.out.println("*\n*\tRunning data fusion\n*");
+        FusibleDataSet<Player, Attribute> fusedDataSet = engine.run(correspondences, null);
+
+        // write the result
+        new PlayerXMLFormatter().writeXML(new File("data/output/fused.xml"), fusedDataSet);
+
+        // evaluate
+        DataFusionEvaluator<Player, Attribute> evaluator = new DataFusionEvaluator<>(strategy, new RecordGroupFactory<Player, Attribute>());
+
+        double accuracy = evaluator.evaluate(fusedDataSet, gs, null);
+
+        System.out.println(String.format("Accuracy: %.2f", accuracy));
     }
 }

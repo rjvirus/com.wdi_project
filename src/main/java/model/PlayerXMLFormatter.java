@@ -9,12 +9,19 @@ public class PlayerXMLFormatter extends XMLFormatter<Player> {
 
     @Override
     public Element createRootElement(Document doc) {
-        return doc.createElement("movies");
+        return doc.createElement("players");
     }
 
     @Override
     public Element createElementFromRecord(Player record, Document doc) {
         Element player = doc.createElement("player");
+
+        //TODO: need to be changed (its just a interim solution
+        String interimSol = "";
+        if (record.getBirth_date() != null){
+            interimSol = record.getBirth_date().toString();
+        }
+
 
         player.appendChild(createTextElement("id", record.getIdentifier(), doc));
 
@@ -24,8 +31,7 @@ public class PlayerXMLFormatter extends XMLFormatter<Player> {
         player.appendChild(createTextElementWithProvenance("birth_place",
                 record.getBirth_place(),
                 record.getMergedAttributeProvenance(Player.BIRTHPLACE), doc));
-        player.appendChild(createTextElementWithProvenance("birth_date", record
-                .getBirth_date().toString(), record
+        player.appendChild(createTextElementWithProvenance("birth_date",  interimSol, record
                 .getMergedAttributeProvenance(Player.BIRTHDATE), doc));
 
         //TODO: add more attributes
@@ -38,6 +44,7 @@ public class PlayerXMLFormatter extends XMLFormatter<Player> {
         Element elem = createTextElement(name, value, doc);
         elem.setAttribute("provenance", provenance);
         return elem;
+
     }
 
 }
