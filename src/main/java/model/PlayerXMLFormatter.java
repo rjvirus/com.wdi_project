@@ -5,6 +5,8 @@ import org.w3c.dom.Element;
 
 import de.uni_mannheim.informatik.dws.winter.model.io.XMLFormatter;
 
+import java.time.format.DateTimeFormatter;
+
 public class PlayerXMLFormatter extends XMLFormatter<Player> {
 
     @Override
@@ -16,15 +18,6 @@ public class PlayerXMLFormatter extends XMLFormatter<Player> {
     public Element createElementFromRecord(Player record, Document doc) {
         Element player = doc.createElement("player");
 
-
-
-        //TODO: need to be changed (its just a interim solution
-        String interimSol = "";
-        if (record.getBirth_date() != null){
-            interimSol = record.getBirth_date().toString();
-        }
-
-
         player.appendChild(createTextElement("id", record.getIdentifier(), doc));
 
         player.appendChild(createTextElementWithProvenance("name",
@@ -33,8 +26,23 @@ public class PlayerXMLFormatter extends XMLFormatter<Player> {
         player.appendChild(createTextElementWithProvenance("birth_place",
                 record.getBirth_place(),
                 record.getMergedAttributeProvenance(Player.BIRTHPLACE), doc));
-        player.appendChild(createTextElementWithProvenance("birth_date",  interimSol, record
-                .getMergedAttributeProvenance(Player.BIRTHDATE), doc));
+        if(record.getBirth_date() != null) {
+            player.appendChild(createTextElementWithProvenance("birth_date",
+                    record.getBirth_date().toString(),
+                    record.getMergedAttributeProvenance(Player.BIRTHDATE), doc));
+        }
+
+        player.appendChild(createTextElementWithProvenance("club",
+                record.getClub(),
+                record.getMergedAttributeProvenance(Player.CLUB), doc));
+
+        if(record.getContract_exp() != null) {
+            player.appendChild(createTextElementWithProvenance("contract_exp",
+                    record.getContract_exp().toString(),
+                    record.getMergedAttributeProvenance(Player.CONTRACTEXP), doc));
+        }
+
+
         player.appendChild(createPositionsElement(record, doc));
 
         //TODO: add more attributes
