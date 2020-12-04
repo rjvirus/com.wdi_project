@@ -22,10 +22,7 @@ public class IdentityResolution {
 
     public static void main(String args[]) throws Exception {
 
-        //create 3 matching rules
-        LinearCombinationMatchingRule<Player, Attribute> matchingRuleRealPred = new LinearCombinationMatchingRule<>(0.7);
-        LinearCombinationMatchingRule<Player, Attribute> matchingRuleRealFifa = new LinearCombinationMatchingRule<>(0.53);
-        LinearCombinationMatchingRule<Player, Attribute> matchingRulePredFifa = new LinearCombinationMatchingRule<>(0.55);
+
 
         //loading the data
         HashedDataSet<Player, Attribute> dataRealPlayers = new HashedDataSet<>();
@@ -37,32 +34,39 @@ public class IdentityResolution {
 
         // load the gold standards (test set)
         System.out.println("*\n*\tLoading gold standard for Real Market Players to Prediction \n*");
+        LinearCombinationMatchingRule<Player, Attribute> matchingRuleRealPred = new LinearCombinationMatchingRule<>(0.8);
         MatchingGoldStandard gsTestRealPred = new MatchingGoldStandard();
-        gsTestRealPred.loadFromCSVFile(new File("data/goldstandard/real_market_2_prediction_test.csv"));
+        matchingRuleRealPred.activateDebugReport("data/output/debugResultsMatchingRuleRealPred.csv", 1000, gsTestRealPred);
+        gsTestRealPred.loadFromCSVFile(new File("data/goldstandard/real_market_2_prediction_train.csv"));
 
+        //create 3 matching rules
         System.out.println("*\n*\tLoading gold standard for Real Market Players to FIFA \n*");
+        LinearCombinationMatchingRule<Player, Attribute> matchingRuleRealFifa = new LinearCombinationMatchingRule<>(0.7);
         MatchingGoldStandard gsTestRealFifa = new MatchingGoldStandard();
-        gsTestRealFifa.loadFromCSVFile(new File("data/goldstandard/real_market_2_fifa_test.csv"));
+        matchingRuleRealFifa.activateDebugReport("data/output/debugResultsMatchingRuleRealFifa.csv", 1000, gsTestRealFifa);
+        gsTestRealFifa.loadFromCSVFile(new File("data/goldstandard/real_market_2_fifa_train.csv"));
 
         System.out.println("*\n*\tLoading gold standard for Prediction to FIFA\n*");
+        LinearCombinationMatchingRule<Player, Attribute> matchingRulePredFifa = new LinearCombinationMatchingRule<>(0.7);
         MatchingGoldStandard gsTestPredFifa = new MatchingGoldStandard();
-        gsTestPredFifa.loadFromCSVFile(new File("data/goldstandard/prediction_2_fifa_test.csv"));
+        matchingRulePredFifa.activateDebugReport("data/output/debugResultsMatchingRulePredFifas.csv", 1000, gsTestPredFifa);
+        gsTestPredFifa.loadFromCSVFile(new File("data/goldstandard/prediction_2_fifa_train.csv"));
 
         //added comparators for RealPred
-        matchingRuleRealPred.addComparator(new PlayerNameComparatorJaccard(), 0.6);
-        matchingRuleRealPred.addComparator(new PlayerNationalityComparatorJaccard(), 0.20);
-        matchingRuleRealPred.addComparator(new PlayerBirthDateComparatorEqual(), 0.20);
+        matchingRuleRealPred.addComparator(new PlayerNameComparatorJaccard(), 0.55);
+        matchingRuleRealPred.addComparator(new PlayerNationalityComparatorJaccard(), 0.10);
+        matchingRuleRealPred.addComparator(new PlayerBirthDateComparatorEqual(), 0.35);
 
         //added comparators for RealFifa
-        matchingRuleRealFifa.addComparator(new PlayerNameShortComparatorJaccard(), 0.6);
-        matchingRuleRealFifa.addComparator(new PlayerClubComparatorNGramJaccard(), 0.12);
-        matchingRuleRealFifa.addComparator(new PlayerNationalityComparatorJaccard(), 0.23);
+        matchingRuleRealFifa.addComparator(new PlayerNameShortComparatorJaccard(), 0.55);
+        matchingRuleRealFifa.addComparator(new PlayerClubComparatorNGramJaccard(), 0.15);
+        matchingRuleRealFifa.addComparator(new PlayerNationalityComparatorJaccard(), 0.25);
         matchingRuleRealFifa.addComparator(new PlayerKitNumberComparatorEqual(), 0.05);
 
         //added comparators for PredFifa
         matchingRulePredFifa.addComparator(new PlayerNameShortComparatorJaccard(), 0.6);
-        matchingRulePredFifa.addComparator(new PlayerClubComparatorNGramJaccard(), 0.1);
         matchingRulePredFifa.addComparator(new PlayerNationalityComparatorJaccard(), 0.25);
+        matchingRulePredFifa.addComparator(new PlayerClubComparatorNGramJaccard(), 0.10);
         matchingRulePredFifa.addComparator(new PlayerPositionComparatorJaccard(), 0.05);
 
         // Initialize Matching Engines
@@ -81,6 +85,9 @@ public class IdentityResolution {
         Processable<Correspondence<Player, Attribute>> correspondencesPredFifa = enginePredFifa.runIdentityResolution(
                 dataPredictionPlayers, dataFifaPlayers , null, matchingRulePredFifa, blocker);
 
+        correspondencesRealPred = engineRealPred.getTopKInstanceCorrespondences(correspondencesRealPred, 1, 0.8);
+        correspondencesRealFifa = engineRealPred.getTopKInstanceCorrespondences(correspondencesRealFifa, 1, 0.7);
+        correspondencesPredFifa = engineRealPred.getTopKInstanceCorrespondences(correspondencesPredFifa, 1, 0.7);
 
         // write the correspondences to the output file
         new CSVCorrespondenceFormatter().writeCSV(new File("data/output/correspondences/real_2_prediction_correspondences.csv"), correspondencesRealPred);
