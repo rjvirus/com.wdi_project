@@ -46,6 +46,9 @@ public class PlayerXMLFormatter extends XMLFormatter<Player> {
         if(!Integer.toString(record.getWage()).isEmpty()) {
             player.appendChild(createTextElementWithProvenance("wage", Integer.toString(record.getWage()), record.getMergedAttributeProvenance(Player.WAGE), doc));
         }
+        if(record.getStrong_foot() != null) {
+            player.appendChild(createTextElementWithProvenance("strong_foot", record.getStrong_foot(), record.getMergedAttributeProvenance(Player.STRONGFOOT), doc));
+        }
         return player;
     }
 

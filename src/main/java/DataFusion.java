@@ -87,6 +87,7 @@ public class DataFusion {
         strategy.addAttributeFuser(Player.POTENTIAL,new PotentialFuserFavourSources(), new PotentialEvaluationRule());
         strategy.addAttributeFuser(Player.RELEASECLAUSE, new ReleaseCluaseFuserFavourSources(), new ReleaseCluaseEvaluationRule());
         strategy.addAttributeFuser(Player.WAGE, new WageFuserFavourSources(), new WageEvaluationRule());
+        strategy.addAttributeFuser(Player.STRONGFOOT, new StrongFootFuserVoting(), new StrongFootEvaluationRule());
         // create the fusion engine
         DataFusionEngine<Player, Attribute> engine = new DataFusionEngine<>(strategy);
 
