@@ -576,12 +576,195 @@
 		<potential>65</potential>
 		<last_injury>NA</last_injury>
 	</player>
+	<player>
+		<id>real_3908</id>
+		<name>Lukas Rupp</name>
+		<birth_date>1991-01-08</birth_date>
+		<birth_place>Heidelberg</birth_place>
+		<nationality>Germany</nationality>
+		<positions>
+			<position>Midfielder</position>
+			<position>Central Midfield</position>
+			<position>CM</position>
+		</positions>
+		<competitions>
+			<competition>Bundesliga</competition>
+			<competition>2.Bundesliga</competition>
+			<competition>A0JuniorenBundesligaSüd/Südwest</competition>
+			<competition>RegionalligaSüd(bis11/12)</competition>
+			<competition>DFB0Pokal</competition>
+			<competition>RegionalligaWest(bis11/12)</competition>
+			<competition>RegionalligaWest</competition>
+			<competition>EuropaLeague</competition>
+			<competition>B0JuniorenBundesligaSüd/Südwest</competition>
+			<competition>UEFAChampionsLeagueQualifying</competition>
+			<competition>RegionalligaSüdwest</competition>
+			<competition>DFB0Junioren0Vereinspokal</competition>
+		</competitions>
+		<strong_foot>Right</strong_foot>
+		<club>TSG Hoffenheim</club>
+		<kit_number>7</kit_number>
+		<games_played>0</games_played>
+		<wage>32000</wage>
+		<market_value_19>2500000</market_value_19>
+		<est_market_value_18>3000000</est_market_value_18>
+		<release_clause>13600000</release_clause>
+		<contract_exp>2020-06-30</contract_exp>
+		<overall>76</overall>
+		<potential>76</potential>
+		<last_injury>NA</last_injury>
+	</player>
+	<player>
+		<id>real_1059</id>
+		<name>Igor Akinfeev</name>
+		<birth_date>1986-04-08</birth_date>
+		<birth_place>Vidnoe, Moskau ...</birth_place>
+		<nationality>Russia</nationality>
+		<positions>
+			<position>Goalkeeper</position>
+			<position>Goalkeeper</position>
+			<position>GK</position>
+		</positions>
+		<competitions>
+			<competition>PremierLiga</competition>
+			<competition>UEFAChampionsLeague</competition>
+			<competition>UEFA0Cup</competition>
+			<competition>RussianCup</competition>
+			<competition>EuropaLeague</competition>
+			<competition>UEFAChampionsLeagueQualifying</competition>
+			<competition>RussianSuperCup</competition>
+			<competition>EuropaLeagueQualifying</competition>
+			<competition>UEFASuperCup</competition>
+		</competitions>
+		<strong_foot>Right</strong_foot>
+		<club>CSKA Moscow</club>
+		<kit_number>35</kit_number>
+		<games_played>16</games_played>
+		<wage>1000</wage>
+		<market_value_19>10000000</market_value_19>
+		<est_market_value_18>12000000</est_market_value_18>
+		<release_clause>18700000</release_clause>
+		<contract_exp>2022-06-30</contract_exp>
+		<overall>80</overall>
+		<potential>80</potential>
+		<last_injury>NA</last_injury>
+	</player>
+	<player>
+		<id>real_2401</id>
+		<name>Junior Sambia</name>
+		<birth_date>1996-09-07</birth_date>
+		<birth_place>Lyon</birth_place>
+		<nationality>France</nationality>
+		<positions>
+			<position>Midfielder</position>
+			<position>Defensive Midfield</position>
+			<position>CM</position>
+		</positions>
+		<competitions>
+			<competition>Ligue2</competition>
+			<competition>Ligue1</competition>
+			<competition>CoupedeFrance</competition>
+			<competition>CoupedelaLigue</competition>
+		</competitions>
+		<strong_foot>right</strong_foot>
+		<club>Montpellier</club>
+		<kit_number>6</kit_number>
+		<games_played>1</games_played>
+		<wage>10000</wage>
+		<market_value_19>4000000</market_value_19>
+		<est_market_value_18>4000000</est_market_value_18>
+		<release_clause>5700000</release_clause>
+		<contract_exp>2022-06-30</contract_exp>
+		<overall>70</overall>
+		<potential>78</potential>
+		<last_injury>NA</last_injury>
+	</player>
+	<player>
+		<id>real_2873</id>
+		<name>Marcelo</name>
+		<birth_date>1988-05-12</birth_date>
+		<birth_place>Rio de Janeiro</birth_place>
+		<nationality>Brazil</nationality>
+		<positions>
+			<position>Defender</position>
+			<position>Left-Back</position>
+			<position>LB</position>
+		</positions>
+		<competitions>
+			<competition>LaLiga</competition>
+			<competition>UEFAChampionsLeague</competition>
+			<competition>CopadelRey</competition>
+			<competition>FIFAClubWorldCup</competition>
+			<competition>Supercopa</competition>
+			<competition>CampeonatoBrasileiroSérieA</competition>
+			<competition>UEFASuperCup</competition>
+		</competitions>
+		<strong_foot>Left</strong_foot>
+		<club>Real Madrid</club>
+		<kit_number>12</kit_number>
+		<games_played>0</games_played>
+		<wage>285000</wage>
+		<market_value_19>25000000</market_value_19>
+		<est_market_value_18>70000000</est_market_value_18>
+		<release_clause>88200000</release_clause>
+		<contract_exp>2022-06-30</contract_exp>
+		<overall>88</overall>
+		<potential>88</potential>
+		<last_injury>NA</last_injury>
+	</player>
+	<player>
+		<id>real_4291</id>
+		<name>Jack Wilshere</name>
+		<birth_date>1992-01-01</birth_date>
+		<birth_place>Stevenage</birth_place>
+		<nationality>England</nationality>
+		<positions>
+			<position>Midfielder</position>
+			<position>Central Midfield</position>
+			<position>CM</position>
+		</positions>
+		<competitions>
+			<competition>PremierLeague</competition>
+			<competition>UEFAChampionsLeague</competition>
+			<competition>EFLCup</competition>
+			<competition>FACup</competition>
+			<competition>EuropaLeague</competition>
+			<competition>PremierLeague2</competition>
+			<competition>UEFAChampionsLeagueQualifying</competition>
+			<competition>CommunityShield</competition>
+			<competition>PremierReserveLeagueSouth</competition>
+		</competitions>
+		<strong_foot>Left</strong_foot>
+		<club>West Ham</club>
+		<kit_number>19</kit_number>
+		<games_played>0</games_played>
+		<wage>83000</wage>
+		<market_value_19>10000000</market_value_19>
+		<est_market_value_18>18000000</est_market_value_18>
+		<release_clause>29600000</release_clause>
+		<contract_exp>2021-06-30</contract_exp>
+		<overall>79</overall>
+		<potential>81</potential>
+		<last_injury>NA</last_injury>
+	</player>
 </players>
+		
+		
 
 
 
 
+		
+		
 
+		
+		
+		
+
+
+
+
+		
 		
 	
 

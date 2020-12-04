@@ -16,6 +16,8 @@ public class PlayerXMLFormatter extends XMLFormatter<Player> {
     public Element createElementFromRecord(Player record, Document doc) {
         Element player = doc.createElement("player");
 
+
+
         //TODO: need to be changed (its just a interim solution
         String interimSol = "";
         if (record.getBirth_date() != null){
@@ -33,6 +35,7 @@ public class PlayerXMLFormatter extends XMLFormatter<Player> {
                 record.getMergedAttributeProvenance(Player.BIRTHPLACE), doc));
         player.appendChild(createTextElementWithProvenance("birth_date",  interimSol, record
                 .getMergedAttributeProvenance(Player.BIRTHDATE), doc));
+        player.appendChild(createPositionsElement(record, doc));
 
         //TODO: add more attributes
 
@@ -45,6 +48,20 @@ public class PlayerXMLFormatter extends XMLFormatter<Player> {
         elem.setAttribute("provenance", provenance);
         return elem;
 
+    }
+
+    protected Element createPositionsElement(Player record, Document doc) {
+        PositionXMLFormatter positionFormatter = new PositionXMLFormatter();
+        Element actorRoot = positionFormatter.createRootElement(doc);
+        actorRoot.setAttribute("provenance",
+                record.getMergedAttributeProvenance(Player.POSITIONS));
+        if (record.getPositions() !=  null) {
+            for (String p : record.getPositions()) {
+                actorRoot.appendChild(positionFormatter
+                        .createElementFromRecord(p, doc));
+            }
+        }
+        return actorRoot;
     }
 
 }

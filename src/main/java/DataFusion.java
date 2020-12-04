@@ -9,8 +9,10 @@ import de.uni_mannheim.informatik.dws.winter.processing.Processable;
 import de.uni_mannheim.informatik.dws.winter.utils.WinterLogManager;
 import evaluation.BirthDateEvaluationRule;
 import evaluation.NameEvaluationRule;
+import evaluation.PositionsEvaluationRule;
 import fusers.BirthDateFuserFavourSource;
 import fusers.NameFuserLongestString;
+import fusers.PositionsFuserUnion;
 import model.Player;
 import model.PlayerXMLFormatter;
 import model.PlayerXMLReader;
@@ -73,7 +75,7 @@ public class DataFusion {
         // load the gold standard
         System.out.println("*\n*\tEvaluating results\n*");
         DataSet<Player, Attribute> gs = new FusibleHashedDataSet<>();
-        new PlayerXMLReader().loadFromXML(new File("data/goldstandard/gold_standard_fusion.xml"), "/players/player", gs); // to be changed
+        new PlayerXMLReader().loadFromXML(new File("data/goldstandard/gold_standard_fusion_final.xml"), "/players/player", gs); // to be changed
 
         for(Player p : gs.get()) {
             System.out.println(String.format("gs: %s", p.getIdentifier()));
@@ -87,6 +89,7 @@ public class DataFusion {
         // add attribute fusers
         strategy.addAttributeFuser(Player.NAME, new NameFuserLongestString(),new NameEvaluationRule());
         strategy.addAttributeFuser(Player.BIRTHDATE, new BirthDateFuserFavourSource(), new BirthDateEvaluationRule());
+        strategy.addAttributeFuser(Player.POSITIONS,new PositionsFuserUnion(), new PositionsEvaluationRule());
 
         // create the fusion engine
         DataFusionEngine<Player, Attribute> engine = new DataFusionEngine<>(strategy);
