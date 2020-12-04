@@ -6,16 +6,16 @@ import de.uni_mannheim.informatik.dws.winter.model.Matchable;
 import de.uni_mannheim.informatik.dws.winter.model.defaultmodel.Attribute;
 import model.Player;
 
-public class NameEvaluationRule extends EvaluationRule<Player, Attribute> {
+public class BirthPlaceEvaluationRule extends EvaluationRule<Player, Attribute> {
 
     @Override
     public boolean isEqual(Player record1, Player record2, Attribute schemaElement) {
-        if(record1.getName()== null && record2.getName()==null)
+        if(record1.getBirth_place()== null && record2.getBirth_place()==null)
             return true;
-        else if(record1.getName()== null || record2.getName()==null)
+        else if(record1.getBirth_place()== null || record2.getBirth_place()==null)
             return false;
         else
-            return record1.getName().equals(record2.getName());
+            return record1.getBirth_place().equals(record2.getBirth_place());
     }
 
     @Override
