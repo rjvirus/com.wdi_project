@@ -41,9 +41,23 @@ public class PlayerXMLFormatter extends XMLFormatter<Player> {
                     record.getContract_exp().toString(),
                     record.getMergedAttributeProvenance(Player.CONTRACTEXP), doc));
         }
+        if(!record.getPositions().isEmpty()) {
+            player.appendChild(createPositionsElement(record, doc));
+        }
+        player.appendChild(createTextElementWithProvenance("potential",Integer.toString(record.getPotential()), record.getMergedAttributeProvenance(Player.POTENTIAL), doc));
+        if(!Integer.toString(record.getRelease_clause()).isEmpty()) {
+            player.appendChild(createTextElementWithProvenance("release_clause", Integer.toString(record.getRelease_clause()), record.getMergedAttributeProvenance(Player.RELEASECLAUSE), doc));
+        }
+        if(!Integer.toString(record.getWage()).isEmpty()) {
+            player.appendChild(createTextElementWithProvenance("wage", Integer.toString(record.getWage()), record.getMergedAttributeProvenance(Player.WAGE), doc));
+        }
+        if(record.getStrong_foot() != null) {
+            player.appendChild(createTextElementWithProvenance("strong_foot", record.getStrong_foot(), record.getMergedAttributeProvenance(Player.STRONGFOOT), doc));
+        }
 
-
-        player.appendChild(createPositionsElement(record, doc));
+        if(!record.getPositions().isEmpty()) {
+            player.appendChild(createPositionsElement(record, doc));
+        }
 
         //TODO: add more attributes
 
