@@ -6,6 +6,7 @@ import org.w3c.dom.Element;
 import de.uni_mannheim.informatik.dws.winter.model.io.XMLFormatter;
 
 import java.time.format.DateTimeFormatter;
+import java.util.List;
 
 public class PlayerXMLFormatter extends XMLFormatter<Player> {
 
@@ -41,9 +42,9 @@ public class PlayerXMLFormatter extends XMLFormatter<Player> {
                     record.getContract_exp().toString(),
                     record.getMergedAttributeProvenance(Player.CONTRACTEXP), doc));
         }
-        if(!record.getPositions().isEmpty()) {
-            player.appendChild(createPositionsElement(record, doc));
-        }
+        //if(!record.getPositions().isEmpty()) {
+        //    player.appendChild(createPositionsElement(record, doc));
+        //}
         player.appendChild(createTextElementWithProvenance("potential",Integer.toString(record.getPotential()), record.getMergedAttributeProvenance(Player.POTENTIAL), doc));
         if(!Integer.toString(record.getRelease_clause()).isEmpty()) {
             player.appendChild(createTextElementWithProvenance("release_clause", Integer.toString(record.getRelease_clause()), record.getMergedAttributeProvenance(Player.RELEASECLAUSE), doc));
@@ -55,8 +56,13 @@ public class PlayerXMLFormatter extends XMLFormatter<Player> {
             player.appendChild(createTextElementWithProvenance("strong_foot", record.getStrong_foot(), record.getMergedAttributeProvenance(Player.STRONGFOOT), doc));
         }
 
-        if(!record.getPositions().isEmpty()) {
-            player.appendChild(createPositionsElement(record, doc));
+        List<String> positions = record.getPositions();
+        if(positions != null && !positions.isEmpty()) {
+            Element positions1 = doc.createElement("positions");
+            for (int i = 0; i < record.getPositions().size(); i++) {
+                positions1.appendChild(createTextElementWithProvenance("positions", record.getPositions().get(i), record.getMergedAttributeProvenance(Player.COMPETITIONS), doc));
+            }
+            player.appendChild(positions1);
         }
 
         //TODO: add more attributes
@@ -72,7 +78,7 @@ public class PlayerXMLFormatter extends XMLFormatter<Player> {
 
     }
 
-    protected Element createPositionsElement(Player record, Document doc) {
+    /*protected Element createPositionsElement(Player record, Document doc) {
         PositionXMLFormatter positionFormatter = new PositionXMLFormatter();
         Element actorRoot = positionFormatter.createRootElement(doc);
         actorRoot.setAttribute("provenance",
@@ -84,7 +90,7 @@ public class PlayerXMLFormatter extends XMLFormatter<Player> {
             }
         }
         return actorRoot;
-    }
+    }*/
 
 }
 

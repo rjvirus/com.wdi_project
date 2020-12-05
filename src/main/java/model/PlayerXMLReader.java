@@ -11,10 +11,7 @@ import org.w3c.dom.Node;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeFormatterBuilder;
-import java.util.Collections;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Locale;
+import java.util.*;
 
 public class PlayerXMLReader extends XMLMatchableReader<Player, Attribute> implements
         FusibleFactory<Player, Attribute> {
@@ -117,6 +114,12 @@ public class PlayerXMLReader extends XMLMatchableReader<Player, Attribute> imple
             player.setPositions(positions);
         }
 
+        String positions1 = getValueFromChildElement(node, "positions");
+        if(competitions != null) {
+            String positions2 = positions1.replaceAll("\\s+"," ");
+            List<String> positions1Final = new ArrayList<String>(Arrays.asList(positions2.split(" ")));
+            player.setPositions(positions1Final);
+        }
         return player;
     }
 
