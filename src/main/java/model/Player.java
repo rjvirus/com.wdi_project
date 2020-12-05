@@ -30,7 +30,6 @@ public class Player extends AbstractRecord<Attribute> implements Serializable {
     private int release_clause;
     private int overall;
     private int potential;
-    private String last_injury;
 
 
     public static final Attribute NAME = new Attribute("Name");
@@ -49,7 +48,6 @@ public class Player extends AbstractRecord<Attribute> implements Serializable {
     public static final Attribute RELEASECLAUSE = new Attribute("ReleaseClause");
     public static final Attribute OVERALL = new Attribute("Overall");
     public static final Attribute POTENTIAL = new Attribute("Potential");
-    public static final Attribute LASTINJURY = new Attribute("LastInjury");
 
     public Player(String identifier, String provenance) {
         super(identifier, provenance);
@@ -95,8 +93,6 @@ public class Player extends AbstractRecord<Attribute> implements Serializable {
             return overall!=0;
         else if(attribute==POTENTIAL)
             return potential!=0;
-        else if(attribute==LASTINJURY)
-            return last_injury!=null && !last_injury.isEmpty();
         return false;
     }
 
@@ -222,15 +218,6 @@ public class Player extends AbstractRecord<Attribute> implements Serializable {
     public void setPotential(int potential) {
         this.potential = potential;
     }
-
-    public String getLast_injury() {
-        return last_injury;
-    }
-
-    public void setLast_injury(String last_injury) {
-        this.last_injury = last_injury;
-    }
-
 
     public List<String> getCompetitions() {
         return competitions;

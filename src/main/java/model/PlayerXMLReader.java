@@ -28,7 +28,6 @@ public class PlayerXMLReader extends XMLMatchableReader<Player, Attribute> imple
         dataset.addAttribute(Player.CONTRACTEXP);
         dataset.addAttribute(Player.ESTMARKETVALUE18);
         dataset.addAttribute(Player.KITNUMBER);
-        dataset.addAttribute(Player.LASTINJURY);
         dataset.addAttribute(Player.MARKETVALUE19);
         dataset.addAttribute(Player.NATIONALITY);
         dataset.addAttribute(Player.POSITIONS);
@@ -84,10 +83,6 @@ public class PlayerXMLReader extends XMLMatchableReader<Player, Attribute> imple
         String potential = getValueFromChildElement(node, "potential");
         if (potential != null && !potential.isEmpty()) {
             player.setPotential(Integer.parseInt(potential));
-        }
-        String last_injury = getValueFromChildElement(node, "last_injury");
-        if (last_injury != null && !last_injury.isEmpty()) {
-            player.setLast_injury(last_injury);
         }
         String birth_date = getValueFromChildElement(node, "birth_date");
         if (birth_date != null && !birth_date.isEmpty()) {
