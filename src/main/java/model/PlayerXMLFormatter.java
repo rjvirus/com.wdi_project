@@ -100,8 +100,6 @@ public class PlayerXMLFormatter extends XMLFormatter<Player> {
             }
         }
 
-        // TODO: add more attributes
-
         return player;
     }
 
@@ -111,16 +109,5 @@ public class PlayerXMLFormatter extends XMLFormatter<Player> {
         return elem;
 
     }
-
-    /*
-     * protected Element createPositionsElement(Player record, Document doc) {
-     * PositionXMLFor1tter positionFormatter = new PositionXMLFormatter(); Element
-     * actorRoot = positionFormatter.createRootElement(doc);
-     * actorRoot.setAttribute("provenance",
-     * record.getMergedAttributeProvenance(Player.POSITIONS)); if
-     * (record.getPositions() != null) { for (String p : record.getPositions()) {
-     * actorRoot.appendChild(positionFormatter .createElementFromRecord(p, doc)); }
-     * } return actorRoot; }
-     */
 
 }
