@@ -12,8 +12,7 @@ import model.Player;
 
 import java.time.LocalDate;
 
-public class ContractExpFuserFavourSource extends
-        AttributeValueFuser<LocalDate, Player, Attribute> {
+public class ContractExpFuserFavourSource extends AttributeValueFuser<LocalDate, Player, Attribute> {
 
     public ContractExpFuserFavourSource() {
         super(new FavourSources<LocalDate, Player, Attribute>());
