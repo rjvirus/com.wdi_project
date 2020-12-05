@@ -32,8 +32,7 @@ public class LastInjuryFuserMostRecent extends AttributeValueFuser<String, Playe
     public void fuse(RecordGroup<Player, Attribute> group, Player fusedRecord, Processable<Correspondence<Attribute, Matchable>> schemaCorrespondences, Attribute schemaElement) {
         FusedValue<String, Player, Attribute> fused = getFusedValue(group, schemaCorrespondences, schemaElement);
         fusedRecord.setLast_injury(fused.getValue());
-        fusedRecord
-                .setAttributeProvenance(Player.LASTINJURY, fused.getOriginalIds());
+        fusedRecord.setAttributeProvenance(Player.LASTINJURY, fused.getOriginalIds());
     }
 
 }

@@ -68,7 +68,6 @@ public class PlayerXMLFormatter extends XMLFormatter<Player> {
         }
 
         if (!record.getPositions().isEmpty()) {
-            player.appendChild(createPositionsElement(record, doc));
             List<String> positions = record.getPositions();
             if (positions != null && !positions.isEmpty()) {
                 Element positions1 = doc.createElement("positions");

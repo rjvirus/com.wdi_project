@@ -23,7 +23,11 @@ public class EstimatedVal18FuserLongestString extends AttributeValueFuser<String
 
     @Override
     public String getValue(Player record, Correspondence<Attribute, Matchable> correspondence) {
-        return Integer.toString(record.getEst_market_value_18());
+        if (hasValue(record, correspondence)){
+            return Integer.toString(record.getEst_market_value_18());
+        }else {
+            return "0";
+        }
     }
 
     @Override
