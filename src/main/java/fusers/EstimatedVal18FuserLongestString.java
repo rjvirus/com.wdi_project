@@ -23,17 +23,18 @@ public class EstimatedVal18FuserLongestString extends AttributeValueFuser<String
 
     @Override
     public String getValue(Player record, Correspondence<Attribute, Matchable> correspondence) {
-        if (hasValue(record, correspondence)){
-            return Integer.toString(record.getEst_market_value_18());
-        }else {
-            return "0";
-        }
+        return Integer.toString(record.getEst_market_value_18());
     }
 
     @Override
     public void fuse(RecordGroup<Player, Attribute> group, Player fusedRecord, Processable<Correspondence<Attribute, Matchable>> schemaCorrespondences, Attribute schemaElement) {
         FusedValue<String, Player, Attribute> fused = getFusedValue(group, schemaCorrespondences, schemaElement);
-        fusedRecord.setEst_market_value_18(Integer.parseInt(fused.getValue()));
+        if(fused.getValue() == null) {
+            fusedRecord.setEst_market_value_18(0);
+        }
+        else {
+            fusedRecord.setEst_market_value_18(Integer.parseInt(fused.getValue()));
+        }
         fusedRecord.setAttributeProvenance(Player.ESTMARKETVALUE18,
                 fused.getOriginalIds());
     }

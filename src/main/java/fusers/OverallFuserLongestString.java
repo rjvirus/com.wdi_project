@@ -29,7 +29,12 @@ public class OverallFuserLongestString extends AttributeValueFuser<String, Playe
     @Override
     public void fuse(RecordGroup<Player, Attribute> group, Player fusedRecord, Processable<Correspondence<Attribute, Matchable>> schemaCorrespondences, Attribute schemaElement) {
         FusedValue<String, Player, Attribute> fused = getFusedValue(group, schemaCorrespondences, schemaElement);
-        fusedRecord.setOverall(Integer.parseInt(fused.getValue()));
+        if(fused.getValue() == null) {
+            fusedRecord.setOverall(0);
+        } else {
+            fusedRecord.setOverall(Integer.parseInt(fused.getValue()));
+        }
+
         fusedRecord.setAttributeProvenance(Player.OVERALL,
                 fused.getOriginalIds());
     }

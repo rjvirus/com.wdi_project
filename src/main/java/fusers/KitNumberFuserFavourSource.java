@@ -29,7 +29,11 @@ public class KitNumberFuserFavourSource extends AttributeValueFuser<Integer, Pla
         @Override
         public void fuse(RecordGroup<Player, Attribute> group, Player fusedRecord, Processable<Correspondence<Attribute, Matchable>> schemaCorrespondences, Attribute schemaElement) {
             FusedValue<Integer, Player, Attribute> fused = getFusedValue(group, schemaCorrespondences, schemaElement);
-            fusedRecord.setKit_number(fused.getValue());
+            if(fused.getValue() == null) {
+                fusedRecord.setKit_number(0);
+            } else {
+                fusedRecord.setKit_number(fused.getValue());
+            }
             fusedRecord.setAttributeProvenance(Player.KITNUMBER, fused.getOriginalIds());
         }
 

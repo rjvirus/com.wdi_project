@@ -29,7 +29,11 @@ public class MarketValueFuserLongestString extends AttributeValueFuser<String, P
     @Override
     public void fuse(RecordGroup<Player, Attribute> group, Player fusedRecord, Processable<Correspondence<Attribute, Matchable>> schemaCorrespondences, Attribute schemaElement) {
         FusedValue<String, Player, Attribute> fused = getFusedValue(group, schemaCorrespondences, schemaElement);
-        fusedRecord.setMarket_value_19(Integer.parseInt(fused.getValue()));
+        if(fused.getValue() == null) {
+            fusedRecord.setMarket_value_19(0);
+        } else {
+            fusedRecord.setMarket_value_19(Integer.parseInt(fused.getValue()));
+        }
         fusedRecord.setAttributeProvenance(Player.MARKETVALUE19,
                 fused.getOriginalIds());
     }
