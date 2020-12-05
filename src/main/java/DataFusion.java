@@ -91,6 +91,13 @@ public class DataFusion {
         strategy.addAttributeFuser(Player.RELEASECLAUSE, new ReleaseCluaseFuserFavourSources(), new ReleaseCluaseEvaluationRule());
         strategy.addAttributeFuser(Player.WAGE, new WageFuserFavourSources(), new WageEvaluationRule());
         strategy.addAttributeFuser(Player.STRONGFOOT, new StrongFootFuserVoting(), new StrongFootEvaluationRule());
+
+        strategy.addAttributeFuser(Player.ESTMARKETVALUE18,new EstimatedVal18FuserLongestString(),new EstimatedValEvaluationRule());
+        strategy.addAttributeFuser(Player.KITNUMBER,new KitNumberFuserFavourSource(),new KitNumberEvaluationRule());
+        strategy.addAttributeFuser(Player.MARKETVALUE19,new MarketValueFuserLongestString(),new MarketValueEvaluationRule());
+        strategy.addAttributeFuser(Player.NATIONALITY,new NationalityFuserFavourSource(),new NationalityEvaluationRule());
+        strategy.addAttributeFuser(Player.OVERALL,new OverallFuserLongestString(),new OverallEvaluationRule());
+
         // create the fusion engine
         DataFusionEngine<Player, Attribute> engine = new DataFusionEngine<>(strategy);
 
@@ -120,11 +127,6 @@ public class DataFusion {
         strategy.addAttributeFuser(Player.COMPETITIONS,new ActorsFuserUnion(),new ActorsEvaluationRule());
 
         mert
-        strategy.addAttributeFuser(Player.ESTMARKETVALUE18,new ActorsFuserUnion(),new ActorsEvaluationRule());
-        strategy.addAttributeFuser(Player.KITNUMBER,new ActorsFuserUnion(),new ActorsEvaluationRule());
-        strategy.addAttributeFuser(Player.MARKETVALUE19,new ActorsFuserUnion(),new ActorsEvaluationRule());
-        strategy.addAttributeFuser(Player.NATIONALITY,new ActorsFuserUnion(),new ActorsEvaluationRule());
-        strategy.addAttributeFuser(Player.OVERALL,new ActorsFuserUnion(),new ActorsEvaluationRule());
 
         kai
         /*strategy.addAttributeFuser(Player.POSITIONS,new ActorsFuserUnion(),new ActorsEvaluationRule());
