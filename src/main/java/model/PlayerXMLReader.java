@@ -35,6 +35,7 @@ public class PlayerXMLReader extends XMLMatchableReader<Player, Attribute> imple
         dataset.addAttribute(Player.POTENTIAL);
         dataset.addAttribute(Player.STRONGFOOT);
         dataset.addAttribute(Player.WAGE);
+        dataset.addAttribute(Player.OVERALL);
     }
 
     @Override
