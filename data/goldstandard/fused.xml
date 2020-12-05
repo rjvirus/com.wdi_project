@@ -41,7 +41,7 @@
 		<nationality>Portugal</nationality>
 		<positions>
 			<position>Forward</position>
-			<position>Left Winger</position>
+			<position>LeftWinger</position>
 			<position>ST</position>
 		</positions>
 		<competitions>
@@ -303,7 +303,7 @@
 			<competition>CommunityShield</competition>
 			<competition>EuropaLeagueQualifying</competition>
 		</competitions>
-		<strong_foot>left</strong_foot>
+		<strong_foot>Left</strong_foot>
 		<club>Chelsea</club>
 		<kit_number>18</kit_number>
 		<games_played>0</games_played>
@@ -489,7 +489,7 @@
 			<competition>SegundaDivisiónB0GrupoII</competition>
 			<competition>UEFASuperCup</competition>
 		</competitions>
-		<strong_foot>left</strong_foot>
+		<strong_foot>Left</strong_foot>
 		<club>Paris SG</club>
 		<kit_number>19</kit_number>
 		<games_played>1</games_played>
