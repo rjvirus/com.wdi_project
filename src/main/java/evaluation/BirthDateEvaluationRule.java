@@ -15,7 +15,7 @@ public class BirthDateEvaluationRule extends EvaluationRule<Player, Attribute> {
         else if(record1.getBirth_date()==null || record2.getBirth_date()==null)
             return false;
         else
-            return record1.getBirth_date() == record2.getBirth_date();
+            return record1.getBirth_date().getYear() == record2.getBirth_date().getYear();
     }
 
     @Override
