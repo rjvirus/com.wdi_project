@@ -68,7 +68,7 @@ public class DataFusion {
         // load the gold standard
         System.out.println("*\n*\tEvaluating results\n*");
         DataSet<Player, Attribute> gs = new FusibleHashedDataSet<>();
-        new PlayerXMLReader().loadFromXML(new File("data/goldstandard/fused.xml"), "/players/player", gs); // to be changed
+        new PlayerXMLReader().loadFromXML(new File("data/goldstandard/fused.xml"), "/players/player", gs);
 
         for(Player p : gs.get()) {
             System.out.println(String.format("gs: %s", p.getIdentifier()));
@@ -77,7 +77,7 @@ public class DataFusion {
         // define the fusion strategy
         DataFusionStrategy<Player, Attribute> strategy = new DataFusionStrategy<>(new PlayerXMLReader());
         // write debug results to file
-        strategy.activateDebugReport("data/output/debugResultsDatafusion.csv", -1, gs);
+        strategy.activateDebugReport("data/output/debugResultsDatafusion.csv", 100000000, gs);
 
         // add attribute fusers
         strategy.addAttributeFuser(Player.NAME, new NameFuserLongestString(),new NameEvaluationRule());
@@ -121,17 +121,10 @@ public class DataFusion {
         double accuracy = evaluator.evaluate(fusedDataSet, gs, null);
 
         System.out.println(String.format("Accuracy: %.2f", accuracy));
+
+        FusibleDataSet<Player, Attribute> dsfusi = new FusibleHashedDataSet<>();
+        new PlayerXMLReader().loadFromXML(new File("data/output/fused.xml"), "/players/player", dsfusi);
+        dsfusi.printDataSetDensityReport();
     }
 }
 
-/* add attribute fusers //TODO: fix and add evaluators and fusers
-        strategy.addAttributeFuser(Player.COMPETITIONS,new ActorsFuserUnion(),new ActorsEvaluationRule());
-
-        mert
-
-        kai
-        /*strategy.addAttributeFuser(Player.POSITIONS,new ActorsFuserUnion(),new ActorsEvaluationRule());
-        // strategy.addAttributeFuser(Player.POTENTIAL,new ActorsFuserUnion(),new ActorsEvaluationRule());
-        // strategy.addAttributeFuser(Player.RELEASECLAUSE,new ActorsFuserUnion(),new ActorsEvaluationRule());
-        // strategy.addAttributeFuser(Player.STRONGFOOT,new ActorsFuserUnion(),new ActorsEvaluationRule());
-        // strategy.addAttributeFuser(Player.WAGE,new ActorsFuserUnion(),new ActorsEvaluationRule());*/
