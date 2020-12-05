@@ -116,6 +116,12 @@ public class PlayerXMLReader extends XMLMatchableReader<Player, Attribute> imple
             player.setPositions(positions);
         }
 
+        String positions1 = getValueFromChildElement(node, "positions");
+        if(competitions != null) {
+            String positions2 = positions1.replaceAll("\\s+"," ");
+            List<String> positions1Final = new ArrayList<String>(Arrays.asList(positions2.split(" ")));
+            player.setPositions(positions1Final);
+        }
         return player;
     }
 
