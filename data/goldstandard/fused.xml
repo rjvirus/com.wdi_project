@@ -9,7 +9,7 @@
 		<nationality>Argentina</nationality>
 		<positions>
 			<position>Forward</position>
-			<position>Right Winger</position>
+			<position>RightWinger</position>
 			<position>RF</position>
 		</positions>
 		<competitions>
@@ -82,7 +82,7 @@
 		<nationality>Bosnia Herzegovina</nationality>
 		<positions>
 			<position>Midfielder</position>
-			<position>Central Midfield</position>
+			<position>CentralMidfield</position>
 			<position>CDM</position>
 		</positions>
 		<competitions>
@@ -118,7 +118,7 @@
 		<nationality>Gabon</nationality>
 		<positions>
 			<position>Forward</position>
-			<position>Centre-Forward</position>
+			<position>CentreForward</position>
 			<position>LM</position>
 		</positions>
 		<competitions>
@@ -160,7 +160,7 @@
 		<nationality>Bosnia Herzegovina</nationality>
 		<positions>
 			<position>Defender</position>
-			<position>Left-Back</position>
+			<position>LeftBack</position>
 			<position>LB</position>
 		</positions>
 		<competitions>
@@ -201,7 +201,7 @@
 		<nationality>Uruguay</nationality>
 		<positions>
 			<position>Forward</position>
-			<position>Centre-Forward</position>
+			<position>CentreForward</position>
 			<position>RS</position>
 		</positions>
 		<competitions>
@@ -244,7 +244,7 @@
 		<nationality>Brazil</nationality>
 		<positions>
 			<position>Forward</position>
-			<position>Right Winger</position>
+			<position>RightWinger</position>
 			<position>RW</position>
 		</positions>
 		<competitions>
@@ -286,7 +286,7 @@
 		<nationality>France</nationality>
 		<positions>
 			<position>Forward</position>
-			<position>Centre-Forward</position>
+			<position>CentreForward</position>
 			<position>ST</position>
 		</positions>
 		<competitions>
@@ -324,7 +324,7 @@
 		<nationality>Argentina</nationality>
 		<positions>
 			<position>Forward</position>
-			<position>Centre-Forward</position>
+			<position>CentreForward</position>
 			<position>ST</position>
 		</positions>
 		<competitions>
@@ -364,7 +364,7 @@
 		<nationality>England</nationality>
 		<positions>
 			<position>Defender</position>
-			<position>Right-Back</position>
+			<position>RightBack</position>
 			<position>CB</position>
 		</positions>
 		<competitions>
@@ -399,7 +399,7 @@
 		<nationality>Portugal</nationality>
 		<positions>
 			<position>Midfielder</position>
-			<position>Defensive Midfield</position>
+			<position>DefensiveMidfield</position>
 			<position>LCM</position>
 		</positions>
 		<competitions>
@@ -435,7 +435,7 @@
 		<nationality>Spain</nationality>
 		<positions>
 			<position>Midfielder</position>
-			<position>Central Midfield</position>
+			<position>CentralMidfield</position>
 			<position>LCM</position>
 		</positions>
 		<competitions>
@@ -474,7 +474,7 @@
 		<nationality>Spain</nationality>
 		<positions>
 			<position>Forward</position>
-			<position>Right Winger</position>
+			<position>RightWinger</position>
 			<position>AttackingMidfield</position>
 			<position>RCM</position>
 		</positions>
@@ -584,7 +584,7 @@
 		<nationality>Germany</nationality>
 		<positions>
 			<position>Midfielder</position>
-			<position>Central Midfield</position>
+			<position>CentralMidfield</position>
 			<position>CM</position>
 		</positions>
 		<competitions>
@@ -657,7 +657,7 @@
 		<nationality>France</nationality>
 		<positions>
 			<position>Midfielder</position>
-			<position>Defensive Midfield</position>
+			<position>DefensiveMidfield</position>
 			<position>CM</position>
 		</positions>
 		<competitions>
@@ -687,7 +687,7 @@
 		<nationality>Brazil</nationality>
 		<positions>
 			<position>Defender</position>
-			<position>Left-Back</position>
+			<position>LeftBack</position>
 			<position>LB</position>
 		</positions>
 		<competitions>
@@ -720,7 +720,7 @@
 		<nationality>England</nationality>
 		<positions>
 			<position>Midfielder</position>
-			<position>Central Midfield</position>
+			<position>CentralMidfield</position>
 			<position>CM</position>
 		</positions>
 		<competitions>

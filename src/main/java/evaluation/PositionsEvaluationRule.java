@@ -1,6 +1,5 @@
 package evaluation;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.*;
 
 
 import de.uni_mannheim.informatik.dws.winter.datafusion.EvaluationRule;
@@ -13,21 +12,26 @@ public class PositionsEvaluationRule extends EvaluationRule<Player, Attribute>{
 
     @Override
     public boolean isEqual(Player record1, Player record2, Attribute schemaElement) {
-        Set<String> actors1 = new HashSet<>();
+        // Set<String> positions1 = new HashSet<>();
+        Collection positions1 = new ArrayList();
         if (record1.getPositions() != null) {
             for (String p : record1.getPositions()) {
 
-                actors1.add(p);
+                positions1.add(p);
             }
         }
-        Set<String> actors2 = new HashSet<>();
+        //Set<String> positions2 = new HashSet<>();
+        Collection positions2 = new ArrayList();
         if (record2.getPositions() != null) {
             for (String p : record2.getPositions()) {
-                actors2.add(p);
+                positions2.add(p);
             }
         }
 
-        return actors1.containsAll(actors2) && actors2.containsAll(actors1);
+
+        positions1.retainAll( positions2 );
+        //System.out.println( positions1.size() );
+        return positions1.size()>0;
     }
 
     /* (non-Javadoc)
