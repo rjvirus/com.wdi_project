@@ -23,12 +23,17 @@ public class PlayerXMLFormatter extends XMLFormatter<Player> {
 
         player.appendChild(createTextElementWithProvenance("name", record.getName(),
                 record.getMergedAttributeProvenance(Player.NAME), doc));
+
         player.appendChild(createTextElementWithProvenance("birth_place", record.getBirth_place(),
                 record.getMergedAttributeProvenance(Player.BIRTHPLACE), doc));
+
         if (record.getBirth_date() != null) {
             player.appendChild(createTextElementWithProvenance("birth_date", record.getBirth_date().toString(),
                     record.getMergedAttributeProvenance(Player.BIRTHDATE), doc));
         }
+
+        player.appendChild(createTextElementWithProvenance("nationality", record.getNationality(),
+                record.getMergedAttributeProvenance(Player.NATIONALITY), doc));
 
         player.appendChild(createTextElementWithProvenance("club", record.getClub(),
                 record.getMergedAttributeProvenance(Player.CLUB), doc));
@@ -50,6 +55,22 @@ public class PlayerXMLFormatter extends XMLFormatter<Player> {
         if (!Integer.toString(record.getWage()).isEmpty()) {
             player.appendChild(createTextElementWithProvenance("wage", Integer.toString(record.getWage()),
                     record.getMergedAttributeProvenance(Player.WAGE), doc));
+        }
+        if (!Integer.toString(record.getMarket_value_19()).isEmpty()) {
+            player.appendChild(createTextElementWithProvenance("market_value_19", Integer.toString(record.getMarket_value_19()),
+                    record.getMergedAttributeProvenance(Player.MARKETVALUE19), doc));
+        }
+        if (!Integer.toString(record.getEst_market_value_18()).isEmpty()) {
+            player.appendChild(createTextElementWithProvenance("est_market_value_18", Integer.toString(record.getEst_market_value_18()),
+                    record.getMergedAttributeProvenance(Player.ESTMARKETVALUE18), doc));
+        }
+        if (!Integer.toString(record.getKit_number()).isEmpty()) {
+            player.appendChild(createTextElementWithProvenance("kit_number", Integer.toString(record.getKit_number()),
+                    record.getMergedAttributeProvenance(Player.KITNUMBER), doc));
+        }
+        if (!Integer.toString(record.getOverall()).isEmpty()) {
+            player.appendChild(createTextElementWithProvenance("overall", Integer.toString(record.getOverall()),
+                    record.getMergedAttributeProvenance(Player.OVERALL), doc));
         }
         if (record.getStrong_foot() != null) {
             player.appendChild(createTextElementWithProvenance("strong_foot", record.getStrong_foot(),
@@ -93,7 +114,7 @@ public class PlayerXMLFormatter extends XMLFormatter<Player> {
 
     /*
      * protected Element createPositionsElement(Player record, Document doc) {
-     * PositionXMLFormatter positionFormatter = new PositionXMLFormatter(); Element
+     * PositionXMLFor1tter positionFormatter = new PositionXMLFormatter(); Element
      * actorRoot = positionFormatter.createRootElement(doc);
      * actorRoot.setAttribute("provenance",
      * record.getMergedAttributeProvenance(Player.POSITIONS)); if

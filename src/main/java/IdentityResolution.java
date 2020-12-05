@@ -35,20 +35,20 @@ public class IdentityResolution {
         LinearCombinationMatchingRule<Player, Attribute> matchingRuleRealPred = new LinearCombinationMatchingRule<>(0.8);
         MatchingGoldStandard gsTestRealPred = new MatchingGoldStandard();
         matchingRuleRealPred.activateDebugReport("data/output/debugResultsMatchingRuleRealPred.csv", 1000, gsTestRealPred);
-        gsTestRealPred.loadFromCSVFile(new File("data/goldstandard/real_market_2_prediction_train.csv"));
+        gsTestRealPred.loadFromCSVFile(new File("data/goldstandard/real_market_2_prediction.csv"));
 
         //create 3 matching rules
         System.out.println("*\n*\tLoading gold standard for Real Market Players to FIFA \n*");
         LinearCombinationMatchingRule<Player, Attribute> matchingRuleRealFifa = new LinearCombinationMatchingRule<>(0.7);
         MatchingGoldStandard gsTestRealFifa = new MatchingGoldStandard();
         matchingRuleRealFifa.activateDebugReport("data/output/debugResultsMatchingRuleRealFifa.csv", 1000, gsTestRealFifa);
-        gsTestRealFifa.loadFromCSVFile(new File("data/goldstandard/real_market_2_fifa_train.csv"));
+        gsTestRealFifa.loadFromCSVFile(new File("data/goldstandard/real_market_2_fifa.csv"));
 
         System.out.println("*\n*\tLoading gold standard for Prediction to FIFA\n*");
         LinearCombinationMatchingRule<Player, Attribute> matchingRulePredFifa = new LinearCombinationMatchingRule<>(0.75);
         MatchingGoldStandard gsTestPredFifa = new MatchingGoldStandard();
         matchingRulePredFifa.activateDebugReport("data/output/debugResultsMatchingRulePredFifas.csv", 1000, gsTestPredFifa);
-        gsTestPredFifa.loadFromCSVFile(new File("data/goldstandard/prediction_2_fifa_train.csv"));
+        gsTestPredFifa.loadFromCSVFile(new File("data/goldstandard/prediction_2_fifa.csv"));
 
         //added comparators for RealPred
         matchingRuleRealPred.addComparator(new PlayerNameComparatorJaccard(), 0.4);
