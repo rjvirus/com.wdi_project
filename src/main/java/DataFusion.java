@@ -85,6 +85,7 @@ public class DataFusion {
         strategy.addAttributeFuser(Player.BIRTHPLACE, new BirthPlaceFuserFavourSource(),new BirthPlaceEvaluationRule());
         strategy.addAttributeFuser(Player.CLUB, new ClubFuserMostRecent(),new ClubEvaluationRule());
         strategy.addAttributeFuser(Player.CONTRACTEXP, new ContractExpFuserFavourSource(),new ContractExpEvaluationRule());
+        strategy.addAttributeFuser(Player.COMPETITIONS, new PlayerCompetitionsFuser(), new PlayerCompetitionsEvaluationRule());
 
         strategy.addAttributeFuser(Player.POSITIONS,new PositionsFuserUnion(), new PositionsEvaluationRule());
         strategy.addAttributeFuser(Player.POTENTIAL,new PotentialFuserFavourSources(), new PotentialEvaluationRule());
