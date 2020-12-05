@@ -1,3 +1,5 @@
+import blocker.PlayerBlockingKeyByNameGenerator;
+import blocker.PlayerBlockingKeyByNameNationalityGenerator;
 import blocker.PlayerBlockingKeyByNationalityGenerator;
 import comparator.*;
 import de.uni_mannheim.informatik.dws.winter.matching.MatchingEngine;
@@ -75,8 +77,11 @@ public class IdentityResolution {
 
         // create a blocker (blocking strategy)
         StandardRecordBlocker<Player, Attribute> blocker = new StandardRecordBlocker<Player, Attribute>(new PlayerBlockingKeyByNationalityGenerator());
-        //NoBlocker<Movie, Attribute> blocker = new NoBlocker<>();
-        //SortedNeighbourhoodBlocker<Player, Attribute, Attribute> blocker = new SortedNeighbourhoodBlocker<>(new PlayerBlockingKeyByNationalityGenerator(), 1000);
+        //SortedNeighbourhoodBlocker<Player, Attribute,Attribute> blocker = new SortedNeighbourhoodBlocker<>(new PlayerBlockingKeyByNationalityGenerator(),1000);
+        //StandardRecordBlocker<Player, Attribute> blocker = new StandardRecordBlocker<Player, Attribute>(new PlayerBlockingKeyByNameGenerator());
+        //SortedNeighbourhoodBlocker<Player, Attribute,Attribute> blocker = new SortedNeighbourhoodBlocker<>(new PlayerBlockingKeyByNameGenerator(),1000);
+        //StandardRecordBlocker<Player, Attribute> blocker = new StandardRecordBlocker<Player, Attribute>(new PlayerBlockingKeyByNameNationalityGenerator());
+        //SortedNeighbourhoodBlocker<Player, Attribute,Attribute> blocker = new SortedNeighbourhoodBlocker<>(new PlayerBlockingKeyByNameNationalityGenerator(),1000);
 
         // Execute the matchings
         Processable<Correspondence<Player, Attribute>> correspondencesRealPred = engineRealPred.runIdentityResolution(
