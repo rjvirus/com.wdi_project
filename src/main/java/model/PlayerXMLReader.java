@@ -11,10 +11,7 @@ import org.w3c.dom.Node;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeFormatterBuilder;
-import java.util.Collections;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Locale;
+import java.util.*;
 
 public class PlayerXMLReader extends XMLMatchableReader<Player, Attribute> implements
         FusibleFactory<Player, Attribute> {
@@ -90,7 +87,7 @@ public class PlayerXMLReader extends XMLMatchableReader<Player, Attribute> imple
         }
         String last_injury = getValueFromChildElement(node, "last_injury");
         if (last_injury != null && !last_injury.isEmpty()) {
-            player.setStrong_foot(last_injury);
+            player.setLast_injury(last_injury);
         }
         String birth_date = getValueFromChildElement(node, "birth_date");
         if (birth_date != null && !birth_date.isEmpty()) {
@@ -107,9 +104,11 @@ public class PlayerXMLReader extends XMLMatchableReader<Player, Attribute> imple
             player.setContract_exp(dt);
         }
 
-        List<String> competitions = getListFromChildElement(node, "competitions");
-        if(competitions != null && competitions.isEmpty()) {
-            player.setCompetitions(competitions);
+        String competitions = getValueFromChildElement(node, "competitions");
+        if(competitions != null) {
+            String competitions1 = competitions.replaceAll("\\s+"," ");
+            List<String> competitionsFinal = new ArrayList<String>(Arrays.asList(competitions1.split(" ")));
+            player.setCompetitions(competitionsFinal);
         }
 
         List<String> positions = getListFromChildElement(node, "positions");

@@ -6,6 +6,7 @@ import org.w3c.dom.Element;
 import de.uni_mannheim.informatik.dws.winter.model.io.XMLFormatter;
 
 import java.time.format.DateTimeFormatter;
+import java.util.List;
 
 public class PlayerXMLFormatter extends XMLFormatter<Player> {
 
@@ -53,6 +54,15 @@ public class PlayerXMLFormatter extends XMLFormatter<Player> {
         }
         if(record.getStrong_foot() != null) {
             player.appendChild(createTextElementWithProvenance("strong_foot", record.getStrong_foot(), record.getMergedAttributeProvenance(Player.STRONGFOOT), doc));
+        }
+
+        List<String> competitions = record.getCompetitions();
+        if(competitions != null && !competitions.isEmpty()) {
+            Element competitions1 = doc.createElement("competitions");
+            for (int i = 0; i < record.getCompetitions().size(); i++) {
+                competitions1.appendChild(createTextElementWithProvenance("competition", record.getCompetitions().get(i), record.getMergedAttributeProvenance(Player.COMPETITIONS), doc));
+            }
+            player.appendChild(competitions1);
         }
 
         if(!record.getPositions().isEmpty()) {
