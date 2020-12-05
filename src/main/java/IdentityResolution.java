@@ -22,8 +22,6 @@ public class IdentityResolution {
 
     public static void main(String args[]) throws Exception {
 
-
-
         //loading the data
         HashedDataSet<Player, Attribute> dataRealPlayers = new HashedDataSet<>();
         HashedDataSet<Player, Attribute> dataPredictionPlayers = new HashedDataSet<>();
@@ -47,7 +45,7 @@ public class IdentityResolution {
         gsTestRealFifa.loadFromCSVFile(new File("data/goldstandard/real_market_2_fifa_train.csv"));
 
         System.out.println("*\n*\tLoading gold standard for Prediction to FIFA\n*");
-        LinearCombinationMatchingRule<Player, Attribute> matchingRulePredFifa = new LinearCombinationMatchingRule<>(0.7);
+        LinearCombinationMatchingRule<Player, Attribute> matchingRulePredFifa = new LinearCombinationMatchingRule<>(0.75);
         MatchingGoldStandard gsTestPredFifa = new MatchingGoldStandard();
         matchingRulePredFifa.activateDebugReport("data/output/debugResultsMatchingRulePredFifas.csv", 1000, gsTestPredFifa);
         gsTestPredFifa.loadFromCSVFile(new File("data/goldstandard/prediction_2_fifa_train.csv"));
@@ -86,8 +84,8 @@ public class IdentityResolution {
                 dataPredictionPlayers, dataFifaPlayers , null, matchingRulePredFifa, blocker);
 
         correspondencesRealPred = engineRealPred.getTopKInstanceCorrespondences(correspondencesRealPred, 1, 0.8);
-        correspondencesRealFifa = engineRealPred.getTopKInstanceCorrespondences(correspondencesRealFifa, 1, 0.7);
-        correspondencesPredFifa = engineRealPred.getTopKInstanceCorrespondences(correspondencesPredFifa, 1, 0.7);
+        correspondencesRealFifa = engineRealPred.getTopKInstanceCorrespondences(correspondencesRealFifa, 1, 0.75);
+        correspondencesPredFifa = engineRealPred.getTopKInstanceCorrespondences(correspondencesPredFifa, 1, 0.75);
 
         // write the correspondences to the output file
         new CSVCorrespondenceFormatter().writeCSV(new File("data/output/correspondences/real_2_prediction_correspondences.csv"), correspondencesRealPred);
