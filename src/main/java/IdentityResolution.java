@@ -1,10 +1,7 @@
-import blocker.PlayerBlockingKeyByNameGenerator;
-import blocker.PlayerBlockingKeyByNameNationalityGenerator;
 import blocker.PlayerBlockingKeyByNationalityGenerator;
 import comparator.*;
 import de.uni_mannheim.informatik.dws.winter.matching.MatchingEngine;
 import de.uni_mannheim.informatik.dws.winter.matching.MatchingEvaluator;
-import de.uni_mannheim.informatik.dws.winter.matching.blockers.SortedNeighbourhoodBlocker;
 import de.uni_mannheim.informatik.dws.winter.matching.blockers.StandardRecordBlocker;
 import de.uni_mannheim.informatik.dws.winter.model.Correspondence;
 import de.uni_mannheim.informatik.dws.winter.model.HashedDataSet;
@@ -77,11 +74,6 @@ public class IdentityResolution {
 
         // create a blocker (blocking strategy)
         StandardRecordBlocker<Player, Attribute> blocker = new StandardRecordBlocker<Player, Attribute>(new PlayerBlockingKeyByNationalityGenerator());
-        //SortedNeighbourhoodBlocker<Player, Attribute,Attribute> blocker = new SortedNeighbourhoodBlocker<>(new PlayerBlockingKeyByNationalityGenerator(),1000);
-        //StandardRecordBlocker<Player, Attribute> blocker = new StandardRecordBlocker<Player, Attribute>(new PlayerBlockingKeyByNameGenerator());
-        //SortedNeighbourhoodBlocker<Player, Attribute,Attribute> blocker = new SortedNeighbourhoodBlocker<>(new PlayerBlockingKeyByNameGenerator(),1000);
-        //StandardRecordBlocker<Player, Attribute> blocker = new StandardRecordBlocker<Player, Attribute>(new PlayerBlockingKeyByNameNationalityGenerator());
-        //SortedNeighbourhoodBlocker<Player, Attribute,Attribute> blocker = new SortedNeighbourhoodBlocker<>(new PlayerBlockingKeyByNameNationalityGenerator(),1000);
 
         // Execute the matchings
         Processable<Correspondence<Player, Attribute>> correspondencesRealPred = engineRealPred.runIdentityResolution(
@@ -134,7 +126,7 @@ public class IdentityResolution {
         System.out.println(String.format(
                 "F1: %.4f",perfTestRealFifa.getF1()));
 
-        System.out.println("Players - Predicted Prict <-> Players - Fifa");
+        System.out.println("Players - Predicted Price <-> Players - Fifa");
         System.out.println(String.format(
                 "Precision: %.4f",perfTestPredFifa.getPrecision()));
         System.out.println(String.format(
