@@ -9,10 +9,12 @@ import model.Player;
 public class EstimatedValEvaluationRule extends EvaluationRule<Player, Attribute>{
     @Override
     public boolean isEqual(Player record1, Player record2, Attribute schemaElement) {
-        if(record1.getEst_market_value_18()> (record2.getEst_market_value_18()*0.9) && record1.getMarket_value_19()<record2.getMarket_value_19()*1.1)
+
+        if(record1.getEst_market_value_18()>= (record2.getEst_market_value_18()*0.9) && record1.getEst_market_value_18()<=record2.getEst_market_value_18()*1.1) {
             return true;
-        else
+        } else {
             return false;
+        }
     }
 
     /* (non-Javadoc)
