@@ -15,7 +15,7 @@ public class ContractExpEvaluationRule extends EvaluationRule<Player, Attribute>
         else if(record1.getContract_exp()==null || record2.getContract_exp()==null)
             return false;
         else
-            return record1.getContract_exp().equals(record2.getContract_exp());
+            return record1.getContract_exp().getYear() == record2.getContract_exp().getYear();
     }
 
     @Override
