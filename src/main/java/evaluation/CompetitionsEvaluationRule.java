@@ -10,7 +10,7 @@ import de.uni_mannheim.informatik.dws.winter.model.Matchable;
 import de.uni_mannheim.informatik.dws.winter.model.defaultmodel.Attribute;
 import model.Player;
 
-public class PlayerCompetitionsEvaluationRule extends EvaluationRule<Player, Attribute>{
+public class CompetitionsEvaluationRule extends EvaluationRule<Player, Attribute>{
 
     @Override
     public boolean isEqual(Player record1, Player record2, Attribute schemaElement) {

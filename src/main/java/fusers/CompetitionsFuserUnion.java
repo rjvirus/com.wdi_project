@@ -15,8 +15,8 @@ import model.Player;
 
 import java.util.List;
 
-public class PlayerCompetitionsFuser extends AttributeValueFuser<List<String>, Player, Attribute> {
-    public PlayerCompetitionsFuser() {
+public class CompetitionsFuserUnion extends AttributeValueFuser<List<String>, Player, Attribute> {
+    public CompetitionsFuserUnion() {
         super(new Union<String, Player, Attribute>());
     }
     @Override
