@@ -80,7 +80,8 @@ public class DataFusion {
         strategy.activateDebugReport("data/output/debugResultsDatafusion.csv", 100000000, gs);
 
         // add attribute fusers
-        strategy.addAttributeFuser(Player.NAME, new NameFuserLongestString(),new NameEvaluationRule());
+       // strategy.addAttributeFuser(Player.NAME, new NameFuserLongestString(),new NameEvaluationRule());
+        strategy.addAttributeFuser(Player.NAME, new NameFuserVoting(),new NameEvaluationRule());
         strategy.addAttributeFuser(Player.BIRTHDATE, new BirthDateFuserFavourSource(), new BirthDateEvaluationRule());
         strategy.addAttributeFuser(Player.BIRTHPLACE, new BirthPlaceFuserFavourSource(),new BirthPlaceEvaluationRule());
         strategy.addAttributeFuser(Player.CLUB, new ClubFuserMostRecent(),new ClubEvaluationRule());
@@ -97,6 +98,7 @@ public class DataFusion {
         strategy.addAttributeFuser(Player.KITNUMBER,new KitNumberFuserFavourSource(),new KitNumberEvaluationRule());
         strategy.addAttributeFuser(Player.MARKETVALUE19,new MarketValueFuserLongestString(),new MarketValueEvaluationRule());
         strategy.addAttributeFuser(Player.NATIONALITY,new NationalityFuserFavourSource(),new NationalityEvaluationRule());
+        // strategy.addAttributeFuser(Player.NATIONALITY,new NationalityFuserVoting(),new NationalityEvaluationRule());
         strategy.addAttributeFuser(Player.OVERALL,new OverallFuserLongestString(),new OverallEvaluationRule());
 
         // create the fusion engine
